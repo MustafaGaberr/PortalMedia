@@ -1,0 +1,137 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+
+const Footer: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const quickLinks = [
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.blog'), href: '/blog' },
+  ];
+
+  const services = [
+    { name: t('services.seo.title'), href: '#services' },
+    { name: t('services.social.title'), href: '#services' },
+    { name: t('services.ppc.title'), href: '#services' },
+    { name: t('services.content.title'), href: '#services' },
+  ];
+
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-6"
+            >
+              <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">P</span>
+                </div>
+                <span className="text-2xl font-bold">Portal Media</span>
+              </div>
+              <p className="text-gray-300 leading-relaxed max-w-md">
+                {t('footer.description')}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h3 className="text-lg font-bold mb-4">{t('footer.quick-links')}</h3>
+            <ul className="space-y-2">
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      to={link.href}
+                      className="text-gray-300 hover:text-green-400 transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        const element = document.querySelector(link.href);
+                        element?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="text-gray-300 hover:text-green-400 transition-colors"
+                    >
+                      {link.name}
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h3 className="text-lg font-bold mb-4">{t('footer.services-title')}</h3>
+            <ul className="space-y-2">
+              {services.map((service, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => {
+                      const element = document.querySelector(service.href);
+                      element?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-gray-300 hover:text-green-400 transition-colors"
+                  >
+                    {service.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-gray-400 text-sm mb-4 sm:mb-0"
+            >
+              {t('footer.rights')}
+            </motion.p>
+
+            <motion.button
+              onClick={scrollToTop}
+              className="bg-gradient-to-r from-blue-600 to-blue-700 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ArrowUp className="w-5 h-5 text-white" />
+            </motion.button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
