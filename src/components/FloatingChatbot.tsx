@@ -20,6 +20,13 @@ const ChatBot: React.FC = () => {
   const goBack = () => {
     if (currentView !== 'main') {
       setCurrentView('main');
+      // Add a bot message to show we're back to main menu
+      setTimeout(() => {
+        setMessages(prev => [...prev, { 
+          type: 'bot', 
+          content: t('chatbot.backToMain')
+        }]);
+      }, 300);
     }
   };
 
@@ -96,9 +103,10 @@ const ChatBot: React.FC = () => {
                 {currentView !== 'main' && (
                   <button
                     onClick={goBack}
-                    className="p-1 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm"
+                    className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm"
+                    title={t('chatbot.backToMainMenu')}
                   >
-                    <ArrowLeft className={`w-4 h-4 drop-shadow-sm ${language === 'ar' ? 'rotate-180' : ''}`} />
+                    <ArrowLeft className={`w-5 h-5 drop-shadow-sm ${language === 'ar' ? 'rotate-180' : ''}`} />
                   </button>
                 )}
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
@@ -160,6 +168,19 @@ const ChatBot: React.FC = () => {
                     </button>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Back to Main Menu Button for non-main views */}
+            {currentView !== 'main' && (
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={goBack}
+                  className="flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 text-sm bg-white/80 text-gray-700 rounded-lg border border-gray-200/50 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-sm hover:shadow-md backdrop-blur-sm"
+                >
+                  <ArrowLeft className={`w-4 h-4 ${language === 'ar' ? 'rotate-180' : ''}`} />
+                  <span>{t('chatbot.backToMainMenu')}</span>
+                </button>
               </div>
             )}
           </div>
