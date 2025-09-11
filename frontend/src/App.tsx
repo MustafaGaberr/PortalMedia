@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 
 // Pages
 import BlogPage from './pages/BlogPage';
@@ -16,6 +17,7 @@ import PaymentPage from './pages/PaymentPage';
 const AppContent: React.FC = () => {
   return (
     <Router>
+      <ScrollToTopOnRouteChange />
       <div className="App overflow-x-hidden min-h-screen">
         <Header />
         <main className="overflow-x-hidden">

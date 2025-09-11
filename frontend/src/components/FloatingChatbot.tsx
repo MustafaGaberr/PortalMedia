@@ -20,14 +20,19 @@ const ChatBot: React.FC = () => {
   const goBack = () => {
     if (currentView !== 'main') {
       setCurrentView('main');
-      // Add a bot message to show we're back to main menu
+      // Add a bot message to show we're back to main menu and reset to show quick replies
       setTimeout(() => {
-        setMessages(prev => [...prev, { 
-          type: 'bot', 
-          content: t('chatbot.backToMain')
-        }]);
+        setMessages([
+          { type: 'bot', content: t('chatbot.greeting') },
+          { type: 'bot', content: t('chatbot.backToMain') }
+        ]);
       }, 300);
     }
+  };
+
+  const clearMessages = () => {
+    setMessages([{ type: 'bot', content: t('chatbot.greeting') }]);
+    setCurrentView('main');
   };
 
   const sendMessage = () => {
@@ -64,10 +69,11 @@ const ChatBot: React.FC = () => {
         setCurrentView('contact');
       }
       
-      setMessages(prev => [...prev, { 
-        type: 'bot', 
-        content: t(`chatbot.responses.${responseKey}`)
-      }]);
+      setMessages(prev => [
+        ...prev, 
+        { type: 'bot', content: t(`chatbot.responses.${responseKey}`) },
+        { type: 'bot', content: t('chatbot.quickRepliesTitle') }
+      ]);
     }, 1000);
   };
 
@@ -92,21 +98,23 @@ const ChatBot: React.FC = () => {
       {/* Chat Window */}
       {isOpen && (
         <div 
-          className={`fixed bottom-28 z-50 w-80 h-96 glass rounded-3xl shadow-elegant border border-white/20 flex flex-col animate-scale-in ${
+          className={`fixed bottom-28 z-50 w-80 h-96 bg-white rounded-3xl shadow-elegant border border-gray-200 flex flex-col animate-scale-in ${
             language === 'ar' ? 'left-6' : 'right-6'
           }`}
         >
           {/* Chat Header */}
-          <div className="p-4 border-b border-white/20 rounded-t-3xl bg-gradient-primary relative overflow-hidden">
+          <div className="p-4 border-b border-gray-200 rounded-t-3xl bg-gradient-primary relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
                 {currentView !== 'main' && (
                   <button
                     onClick={goBack}
-                    className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm"
+                    className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
                     title={t('chatbot.backToMainMenu')}
                   >
-                    <ArrowLeft className={`w-5 h-5 drop-shadow-sm ${language === 'ar' ? 'rotate-180' : ''}`} />
+                    <ArrowLeft className={`w-5 h-5 drop-shadow-sm transition-transform duration-200 ${
+                      language === 'ar' ? 'rotate-180' : ''
+                    }`} />
                   </button>
                 )}
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
@@ -123,12 +131,25 @@ const ChatBot: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={toggleChat}
-                className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm"
-              >
-                <X className="w-5 h-5 drop-shadow-sm" />
-              </button>
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                {/* Clear Chat Button */}
+                <button
+                  onClick={clearMessages}
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
+                  title="Clear Chat"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+                {/* Close Button */}
+                <button
+                  onClick={toggleChat}
+                  className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
+                >
+                  <X className="w-5 h-5 drop-shadow-sm" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -140,10 +161,10 @@ const ChatBot: React.FC = () => {
                 className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-xs p-3 rounded-2xl shadow-soft backdrop-blur-sm ${
+                  className={`max-w-xs p-3 rounded-2xl shadow-md ${
                     msg.type === 'user'
-                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white border border-primary-400/50'
-                      : 'bg-white/80 text-gray-800 border border-gray-200/50'
+                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white border border-primary-400'
+                      : 'bg-gray-100 text-gray-800 border border-gray-200'
                   }`}
                 >
                   <p className="text-sm">{msg.content}</p>
@@ -152,7 +173,11 @@ const ChatBot: React.FC = () => {
             ))}
 
             {/* Quick Replies */}
-            {messages.length === 1 && currentView === 'main' && (
+            {currentView === 'main' && (
+              messages.length === 1 || 
+              messages.length === 2 || 
+              (messages.length >= 3 && messages[messages.length - 1].content === t('chatbot.quickRepliesTitle'))
+            ) && (
               <div className="space-y-2">
                 <p className="text-xs text-gray-500 text-center">
                   {t('chatbot.quickRepliesTitle')}
@@ -162,7 +187,7 @@ const ChatBot: React.FC = () => {
                     <button
                       key={index}
                       onClick={() => handleQuickReply(replyKey)}
-                      className="text-xs h-8 px-3 py-1 rounded-lg border border-primary-500/30 text-primary-600 hover:bg-gradient-to-r hover:from-primary-500 hover:to-primary-600 hover:text-white hover:border-primary-400 transition-all duration-200 text-left focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-sm hover:shadow-md backdrop-blur-sm"
+                      className="text-xs h-8 px-3 py-1 rounded-lg border border-primary-500/30 text-primary-600 hover:bg-gradient-to-r hover:from-primary-500 hover:to-primary-600 hover:text-white hover:border-primary-400 transition-all duration-200 text-left focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-sm hover:shadow-md"
                     >
                       {t(`chatbot.quickReplies.${replyKey}`)}
                     </button>
@@ -171,22 +196,11 @@ const ChatBot: React.FC = () => {
               </div>
             )}
 
-            {/* Back to Main Menu Button for non-main views */}
-            {currentView !== 'main' && (
-              <div className="flex justify-center mt-4">
-                <button
-                  onClick={goBack}
-                  className="flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 text-sm bg-white/80 text-gray-700 rounded-lg border border-gray-200/50 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-sm hover:shadow-md backdrop-blur-sm"
-                >
-                  <ArrowLeft className={`w-4 h-4 ${language === 'ar' ? 'rotate-180' : ''}`} />
-                  <span>{t('chatbot.backToMainMenu')}</span>
-                </button>
-              </div>
-            )}
+            {/* Back to Main Menu Button - REMOVED */}
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-white/20 glass-dark rounded-b-3xl">
+          <div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-3xl">
             <div className="flex space-x-2 rtl:space-x-reverse">
               <input
                 type="text"
@@ -194,12 +208,12 @@ const ChatBot: React.FC = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                className="flex-1 px-4 py-3 text-sm bg-white/80 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 backdrop-blur-sm shadow-sm placeholder-gray-400"
+                className="flex-1 px-4 py-3 text-sm bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 shadow-sm placeholder-gray-400"
               />
               <button
                 onClick={sendMessage}
                 disabled={!message.trim()}
-                className="px-4 py-3 btn-primary text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-soft hover:shadow-lg backdrop-blur-sm border border-primary-400/50"
+                className="px-4 py-3 btn-primary text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-md hover:shadow-lg border border-primary-400"
               >
                 <Send className="w-5 h-5 drop-shadow-sm" />
               </button>

@@ -134,6 +134,8 @@ const resources = {
           getStarted: 'I want to get started'
         },
         backButton: 'Back',
+        backToMain: 'Let\'s go back to the main menu. How else can I help you?',
+        backToMainMenu: 'Back to Main Menu',
         servicesTitle: 'Our Services',
         contactTitle: 'Contact Us',
         responses: {
@@ -276,6 +278,8 @@ const resources = {
           getStarted: 'أريد البدء'
         },
         backButton: 'العودة',
+        backToMain: 'لنعود إلى القائمة الرئيسية. كيف يمكنني مساعدتك أيضاً؟',
+        backToMainMenu: 'العودة للقائمة الرئيسية',
         servicesTitle: 'خدماتنا',
         contactTitle: 'اتصل بنا',
         responses: {
