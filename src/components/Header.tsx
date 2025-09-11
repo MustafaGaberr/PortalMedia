@@ -127,8 +127,8 @@ const Header: React.FC = () => {
 
           {/* Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-4 rtl:space-x-reverse">
-            {/* Language Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* Language Dropdown - Hidden on mobile */}
+            <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                 className="flex items-center px-4 py-2 glass rounded-xl shadow-elegant border border-white/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500/50 min-w-[120px]"
@@ -224,6 +224,41 @@ const Header: React.FC = () => {
                 )}
               </div>
             ))}
+            
+            {/* Language Switcher in Mobile Menu */}
+            <div className="mx-2 mt-4 pt-4 border-t border-primary-200/30">
+              <p className="px-6 py-2 text-xs text-gray-500 font-medium uppercase tracking-wide">
+                Language / اللغة
+              </p>
+              <button
+                onClick={() => handleLanguageChange('en')}
+                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
+                  language === 'en'
+                    ? 'text-primary-600 bg-primary-50 font-semibold'
+                    : 'text-gray-800 hover:text-primary-600 hover:bg-primary-50'
+                }`}
+              >
+                <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇺🇸</span>
+                <span className="text-sm font-medium">English</span>
+                {language === 'en' && (
+                  <span className="ml-auto text-primary-600">✓</span>
+                )}
+              </button>
+              <button
+                onClick={() => handleLanguageChange('ar')}
+                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
+                  language === 'ar'
+                    ? 'text-primary-600 bg-primary-50 font-semibold'
+                    : 'text-gray-800 hover:text-primary-600 hover:bg-primary-50'
+                }`}
+              >
+                <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇸🇦</span>
+                <span className="text-sm font-medium">العربية</span>
+                {language === 'ar' && (
+                  <span className="ml-auto text-primary-600">✓</span>
+                )}
+              </button>
+            </div>
           </nav>
         </motion.div>
       </div>

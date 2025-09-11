@@ -101,18 +101,29 @@ const Hero: React.FC = () => {
             {t('hero.learn-more')}
           </motion.button>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
-          </div>
-        </motion.div>
       </div>
+
+      {/* Enhanced Scroll Indicator - Fixed at bottom of hero section only */}
+      <motion.div
+        className="hidden sm:block absolute bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer z-50"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        onClick={() => scrollToSection('about')}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/5 shadow-lg hover:border-white/80 transition-all duration-300 hover:bg-white/10">
+          <motion.div 
+            className="w-1.5 h-4 bg-gradient-to-b from-white to-white/70 rounded-full mt-2 shadow-sm"
+            animate={{ y: [0, 6, 0], opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+        {/* Scroll hint text */}
+        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-white/60 text-xs font-medium whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-300">
+          Scroll Down
+        </div>
+      </motion.div>
     </section>
   );
 };

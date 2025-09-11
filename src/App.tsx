@@ -12,6 +12,7 @@ import Team from './components/Team';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingChatbot from './components/FloatingChatbot';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 // Pages
 import BlogPage from './pages/BlogPage';
@@ -31,9 +32,9 @@ const HomePage: React.FC = () => (
 const AppContent: React.FC = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="App overflow-x-hidden min-h-screen">
         <Header />
-        <main>
+        <main className="overflow-x-hidden">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/blog" element={<BlogPage />} />
@@ -43,6 +44,7 @@ const AppContent: React.FC = () => {
         </main>
         <Footer />
         <FloatingChatbot />
+        <ScrollToTopButton />
       </div>
     </Router>
   );
