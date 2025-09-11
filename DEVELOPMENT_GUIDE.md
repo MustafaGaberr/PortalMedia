@@ -2,25 +2,26 @@
 
 ## 🏗️ Project Architecture
 
-This project follows a modern monorepo structure with clear separation between frontend and backend components.
+This project follows a standard React app structure with an integrated API backend.
 
 ### Project Structure
 
 ```
 PortalMedia/
-├── frontend/              # React TypeScript Frontend
-│   ├── src/              # Source code
-│   ├── Public/           # Static assets
-│   ├── package.json      # Frontend dependencies
-│   ├── vite.config.ts    # Vite configuration
-│   └── .env.local        # Frontend environment
-│
-├── backend/               # Express Backend
+├── src/                  # React Source Code
+│   ├── components/       # UI Components
+│   ├── contexts/         # React Contexts
+│   ├── hooks/            # Custom Hooks
+│   ├── i18n/             # Internationalization
+│   ├── pages/            # Route Components
+│   └── ...
+├── Public/               # Static Assets
+├── api/                  # Express Backend
 │   ├── server.js         # API server
 │   ├── package.json      # Backend dependencies
 │   └── .env              # Backend secrets (secure)
-│
-├── package.json          # Root orchestrator
+├── package.json          # Frontend dependencies & scripts
+├── vite.config.ts        # Vite configuration
 └── README.md             # Documentation
 ```
 
@@ -29,50 +30,55 @@ PortalMedia/
 ### Single Command Development
 
 ```bash
-# Start both frontend and backend simultaneously
+# Start frontend development server
 npm run dev
+
+# Start backend API server
+npm run server
+
+# Start both (requires concurrently installation)
+npm run dev:full
 ```
 
-This command runs:
+This runs:
 
-- **Backend**: http://localhost:3001 (Express API)
 - **Frontend**: http://localhost:5173 (Vite Dev Server)
+- **Backend**: http://localhost:3001 (Express API)
 
 ### Individual Development
 
 ```bash
 # Frontend only
-npm run dev:frontend
+npm run dev
 
 # Backend only
-npm run dev:backend
+npm run server
 ```
 
 ## 🔐 Security Configuration
 
 ### Credential Separation
 
-- **Backend** (`backend/.env`): Contains PayPal secret (secure)
-- **Frontend** (`frontend/.env.local`): Contains only client ID (safe)
+- **Backend** (`api/.env`): Contains PayPal secret (secure)
+- **Frontend** (`.env.local`): Contains only client ID (safe)
 
 ### Git Protection
 
 ```gitignore
 # Protects both environments
-backend/.env           # Secret credentials
-frontend/.env*         # Frontend environment variables
+api/.env              # Secret credentials
+.env.local            # Frontend environment variables
 ```
 
 ## 📂 Component Organization
 
-### Frontend (`/frontend`)
+### Frontend (`/src`)
 
 - All React/TypeScript files contained
 - Independent dependency management
-- Separate build configuration
 - Clean development environment
 
-### Backend (`/backend`)
+### Backend (`/api`)
 
 - API server isolated
 - Secure credential management
@@ -90,19 +96,20 @@ frontend/.env*         # Frontend environment variables
 
 ```bash
 # Setup (one time)
-npm run install:all     # Install all dependencies
+npm install              # Install frontend dependencies
+cd api && npm install    # Install backend dependencies
 
 # Development
-npm run dev            # Start both servers
-npm run dev:frontend   # Start React app only
-npm run dev:backend    # Start API server only
+npm run dev              # Start frontend only
+npm run server           # Start backend only
+npm run dev:full         # Start both servers
 
 # Production
-npm run build          # Build frontend for production
+npm run build            # Build frontend for production
 
 # Maintenance
-npm run lint           # Lint both projects
-npm run clean          # Clean all build files
+npm run lint             # Lint frontend
+cd api && npm run lint   # Lint backend
 ```
 
 ## 📋 Development Checklist
@@ -117,7 +124,7 @@ npm run clean          # Clean all build files
 
 ### Daily Development
 
-1. **Start Development**: `npm run dev`
+1. **Start Development**: `npm run dev` (frontend) or `npm run dev:full` (both)
 2. **Frontend**: http://localhost:5173
 3. **Backend API**: http://localhost:3001
 4. **Test PayPal**: Navigate to `/payment`
@@ -162,8 +169,8 @@ npm run clean          # Clean all build files
 
 ### Development Flow
 
-1. Code changes in `frontend/src/` → Frontend hot reload
-2. Code changes in `backend/server.js` → Manual restart needed
+1. Code changes in `src/` → Frontend hot reload
+2. Code changes in `api/server.js` → Nodemon auto-restart
 3. Environment changes → Restart both servers
 
 ### Production Deployment

@@ -1,34 +1,62 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [currentSection, setCurrentSection] = useState('');
   const { language, changeLanguage, t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navigation = [
     { name: t('nav.home'), href: '/' },
     { name: t('nav.about'), href: '#about' },
     { name: t('nav.services'), href: '#services' },
-    { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.team'), href: '#team' },
     { name: t('nav.contact'), href: '#contact' },
+    { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.payment'), href: '/payment' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Only track sections on home page
+      if (location.pathname === '/') {
+        const sections = ['#about', '#services', '#team', '#contact'];
+        const scrollPosition = window.scrollY + 100; // Offset for navbar height
+        
+        let current = '';
+        sections.forEach(sectionId => {
+          const element = document.querySelector(sectionId);
+          if (element) {
+            const offsetTop = element.offsetTop;
+            const offsetHeight = element.offsetHeight;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              current = sectionId;
+            }
+          }
+        });
+        
+        // If we're at the very top, no section is active
+        if (window.scrollY < 100) {
+          current = '';
+        }
+        
+        setCurrentSection(current);
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -42,8 +70,38 @@ const Header: React.FC = () => {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
+      // If we're not on the home page, navigate to home first then scroll
+      if (location.pathname !== '/') {
+        // Navigate to home page and add hash to URL so it scrolls when page loads
+        navigate('/' + href);
+        return;
+      }
+      
+      // If we're on home page, scroll to the section
       const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleHomeClick = () => {
+    if (location.pathname === '/') {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on other page, navigate to home
+      navigate('/');
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on other page, navigate to home
+      navigate('/');
     }
   };
 
@@ -60,6 +118,12 @@ const Header: React.FC = () => {
     return language === 'en' ? 'English' : 'العربية';
   };
 
+  const isCurrentSection = (href: string) => {
+    return currentSection === href;
+  };
+
+  const isHomePage = location.pathname === '/';
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -67,8 +131,10 @@ const Header: React.FC = () => {
       transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'glass border-b border-primary-200/50 shadow-elegant' 
-          : 'bg-transparent'
+          ? 'bg-blue-900/90 backdrop-blur-md border-b border-blue-700/50 shadow-lg' 
+          : isHomePage
+          ? 'bg-transparent'
+          : 'bg-blue-900/90 backdrop-blur-md border-b border-blue-700/50 shadow-lg'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,12 +142,17 @@ const Header: React.FC = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2 rtl:space-x-reverse"
+            className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+            onClick={handleLogoClick}
           >
             <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
               <span className="text-white font-bold text-lg drop-shadow-sm">P</span>
             </div>
-            <span className="text-2xl font-bold text-gradient drop-shadow-sm">
+            <span className={`text-2xl font-bold drop-shadow-sm ${
+              isScrolled || !isHomePage
+                ? 'text-white'
+                : 'text-gradient'
+            }`}>
               Portal Media
             </span>
           </motion.div>
@@ -91,30 +162,43 @@ const Header: React.FC = () => {
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
-                  <Link
-                    to={item.href}
-                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                      location.pathname === item.href
-                        ? 'text-primary-500 font-semibold'
-                        : isScrolled
-                        ? 'text-gray-800 hover:text-primary-600'
-                        : 'text-white hover:text-primary-200 drop-shadow-sm'
-                    }`}
-                  >
-                    {item.name}
-                    {location.pathname === item.href && (
-                      <motion.div
-                        layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 shadow-glow"
-                      />
-                    )}
-                  </Link>
+                  item.href === '/' ? (
+                    // Special handling for Home link
+                    <button
+                      onClick={handleHomeClick}
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                        location.pathname === item.href && currentSection === ''
+                          ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                          : isScrolled || !isHomePage
+                          ? 'text-white/90 hover:text-blue-300'
+                          : 'text-white hover:text-primary-200 drop-shadow-sm'
+                      }`}
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                        location.pathname === item.href
+                          ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                          : isScrolled || !isHomePage
+                          ? 'text-white/90 hover:text-blue-300'
+                          : 'text-white hover:text-primary-200 drop-shadow-sm'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
                 ) : (
                   <button
                     onClick={() => scrollToSection(item.href)}
                     className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                      isScrolled
-                        ? 'text-gray-800 hover:text-primary-600'
+                      // Check if we're on home page and this section is currently in view
+                      location.pathname === '/' && isCurrentSection(item.href)
+                        ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                        : isScrolled || !isHomePage
+                        ? 'text-white/90 hover:text-blue-300'
                         : 'text-white hover:text-primary-200 drop-shadow-sm'
                     }`}
                   >
@@ -131,7 +215,7 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 glass rounded-xl shadow-elegant border border-white/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500/50 min-w-[120px]"
+                className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[120px]"
                 title="Change Language"
               >
                 <span className="text-lg mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
@@ -148,7 +232,7 @@ const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className={`absolute top-full mt-2 glass rounded-xl shadow-elegant border border-white/20 backdrop-blur-sm overflow-hidden min-w-[140px] z-50 ${
+                  className={`absolute top-full mt-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden min-w-[140px] z-50 ${
                     language === 'ar' ? 'right-0' : 'left-0'
                   }`}
                 >
@@ -181,7 +265,7 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl glass text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-elegant border border-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="lg:hidden p-3 rounded-xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
               title={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X size={22} className="drop-shadow-sm" /> : <Menu size={22} className="drop-shadow-sm" />}
@@ -194,30 +278,51 @@ const Header: React.FC = () => {
           initial={false}
           animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
           transition={{ duration: 0.3 }}
-          className="lg:hidden overflow-hidden glass rounded-xl mt-2 border border-primary-200/30 shadow-elegant"
+          className="lg:hidden overflow-hidden bg-blue-900/95 backdrop-blur-md rounded-xl mt-2 border border-blue-700/50"
         >
           <nav className="py-4">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
-                  <Link
-                    to={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
-                      location.pathname === item.href
-                        ? 'text-primary-600 bg-primary-50 border-l-4 border-primary-500 font-semibold'
-                        : 'text-gray-800 hover:text-primary-600 hover:bg-primary-50'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
+                  item.href === '/' ? (
+                    // Special handling for Home link in mobile
+                    <button
+                      onClick={() => {
+                        handleHomeClick();
+                        setIsMenuOpen(false);
+                      }}
+                      className={`block w-full text-left px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                        location.pathname === item.href && currentSection === ''
+                          ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
+                          : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                      }`}
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                        location.pathname === item.href
+                          ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
+                          : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
                 ) : (
                   <button
                     onClick={() => {
                       scrollToSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className="block w-full text-left px-6 py-3 text-gray-800 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 font-medium rounded-lg mx-2"
+                    className={`block w-full text-left px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                      location.pathname === '/' && isCurrentSection(item.href)
+                        ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
+                        : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                    }`}
                   >
                     {item.name}
                   </button>
@@ -226,36 +331,36 @@ const Header: React.FC = () => {
             ))}
             
             {/* Language Switcher in Mobile Menu */}
-            <div className="mx-2 mt-4 pt-4 border-t border-primary-200/30">
-              <p className="px-6 py-2 text-xs text-gray-500 font-medium uppercase tracking-wide">
+            <div className="mx-2 mt-4 pt-4 border-t border-blue-700/50">
+              <p className="px-6 py-2 text-xs text-white/70 font-medium uppercase tracking-wide">
                 Language / اللغة
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
                   language === 'en'
-                    ? 'text-primary-600 bg-primary-50 font-semibold'
-                    : 'text-gray-800 hover:text-primary-600 hover:bg-primary-50'
+                    ? 'text-white bg-blue-800/50 font-semibold'
+                    : 'text-white/90 hover:text-white hover:bg-blue-800/30'
                 }`}
               >
                 <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇺🇸</span>
                 <span className="text-sm font-medium">English</span>
                 {language === 'en' && (
-                  <span className="ml-auto text-primary-600">✓</span>
+                  <span className="ml-auto text-white">✓</span>
                 )}
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
                   language === 'ar'
-                    ? 'text-primary-600 bg-primary-50 font-semibold'
-                    : 'text-gray-800 hover:text-primary-600 hover:bg-primary-50'
+                    ? 'text-white bg-blue-800/50 font-semibold'
+                    : 'text-white/90 hover:text-white hover:bg-blue-800/30'
                 }`}
               >
                 <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇸🇦</span>
                 <span className="text-sm font-medium">العربية</span>
                 {language === 'ar' && (
-                  <span className="ml-auto text-primary-600">✓</span>
+                  <span className="ml-auto text-white">✓</span>
                 )}
               </button>
             </div>

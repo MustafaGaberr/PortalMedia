@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Play className="w-5 h-5" />
-            {t('hero.learn-more')}
+            {t('hero.learnMore')}
           </motion.button>
         </motion.div>
       </div>

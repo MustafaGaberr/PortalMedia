@@ -4,34 +4,20 @@ import { LanguageProvider } from './contexts/LanguageContext';
 
 // Components
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import BlogPreview from './components/BlogPreview';
-import Team from './components/Team';
-import Contact from './components/Contact';
+import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 
 // Pages
 import BlogPage from './pages/BlogPage';
 import PaymentPage from './pages/PaymentPage';
 
-const HomePage: React.FC = () => (
-  <>
-    <Hero />
-    <About />
-    <Services />
-    <BlogPreview />
-    <Team />
-    <Contact />
-  </>
-);
-
 const AppContent: React.FC = () => {
   return (
     <Router>
+      <ScrollToTopOnRouteChange />
       <div className="App overflow-x-hidden min-h-screen">
         <Header />
         <main className="overflow-x-hidden">

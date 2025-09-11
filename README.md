@@ -1,198 +1,119 @@
-# Portal Media - Full Stack Application
+# Portal Media Frontend
 
 # Portal Media
 
-## Project Overview
+Modern React web application with TypeScript, featuring multi-language support, PayPal integration, and responsive design.
 
-Portal Media is a modern, full-stack web application featuring a React frontend with TypeScript and an Express.js backend. The application includes secure PayPal integration, multi-language support, and responsive design.
+## Features
 
-## 🏗️ **PROJECT STRUCTURE**
+- React 18 with TypeScript
+- Multi-language support (Arabic/English)
+- PayPal payment integration
+- Responsive design with Tailwind CSS
+- Interactive chatbot
+- Framer Motion animations
+- Express.js API backend
 
-```
-PortalMedia/
-├── frontend/                 # React TypeScript Frontend
-│   ├── src/
-│   │   ├── components/      # UI Components
-│   │   ├── contexts/        # React Contexts
-│   │   ├── hooks/          # Custom Hooks
-│   │   ├── i18n/           # Internationalization
-│   │   ├── pages/          # Route Components
-│   │   └── ...
-│   ├── Public/             # Static Assets
-│   ├── package.json        # Frontend Dependencies
-│   ├── vite.config.ts     # Vite Configuration
-│   ├── .env.local         # Frontend Environment Variables
-│   └── README.md          # Frontend Documentation
-│
-├── backend/                 # Express.js Backend
-│   ├── server.js           # Main Server File
-│   ├── package.json        # Backend Dependencies
-│   ├── .env               # Backend Environment Variables (Secret)
-│   ├── .env.template      # Environment Template
-│   └── README.md          # Backend Documentation
-│
-├── package.json            # Root Package Manager
-├── .gitignore             # Git Ignore Rules
-└── README.md              # This File
-```
-
-## 🚀 **Quick Start**
+## Quick Start
 
 ### Prerequisites
 
 - Node.js 16+
 - npm
 
-### 1. Install All Dependencies
+### Installation
 
 ```bash
-npm run install:all
+npm install
+cd api && npm install
 ```
 
-### 2. Configure Environment Variables
+### Environment Setup
 
-**Backend Setup:**
-
-```bash
-cd backend
-cp .env.template .env
-# Edit .env with your PayPal credentials
-```
-
-**Frontend Setup:**
+**Frontend (.env.local):**
 
 ```bash
-cd frontend
 cp .env.local.template .env.local
-# Edit .env.local with your PayPal client ID
+# Edit with your PayPal client ID
 ```
 
-### 3. Start Development Servers
+**Backend (api/.env):**
 
 ```bash
-# Run both servers simultaneously
+cp api/.env.template api/.env
+# Edit with your PayPal credentials
+```
+
+### Development
+
+```bash
+# Start frontend only
 npm run dev
 
-# Or run separately:
-npm run dev:backend    # Backend on http://localhost:3001
-npm run dev:frontend   # Frontend on http://localhost:5173
+# Start backend only
+npm run server
+
+# Start both (requires concurrently installation)
+npm run dev:full
 ```
 
-## 🔐 **Security Architecture**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3001
 
-### Secure Credential Management
+## Project Structure
 
 ```
-Frontend (React) - PUBLIC ZONE
-├── ✅ Uses VITE_PAYPAL_CLIENT_ID only
-├── ✅ No access to secret key
-├── ✅ Dynamic PayPal SDK loading
-└── ✅ Communicates with backend via API
-
-Backend (Express) - SECURE ZONE
-├── 🔒 Uses PAYPAL_CLIENT_SECRET (protected)
-├── 🔒 Handles all PayPal API authentication
-├── 🔒 Never exposes secret to frontend
-└── 🔒 Environment variables protected by .gitignore
+PortalMedia/
+├── src/                     # React Source Code
+│   ├── components/          # UI Components
+│   ├── contexts/            # React Contexts
+│   ├── hooks/               # Custom Hooks
+│   ├── i18n/                # Internationalization
+│   ├── pages/               # Route Components
+│   └── ...
+├── Public/                  # Static Assets
+├── api/                     # Express.js Backend
+│   ├── server.js            # Main Server File
+│   ├── package.json         # Backend Dependencies
+│   ├── .env                 # Backend Environment Variables (Secret)
+│   └── .env.template        # Environment Template
+├── package.json             # Frontend Dependencies & Scripts
+├── vite.config.ts           # Vite Configuration
+├── tailwind.config.js       # Tailwind Configuration
+├── .gitignore               # Git Ignore Rules
+└── README.md                # This File
 ```
 
-### Security Features
+## Available Scripts
 
-- **Separated Concerns**: Frontend and backend credentials isolated
-- **Git Protection**: All `.env` files excluded from version control
-- **API Proxy**: Secure backend endpoints for sensitive operations
-- **Dynamic Loading**: No hardcoded credentials in source code
+- `npm run dev` - Start frontend development server
+- `npm run build` - Build frontend for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run server` - Start backend API server
+- `npm run dev:full` - Start both frontend and backend
 
-## 🎯 **Key Features**
-
-### Frontend Features
-
-- ⚛️ React 18 with TypeScript
-- 🎨 Tailwind CSS for styling
-- 🌍 Multi-language support (Arabic/English)
-- 💳 Secure PayPal checkout integration
-- 📱 Fully responsive design
-- ✨ Framer Motion animations
-- 💬 Interactive chatbot
-- 🔝 Scroll to top functionality
-
-### Backend Features
-
-- 🚀 Express.js API server
-- 🔒 Secure PayPal integration
-- 🌐 CORS configured
-- 📝 Comprehensive error handling
-- 🏥 Health check endpoints
-
-## 📋 **Available Scripts**
-
-### Root Level Commands
-
-```bash
-npm run install:all    # Install all dependencies (root, frontend, backend)
-npm run dev           # Start both servers
-npm run dev:frontend  # Start only frontend
-npm run dev:backend   # Start only backend
-npm run build         # Build frontend for production
-npm run lint          # Lint both projects
-npm run clean         # Clean all node_modules and build files
-```
-
-### Individual Project Commands
-
-See `frontend/README.md` and `backend/README.md` for specific documentation.
-
-## 🌐 **Development URLs**
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3001
-- **Payment Page**: http://localhost:5173/payment
-
-## 📚 **Documentation**
-
-- [Frontend Documentation](./frontend/README.md)
-- [Backend Documentation](./backend/README.md)
-- [Development Guide](./DEVELOPMENT_GUIDE.md)
-
-## 🔧 **Development Workflow**
-
-1. **Setup**: Run `npm run install:all` once
-2. **Environment**: Configure `.env` files in both directories
-3. **Development**: Use `npm run dev` to start both servers
-4. **Testing**: Test PayPal integration in sandbox mode
-5. **Build**: Use `npm run build` for production
-
-## 🛡️ **Security Best Practices**
-
-- Never commit `.env` files
-- Keep secret keys only in backend
-- Use environment templates for setup
-- Regularly rotate API credentials
-- Test in sandbox before production
-
-## 📦 **Technology Stack**
+## Technology Stack
 
 ### Frontend
 
-- React 18.3.1 + TypeScript 5.5.3
-- Vite 5.4.2 (Build tool)
-- Tailwind CSS 3.4.1 (Styling)
-- Framer Motion 12.23.12 (Animations)
-- i18next (Internationalization)
+- React 18 + TypeScript
+- Vite (build tool)
+- Tailwind CSS (styling)
+- Framer Motion (animations)
+- i18next (internationalization)
+- React Router DOM (routing)
 
 ### Backend
 
-- Node.js + Express.js 4.19.2
-- PayPal REST API Integration
-- CORS 2.8.5 (Cross-origin requests)
-- dotenv 16.4.5 (Environment management)
+- Node.js + Express.js
+- PayPal REST API integration
+- CORS enabled
+- Environment variable management
 
-## 🚀 **Deployment**
+## Security
 
-- **Frontend**: Build with `npm run build` and deploy static assets
-- **Backend**: Deploy Node.js server with environment variables
-- **Environment**: Use production PayPal credentials in live environment
-
----
-
-**Portal Media** - Modern Web Application
+- PayPal credentials properly separated
+- Client ID safe for frontend exposure
+- Secret key secure in backend only
+- Environment templates for safe setup
