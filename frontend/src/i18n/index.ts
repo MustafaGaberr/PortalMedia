@@ -79,13 +79,27 @@ const resources = {
       contact: {
         title: 'Get In Touch',
         subtitle: 'Ready to Start Your Project?',
+        getInTouch: 'Get In',
+        touch: 'Touch',
+        readyToStart: 'Ready to start your next project? Let\'s create something amazing together.',
+        sendMessage: 'Send us a message',
         name: 'Full Name',
         email: 'Email Address',
         phone: 'Phone Number',
         message: 'Your Message',
+        namePlaceholder: 'Your name',
+        emailPlaceholder: 'your@email.com',
+        messagePlaceholder: 'Tell us about your project...',
         send: 'Send Message',
-        whatsapp: 'WhatsApp Us',
-        follow: 'Follow Us'
+        sending: 'Sending...',
+        successMessage: 'Thank you for your message! We\'ll get back to you soon.',
+        contactInformation: 'Contact Information',
+        follow: 'Follow Us',
+        stayConnected: 'Stay connected with us for the latest updates and behind-the-scenes content.',
+        discussProject: 'Let\'s discuss your project and bring your vision to life.',
+        scheduleCall: 'Schedule a Call',
+        address: '123 Business Ave, Riyadh, Saudi Arabia',
+        whatsapp: 'WhatsApp Us'
       },
       // Payment
       payment: {
@@ -207,13 +221,27 @@ const resources = {
       contact: {
         title: 'تواصل معنا',
         subtitle: 'مستعد لبدء مشروعك؟',
+        getInTouch: 'تواصل',
+        touch: 'معنا',
+        readyToStart: 'مستعد لبدء مشروعك القادم؟ لنخلق شيئاً مذهلاً معاً.',
+        sendMessage: 'أرسل لنا رسالة',
         name: 'الاسم الكامل',
         email: 'عنوان البريد الإلكتروني',
         phone: 'رقم الهاتف',
         message: 'رسالتك',
+        namePlaceholder: 'اسمك',
+        emailPlaceholder: 'your@email.com',
+        messagePlaceholder: 'أخبرنا عن مشروعك...',
         send: 'إرسال الرسالة',
-        whatsapp: 'واتساب',
-        follow: 'تابعنا'
+        sending: 'جاري الإرسال...',
+        successMessage: 'شكراً لرسالتك! سنتواصل معك قريباً.',
+        contactInformation: 'معلومات الاتصال',
+        follow: 'تابعنا',
+        stayConnected: 'ابق متصلاً معنا للحصول على آخر التحديثات والمحتوى الحصري.',
+        discussProject: 'لنناقش مشروعك ونحول رؤيتك إلى حقيقة.',
+        scheduleCall: 'جدولة مكالمة',
+        address: '123 شارع الأعمال، الرياض، المملكة العربية السعودية',
+        whatsapp: 'واتساب'
       },
       // Payment
       payment: {
