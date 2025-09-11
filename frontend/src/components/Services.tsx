@@ -76,43 +76,44 @@ const Services: React.FC = () => {
           {/* Services Grid */}
           <motion.div 
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           >
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="relative h-80 perspective-1000"
+                className="relative h-64 md:h-80 perspective-1000"
                 onMouseEnter={() => setFlippedCard(index)}
                 onMouseLeave={() => setFlippedCard(null)}
               >
                 <motion.div
-                  className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d"
+                  className="relative w-full h-full transition-transform duration-300 transform-style-preserve-3d"
                   animate={{ 
                     rotateY: flippedCard === index ? 180 : 0 
                   }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                   {/* Front of card */}
-                  <div className="absolute inset-0 w-full h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden border border-gray-100">
-                    <div className="p-8 h-full flex flex-col justify-center items-center text-center">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6`}>
-                        <service.icon className="w-8 h-8 text-white" />
+                  <div className="absolute inset-0 w-full h-full bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden border border-gray-100">
+                    <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center">
+                      <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6`}>
+                        <service.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">
+                      <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-2 md:mb-4 line-clamp-2">
                         {service.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-600 leading-relaxed text-xs md:text-base line-clamp-3">
                         {service.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Back of card */}
-                  <div className={`absolute inset-0 w-full h-full bg-gradient-to-br ${service.gradient} rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden rotate-y-180`}>
-                    <div className="p-8 h-full flex flex-col justify-center items-center text-center text-white">
-                      <service.icon className="w-12 h-12 mb-6" />
-                      <h3 className="text-xl font-bold mb-6">{service.title}</h3>
-                      <ul className="space-y-3">
+                  <div className={`absolute inset-0 w-full h-full bg-gradient-to-br ${service.gradient} rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden rotate-y-180`}>
+                    <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center text-white">
+                      <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" />
+                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6">{service.title}</h3>
+                      <ul className="space-y-2 md:space-y-3">
                         {service.details.map((detail, detailIndex) => (
                           <motion.li
                             key={detailIndex}
@@ -122,9 +123,9 @@ const Services: React.FC = () => {
                               x: flippedCard === index ? 0 : -20
                             }}
                             transition={{ delay: detailIndex * 0.1 }}
-                            className="flex items-center justify-center"
+                            className="flex items-center justify-center text-xs md:text-base"
                           >
-                            <div className="w-2 h-2 bg-white rounded-full mr-3 rtl:ml-3 rtl:mr-0"></div>
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0"></div>
                             {detail}
                           </motion.li>
                         ))}
@@ -137,21 +138,6 @@ const Services: React.FC = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-      `}</style>
     </section>
   );
 };

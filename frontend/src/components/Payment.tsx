@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, XCircle, Loader } from 'lucide-react';
+import { CheckCircle, XCircle, Loader, CreditCard } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -8,8 +8,9 @@ declare global {
   }
 }
 
-interface PayPalButtonProps {
+interface PaymentProps {
   amount: string;
+  description?: string;
   onSuccess?: (details: any) => void;
   onError?: (error: any) => void;
   onCancel?: () => void;
@@ -22,31 +23,36 @@ interface PaymentStatus {
   details?: any;
 }
 
-// Load PayPal SDK dynamically
+// Load PayPal SDK dynamically for LIVE mode
 const loadPayPalSDK = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    // Check if already loaded
+    // Remove any existing PayPal scripts first
+    const existingScripts = document.querySelectorAll('script[src*="paypal.com/sdk/js"]');
+    existingScripts.forEach(script => script.remove());
+    
+    // Clear any existing PayPal instance
     if (window.paypal) {
-      resolve();
-      return;
+      delete window.paypal;
     }
 
-    // Get client ID from environment variable
+    // Get client ID from environment variable (LIVE mode)
     const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
-    const mode = import.meta.env.VITE_PAYPAL_MODE || 'sandbox';
     
     if (!clientId) {
       reject(new Error('PayPal Client ID not configured'));
       return;
     }
 
-    // Create script element
+    // Create script element for LIVE PayPal SDK with explicit live mode parameters
     const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&vault=false&components=buttons,card-fields&disable-funding=paylater,venmo`;
     script.async = true;
     
     script.onload = () => {
       if (window.paypal) {
+        console.log('PayPal SDK loaded successfully in LIVE mode');
+        console.log('PayPal environment:', window.paypal);
+        console.log('SDK URL used:', script.src);
         resolve();
       } else {
         reject(new Error('PayPal SDK failed to load'));
@@ -62,8 +68,9 @@ const loadPayPalSDK = (): Promise<void> => {
   });
 };
 
-const PayPalButton: React.FC<PayPalButtonProps> = ({
+const Payment: React.FC<PaymentProps> = ({
   amount,
+  description = '',
   onSuccess,
   onError,
   onCancel,
@@ -112,6 +119,7 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
           body: JSON.stringify({
             amount: parseFloat(amount).toFixed(2),
             currency: 'USD',
+            description: description || 'Portal Media Services',
           }),
         });
 
@@ -157,6 +165,7 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
         // Extract payer name from the response
         const payerName = details.payer?.name?.given_name || 
                          details.payment_source?.paypal?.name?.given_name || 
+                         details.payer?.name?.surname ||
                          'valued customer';
         
         setPaymentStatus({ 
@@ -168,9 +177,6 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
         if (onSuccess) {
           onSuccess(details);
         }
-
-        // Show success alert with payer name
-        alert(`Payment successful! Thank you, ${payerName}!`);
         
       } catch (error) {
         console.error('Payment capture error:', error);
@@ -201,7 +207,10 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
       }
     };
 
-    // Render PayPal button
+    // Render PayPal Smart Buttons (includes both PayPal and Card options)
+    console.log('Rendering PayPal buttons with Client ID:', import.meta.env.VITE_PAYPAL_CLIENT_ID?.substring(0, 10) + '...');
+    console.log('PayPal SDK environment check:', window.paypal.version || 'Unknown');
+    
     window.paypal
       .Buttons({
         createOrder,
@@ -214,11 +223,14 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
           shape: 'rect',
           label: 'paypal',
           height: 50,
+          tagline: false
         },
+        // Enable both PayPal and card funding sources
+        fundingSource: undefined, // This allows both PayPal and card options
       })
       .render(paypalRef.current);
 
-  }, [isSDKReady, amount, disabled, onSuccess, onError, onCancel]);
+  }, [isSDKReady, amount, description, disabled, onSuccess, onError, onCancel]);
 
   if (!isSDKReady) {
     return (
@@ -232,13 +244,44 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
   if (!amount || parseFloat(amount) <= 0) {
     return (
       <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <p className="text-yellow-800 text-center">Please enter a valid amount to proceed with PayPal payment.</p>
+        <p className="text-yellow-800 text-center">Please enter a valid amount to proceed with payment.</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Payment Header */}
+      <div className="text-center pb-4 border-b border-gray-200">
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">Complete Your Payment</h3>
+        <p className="text-gray-600">Choose your preferred payment method below</p>
+      </div>
+
+      {/* Payment Options Info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">PP</span>
+            </div>
+            <div>
+              <h4 className="font-semibold text-blue-900">Pay with PayPal</h4>
+              <p className="text-sm text-blue-700">Use your PayPal account</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-center space-x-3">
+            <CreditCard className="w-8 h-8 text-green-600" />
+            <div>
+              <h4 className="font-semibold text-green-900">Pay with Card</h4>
+              <p className="text-sm text-green-700">Visa, MasterCard, etc.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Payment Status */}
       {paymentStatus.type !== 'idle' && (
         <motion.div
@@ -268,18 +311,31 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
         </motion.div>
       )}
 
-      {/* PayPal Button Container */}
+      {/* PayPal Smart Buttons Container */}
       <div 
+        id="paypal-button-container"
         ref={paypalRef}
         className={`${disabled ? 'opacity-50 pointer-events-none' : ''}`}
       />
 
       {/* Amount Display */}
-      <div className="text-center text-sm text-gray-600">
-        Amount: <span className="font-semibold">${parseFloat(amount).toFixed(2)} USD</span>
+      <div className="text-center p-4 bg-gray-50 rounded-lg">
+        <div className="text-lg font-semibold text-gray-900">
+          Total: <span className="text-blue-600">${parseFloat(amount).toFixed(2)} USD</span>
+        </div>
+        {description && (
+          <div className="text-sm text-gray-600 mt-1">{description}</div>
+        )}
+      </div>
+
+      {/* Security Notice */}
+      <div className="text-center text-xs text-gray-500">
+        <p>🔒 Your payment is secured by PayPal's industry-leading encryption</p>
+        <p className="font-semibold text-red-600">⚠️ LIVE MODE: This is a real transaction and will be processed immediately</p>
+        <p className="text-blue-600">Client ID: {import.meta.env.VITE_PAYPAL_CLIENT_ID ? `${import.meta.env.VITE_PAYPAL_CLIENT_ID.substring(0, 8)}...` : 'Not configured'}</p>
       </div>
     </div>
   );
 };
 
-export default PayPalButton;
+export default Payment;

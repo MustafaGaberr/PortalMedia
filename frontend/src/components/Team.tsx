@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Linkedin, Twitter, Mail } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
 
 const Team: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { ref, controls } = useScrollAnimation();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance required
+  const minSwipeDistance = 50;
 
   const teamMembers = [
     {
@@ -77,71 +79,95 @@ const Team: React.FC = () => {
 
   const getVisibleMembers = () => {
     const members = [];
-    for (let i = 0; i < 3; i++) {
+    // Show 2 members on mobile, 3 on desktop
+    const visibleCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 3;
+    for (let i = 0; i < visibleCount; i++) {
       const index = (currentSlide + i) % teamMembers.length;
       members.push({ ...teamMembers[index], slideIndex: i });
     }
     return members;
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe && !isRTL) {
+      nextSlide();
+    } else if (isRightSwipe && !isRTL) {
+      prevSlide();
+    } else if (isLeftSwipe && isRTL) {
+      prevSlide();
+    } else if (isRightSwipe && isRTL) {
+      nextSlide();
+    }
+  };
+
   return (
     <section id="team" className="py-20 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-        >
+        <div>
           {/* Header */}
-          <motion.div variants={fadeInUp} className="text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               {t('team.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('team.subtitle')}
             </p>
-          </motion.div>
+          </div>
 
           {/* Team Carousel */}
-          <motion.div variants={fadeInUp} className="relative">
+          <div className="relative">
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className={`absolute ${isRTL ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
+              className={`absolute ${isRTL ? 'right-2 md:right-0' : 'left-2 md:left-0'} top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
             >
-              <ChevronLeft className={`w-6 h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
+              <ChevronLeft className={`w-4 h-4 md:w-6 md:h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
             </button>
             <button
               onClick={nextSlide}
-              className={`absolute ${isRTL ? 'left-0' : 'right-0'} top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
+              className={`absolute ${isRTL ? 'left-2 md:left-0' : 'right-2 md:right-0'} top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
             >
-              <ChevronRight className={`w-6 h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
+              <ChevronRight className={`w-4 h-4 md:w-6 md:h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Team Members */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-16">
-              <AnimatePresence mode="wait">
-                {getVisibleMembers().map((member, index) => (
-                  <motion.div
-                    key={`${member.name}-${currentSlide}`}
-                    initial={{ opacity: 0, x: isRTL ? -100 : 100, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: isRTL ? 100 : -100, scale: 0.9 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.1,
-                      ease: [0.6, -0.05, 0.01, 0.99]
-                    }}
-                    className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group ${
-                      index === 1 ? 'md:scale-110 z-10' : 'md:scale-95'
-                    }`}
-                  >
+            <div 
+              className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mx-8 md:mx-16 transition-all duration-500 ease-in-out"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+              style={{ transform: `translateX(0)` }}
+            >
+              {getVisibleMembers().map((member, index) => (
+                <div
+                  key={`${member.name}-${currentSlide}`}
+                  className={`bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden group opacity-0 animate-fade-in ${
+                    index === 1 && typeof window !== 'undefined' && window.innerWidth >= 768 ? 'md:scale-110 z-10' : 'md:scale-95'
+                  }`}
+                  style={{ 
+                    animationDelay: `${index * 150}ms`,
+                    animationFillMode: 'forwards'
+                  }}
+                >
                     <div className="relative overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       
@@ -159,20 +185,19 @@ const Team: React.FC = () => {
                       </div>
                     </div>
                     
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    <div className="p-4 md:p-6">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 md:mb-2">
                         {member.name}
                       </h3>
-                      <p className="text-blue-600 font-semibold mb-3">
+                      <p className="text-blue-600 font-semibold mb-2 md:mb-3 text-sm md:text-base">
                         {member.title}
                       </p>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-xs md:text-sm leading-relaxed line-clamp-3">
                         {member.bio}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </AnimatePresence>
             </div>
 
             {/* Dots Indicator */}
@@ -189,8 +214,8 @@ const Team: React.FC = () => {
                 />
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

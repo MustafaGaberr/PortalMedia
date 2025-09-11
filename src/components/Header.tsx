@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Header: React.FC = () => {
@@ -10,7 +10,6 @@ const Header: React.FC = () => {
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const { language, changeLanguage, t } = useLanguage();
   const location = useLocation();
-  const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navigation = [
@@ -43,18 +42,8 @@ const Header: React.FC = () => {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
-      // If we're not on the home page, navigate to home first then scroll
-      if (location.pathname !== '/') {
-        // Navigate to home page and add hash to URL so it scrolls when page loads
-        navigate('/' + href);
-        return;
-      }
-      
-      // If we're on home page, scroll to the section
       const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      element?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

@@ -4,6 +4,7 @@ import { Calendar, User, ArrowRight, Search, Filter } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
+import { blogPosts } from '../data/blogPosts';
 
 const BlogPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
@@ -12,80 +13,19 @@ const BlogPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Future of Digital Marketing in 2024",
-      excerpt: "Discover the latest trends and technologies that will shape digital marketing strategies in the coming year.",
-      content: "Digital marketing is evolving at an unprecedented pace. With new technologies emerging and consumer behaviors shifting, businesses must adapt their strategies to stay competitive...",
-      image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg",
-      author: "Sarah Johnson",
-      date: "Dec 15, 2024",
-      category: "Marketing",
-      readTime: "5 min read"
-    },
-    {
-      id: 2,
-      title: "Social Media ROI: Measuring Success",
-      excerpt: "Learn how to effectively measure and optimize your social media marketing return on investment.",
-      content: "Understanding the return on investment of your social media efforts is crucial for long-term success. This comprehensive guide will walk you through the essential metrics...",
-      image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg",
-      author: "Mike Chen",
-      date: "Dec 12, 2024",
-      category: "Social Media",
-      readTime: "7 min read"
-    },
-    {
-      id: 3,
-      title: "SEO Best Practices for Modern Websites",
-      excerpt: "Essential SEO strategies that will help your website rank higher in search engine results.",
-      content: "Search engine optimization has become more sophisticated than ever. With Google's algorithm updates and changing user behavior patterns...",
-      image: "https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg",
-      author: "Emily Davis",
-      date: "Dec 10, 2024",
-      category: "SEO",
-      readTime: "6 min read"
-    },
-    {
-      id: 4,
-      title: "Content Marketing Strategies That Convert",
-      excerpt: "Create compelling content that engages your audience and drives conversions.",
-      image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-      author: "Ahmed Al-Rashid",
-      date: "Dec 8, 2024",
-      category: "Content",
-      readTime: "4 min read"
-    },
-    {
-      id: 5,
-      title: "PPC Campaign Optimization Techniques",
-      excerpt: "Advanced techniques to improve your pay-per-click advertising performance.",
-      image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg",
-      author: "Lisa Park",
-      date: "Dec 5, 2024",
-      category: "PPC",
-      readTime: "8 min read"
-    },
-    {
-      id: 6,
-      title: "Building a Strong Brand Identity Online",
-      excerpt: "Develop a consistent brand presence across all digital touchpoints.",
-      image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
-      author: "Sarah Johnson",
-      date: "Dec 3, 2024",
-      category: "Branding",
-      readTime: "5 min read"
-    }
-  ];
-
   const categories = ['all', 'Marketing', 'Social Media', 'SEO', 'Content', 'PPC', 'Branding'];
 
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredPosts = React.useMemo(() => {
+    return blogPosts.filter(post => {
+      const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchTerm, selectedCategory]);
+
+  // Ensure filteredPosts is never undefined or null
+  const validFilteredPosts = filteredPosts || [];
 
   // If viewing a single post
   if (id) {
@@ -233,10 +173,12 @@ const BlogPage: React.FC = () => {
 
           {/* Blog Posts Grid */}
           <motion.div 
+            key={`${searchTerm}-${selectedCategory}`}
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredPosts.map((post, index) => (
+            {validFilteredPosts.length > 0 ? (
+              validFilteredPosts.map((post) => (
               <motion.article
                 key={post.id}
                 variants={fadeInUp}
@@ -285,21 +227,23 @@ const BlogPage: React.FC = () => {
                     to={`/blog/${post.id}`}
                     className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                   >
-                    {t('blog.read-more')}
+                    {t('blog.readMore')}
                     <ArrowRight 
                       className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} 
                     />
                   </Link>
                 </div>
               </motion.article>
-            ))}
+            ))
+            ) : (
+              <motion.div 
+                variants={fadeInUp} 
+                className="col-span-full text-center py-16"
+              >
+                <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
+              </motion.div>
+            )}
           </motion.div>
-
-          {filteredPosts.length === 0 && (
-            <motion.div variants={fadeInUp} className="text-center py-16">
-              <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </div>

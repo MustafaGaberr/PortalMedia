@@ -65,7 +65,7 @@ const About: React.FC = () => {
           </motion.div>
 
           {/* Image */}
-          <motion.div variants={fadeInUp} className="relative">
+          <motion.div variants={fadeInUp} className="relative hidden lg:block">
             <div className="relative z-10">
               <img
                 src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"

@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="text-lg font-bold mb-4">{t('footer.quick-links')}</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-lg font-bold mb-4">{t('footer.services-title')}</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.servicesTitle')}</h3>
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>

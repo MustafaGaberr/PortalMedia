@@ -26,7 +26,7 @@ const ScrollToTop = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className={`fixed bottom-24 z-50 bg-gradient-to-r from-blue-600 to-blue-700 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hidden sm:flex ${
+          className={`fixed bottom-24 z-50 bg-gradient-to-r from-blue-600 to-blue-700 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 ${
             language === 'ar' ? 'left-6' : 'right-6'
           }`}
           whileHover={{ scale: 1.1, y: -2 }}
