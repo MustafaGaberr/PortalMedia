@@ -1,5 +1,7 @@
 # Portal Media - Full Stack Application
 
+# Portal Media
+
 ## Project Overview
 
 Portal Media is a modern, full-stack web application featuring a React frontend with TypeScript and an Express.js backend. The application includes secure PayPal integration, multi-language support, and responsive design.
@@ -193,4 +195,4 @@ See `frontend/README.md` and `backend/README.md` for specific documentation.
 
 ---
 
-**Portal Media** - Modern, Secure, Scalable Web Application
+**Portal Media** - Modern Web Application

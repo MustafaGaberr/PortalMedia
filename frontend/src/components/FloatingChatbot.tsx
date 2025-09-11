@@ -20,7 +20,6 @@ const ChatBot: React.FC = () => {
   const goBack = () => {
     if (currentView !== 'main') {
       setCurrentView('main');
-      // Add a bot message to show we're back to main menu and reset to show quick replies
       setTimeout(() => {
         setMessages([
           { type: 'bot', content: t('chatbot.greeting') },
@@ -40,7 +39,6 @@ const ChatBot: React.FC = () => {
       setMessages(prev => [...prev, { type: 'user', content: message }]);
       setMessage('');
       
-      // Simulate bot response
       setTimeout(() => {
         setMessages(prev => [...prev, { 
           type: 'bot', 
@@ -54,7 +52,6 @@ const ChatBot: React.FC = () => {
     const reply = t(`chatbot.quickReplies.${replyKey}`);
     setMessages(prev => [...prev, { type: 'user', content: reply }]);
     
-    // Simulate bot response based on quick reply
     setTimeout(() => {
       let responseKey = 'default';
       if (replyKey === 'services') {
@@ -132,7 +129,6 @@ const ChatBot: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                {/* Clear Chat Button */}
                 <button
                   onClick={clearMessages}
                   className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
@@ -142,7 +138,6 @@ const ChatBot: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
                 </button>
-                {/* Close Button */}
                 <button
                   onClick={toggleChat}
                   className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
@@ -195,8 +190,6 @@ const ChatBot: React.FC = () => {
                 </div>
               </div>
             )}
-
-            {/* Back to Main Menu Button - REMOVED */}
           </div>
 
           {/* Input */}

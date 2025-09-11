@@ -41,7 +41,10 @@ frontend/.env*
 backend/.env
 
 # PayPal files
+PAYPAL_README.md
+PAYPAL_UPDATE.md
 SECURE_PAYPAL_README.md
+SECURITY_NOTICE.md
 *.key
 *.pem
 
