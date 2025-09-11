@@ -22,6 +22,46 @@ interface PaymentStatus {
   details?: any;
 }
 
+// Load PayPal SDK dynamically
+const loadPayPalSDK = (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    // Check if already loaded
+    if (window.paypal) {
+      resolve();
+      return;
+    }
+
+    // Get client ID from environment variable
+    const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
+    const mode = import.meta.env.VITE_PAYPAL_MODE || 'sandbox';
+    
+    if (!clientId) {
+      reject(new Error('PayPal Client ID not configured'));
+      return;
+    }
+
+    // Create script element
+    const script = document.createElement('script');
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+    script.async = true;
+    
+    script.onload = () => {
+      if (window.paypal) {
+        resolve();
+      } else {
+        reject(new Error('PayPal SDK failed to load'));
+      }
+    };
+    
+    script.onerror = () => {
+      reject(new Error('Failed to load PayPal SDK'));
+    };
+
+    // Append to head
+    document.head.appendChild(script);
+  });
+};
+
 const PayPalButton: React.FC<PayPalButtonProps> = ({
   amount,
   onSuccess,
@@ -34,16 +74,21 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
   const [isSDKReady, setIsSDKReady] = useState(false);
 
   useEffect(() => {
-    // Check if PayPal SDK is loaded
-    const checkPayPalSDK = () => {
-      if (window.paypal) {
+    // Load PayPal SDK
+    const initializePayPal = async () => {
+      try {
+        await loadPayPalSDK();
         setIsSDKReady(true);
-      } else {
-        // Wait for SDK to load
-        setTimeout(checkPayPalSDK, 100);
+      } catch (error) {
+        console.error('Failed to load PayPal SDK:', error);
+        setPaymentStatus({ 
+          type: 'error', 
+          message: 'Failed to load PayPal. Please refresh the page.' 
+        });
       }
     };
-    checkPayPalSDK();
+    
+    initializePayPal();
   }, []);
 
   useEffect(() => {
@@ -95,7 +140,7 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({
       try {
         setPaymentStatus({ type: 'processing', message: 'Processing payment...' });
 
-        // Capture the payment through our backend
+        // Capture the payment through backend
         const response = await fetch(`/api/capture-order/${data.orderID}`, {
           method: 'POST',
           headers: {
