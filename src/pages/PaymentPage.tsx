@@ -4,6 +4,7 @@ import { CreditCard, Shield, Check, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
+import PayPalButton from '../components/PayPalButton';
 
 const PaymentPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
@@ -231,26 +232,70 @@ const PaymentPage: React.FC = () => {
                     </motion.div>
                   )}
 
-                  {/* Payment Button */}
-                  <motion.button
-                    type="submit"
-                    disabled={!selectedMethod || !amount || isProcessing}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 rtl:space-x-reverse"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {isProcessing ? (
-                      <>
-                        <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                        <span>Processing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Shield className="w-5 h-5" />
-                        <span>{t('payment.pay-now')}</span>
-                      </>
-                    )}
-                  </motion.button>
+                  {/* PayPal Integration */}
+                  {selectedMethod === 'paypal' && amount && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4"
+                    >
+                      <div className="border-t border-gray-200 pt-6">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Complete Payment with PayPal</h3>
+                        <PayPalButton
+                          amount={amount}
+                          disabled={isProcessing}
+                          onSuccess={(details) => {
+                            console.log('Payment successful:', details);
+                            setIsProcessing(false);
+                            // Reset form
+                            setAmount('');
+                            setDescription('');
+                            setSelectedMethod(null);
+                          }}
+                          onError={(error) => {
+                            console.error('Payment error:', error);
+                            setIsProcessing(false);
+                            alert('Payment failed. Please try again.');
+                          }}
+                          onCancel={() => {
+                            console.log('Payment cancelled');
+                            setIsProcessing(false);
+                          }}
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Visa Card Payment Button */}
+                  {selectedMethod === 'visa' && (
+                    <motion.button
+                      type="submit"
+                      disabled={!selectedMethod || !amount || isProcessing}
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 rtl:space-x-reverse"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {isProcessing ? (
+                        <>
+                          <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                          <span>Processing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Shield className="w-5 h-5" />
+                          <span>{t('payment.pay-now')}</span>
+                        </>
+                      )}
+                    </motion.button>
+                  )}
+
+                  {/* General Payment Instructions */}
+                  {!selectedMethod && (
+                    <div className="text-center p-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                      <p className="text-gray-600">Please select a payment method to continue</p>
+                    </div>
+                  )}
                 </form>
               </div>
             </motion.div>
