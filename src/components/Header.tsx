@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import ReactCountryFlag from 'react-country-flag';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ const Header: React.FC = () => {
         
         let current = '';
         sections.forEach(sectionId => {
-          const element = document.querySelector(sectionId);
+          const element = document.querySelector(sectionId) as HTMLElement;
           if (element) {
             const offsetTop = element.offsetTop;
             const offsetHeight = element.offsetHeight;
@@ -111,7 +112,27 @@ const Header: React.FC = () => {
   };
 
   const getCurrentFlag = () => {
-    return language === 'en' ? '🇺🇸' : '🇸🇦';
+    return language === 'en' ? (
+      <ReactCountryFlag 
+        countryCode="US" 
+        svg 
+        style={{
+          width: '1.2em',
+          height: '1.2em',
+        }}
+        title="United States"
+      />
+    ) : (
+      <ReactCountryFlag 
+        countryCode="SA" 
+        svg 
+        style={{
+          width: '1.2em',
+          height: '1.2em',
+        }}
+        title="Saudi Arabia"
+      />
+    );
   };
 
   const getCurrentLanguageName = () => {
@@ -218,7 +239,7 @@ const Header: React.FC = () => {
                 className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[120px]"
                 title="Change Language"
               >
-                <span className="text-lg mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
+                <span className="mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
                 <span className="text-sm font-semibold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
                 <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-200 drop-shadow-sm ${
                   isLangDropdownOpen ? 'rotate-180' : ''
@@ -244,7 +265,17 @@ const Header: React.FC = () => {
                         : 'text-white/90 hover:text-white'
                     }`}
                   >
-                    <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">🇺🇸</span>
+                    <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
+                      <ReactCountryFlag 
+                        countryCode="US" 
+                        svg 
+                        style={{
+                          width: '1.2em',
+                          height: '1.2em',
+                        }}
+                        title="United States"
+                      />
+                    </span>
                     <span className="text-sm font-medium">English</span>
                   </button>
                   <button
@@ -255,7 +286,17 @@ const Header: React.FC = () => {
                         : 'text-white/90 hover:text-white'
                     }`}
                   >
-                    <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">🇸🇦</span>
+                    <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
+                      <ReactCountryFlag 
+                        countryCode="SA" 
+                        svg 
+                        style={{
+                          width: '1.2em',
+                          height: '1.2em',
+                        }}
+                        title="Saudi Arabia"
+                      />
+                    </span>
                     <span className="text-sm font-medium">العربية</span>
                   </button>
                 </motion.div>
@@ -343,7 +384,17 @@ const Header: React.FC = () => {
                     : 'text-white/90 hover:text-white hover:bg-blue-800/30'
                 }`}
               >
-                <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇺🇸</span>
+                <span className="mr-3 rtl:ml-3 rtl:mr-0">
+                  <ReactCountryFlag 
+                    countryCode="US" 
+                    svg 
+                    style={{
+                      width: '1.2em',
+                      height: '1.2em',
+                    }}
+                    title="United States"
+                  />
+                </span>
                 <span className="text-sm font-medium">English</span>
                 {language === 'en' && (
                   <span className="ml-auto text-white">✓</span>
@@ -357,7 +408,17 @@ const Header: React.FC = () => {
                     : 'text-white/90 hover:text-white hover:bg-blue-800/30'
                 }`}
               >
-                <span className="text-lg mr-3 rtl:ml-3 rtl:mr-0">🇸🇦</span>
+                <span className="mr-3 rtl:ml-3 rtl:mr-0">
+                  <ReactCountryFlag 
+                    countryCode="SA" 
+                    svg 
+                    style={{
+                      width: '1.2em',
+                      height: '1.2em',
+                    }}
+                    title="Saudi Arabia"
+                  />
+                </span>
                 <span className="text-sm font-medium">العربية</span>
                 {language === 'ar' && (
                   <span className="ml-auto text-white">✓</span>
