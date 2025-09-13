@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
+      transition: { duration: 0.2 }
     }
   };
 
@@ -129,7 +129,7 @@ const Contact: React.FC = () => {
                 boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
                 borderColor: "rgba(59, 130, 246, 0.3)"
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold text-white mb-6">{t('contact.sendMessage')}</h3>
               
@@ -147,7 +147,7 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder={t('contact.namePlaceholder')}
                   />
                 </motion.div>
@@ -165,7 +165,7 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder={t('contact.emailPlaceholder')}
                   />
                 </motion.div>
@@ -183,7 +183,7 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                     placeholder={t('contact.messagePlaceholder')}
                   ></textarea>
                 </motion.div>
@@ -191,11 +191,11 @@ const Contact: React.FC = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  animate={isSubmitting ? { scale: [1, 1.02, 1] } : {}}
-                  transition={{ repeat: isSubmitting ? Infinity : 0, duration: 1 }}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  animate={isSubmitting ? { scale: [1, 1.01, 1] } : {}}
+                  transition={{ repeat: isSubmitting ? Infinity : 0, duration: 0.8 }}
                 >
                   {isSubmitting ? (
                     <>
@@ -222,7 +222,7 @@ const Contact: React.FC = () => {
                 boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
                 borderColor: "rgba(59, 130, 246, 0.3)"
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold text-white mb-6">{t('contact.contactInformation')}</h3>
               
@@ -231,14 +231,14 @@ const Contact: React.FC = () => {
                   <motion.a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 rtl:space-x-reverse text-gray-300 hover:text-blue-400 transition-colors duration-300 group"
-                    whileHover={{ x: isRTL ? -10 : 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    className="flex items-center space-x-4 rtl:space-x-reverse text-gray-300 hover:text-blue-400 transition-colors duration-200 group"
+                    whileHover={{ x: isRTL ? -5 : 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
                   >
                     <motion.div
-                      className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center group-hover:bg-blue-500/30 transition-colors duration-300"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
+                      className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center group-hover:bg-blue-500/30 transition-colors duration-200"
+                      whileHover={{ rotate: 180 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <item.icon className="w-6 h-6" />
                     </motion.div>
@@ -255,7 +255,7 @@ const Contact: React.FC = () => {
                 boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
                 borderColor: "rgba(59, 130, 246, 0.3)"
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold text-white mb-6">{t('contact.follow')}</h3>
               
@@ -264,14 +264,14 @@ const Contact: React.FC = () => {
                   <motion.a
                     key={index}
                     href={social.href}
-                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-gray-300 ${social.color} transition-colors duration-300 border border-white/20 hover:border-current`}
+                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-gray-300 ${social.color} transition-colors duration-200 border border-white/20 hover:border-current`}
                     whileHover={{ 
-                      scale: 1.1, 
-                      rotate: 360,
+                      scale: 1.05, 
+                      rotate: 180,
                       boxShadow: "0 10px 20px -5px rgba(59, 130, 246, 0.3)"
                     }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400 }}
                     aria-label={social.label}
                   >
                     <social.icon className="w-6 h-6" />
@@ -291,16 +291,16 @@ const Contact: React.FC = () => {
                 scale: 1.02,
                 boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.4)"
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
             >
               <h3 className="text-xl font-bold text-white mb-4">{t('contact.readyToStart')}</h3>
               <p className="text-gray-300 mb-6">
                 {t('contact.discussProject')}
               </p>
               <motion.button
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-200"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {t('contact.scheduleCall')}
               </motion.button>

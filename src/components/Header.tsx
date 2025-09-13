@@ -149,8 +149,8 @@ const Header: React.FC = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled 
           ? 'bg-blue-900/90 backdrop-blur-md border-b border-blue-700/50 shadow-lg' 
           : isHomePage
@@ -187,7 +187,7 @@ const Header: React.FC = () => {
                     // Special handling for Home link
                     <button
                       onClick={handleHomeClick}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href && currentSection === ''
                           ? 'text-blue-300 font-bold text-base drop-shadow-lg'
                           : isScrolled || !isHomePage
@@ -200,7 +200,7 @@ const Header: React.FC = () => {
                   ) : (
                     <Link
                       to={item.href}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href
                           ? 'text-blue-300 font-bold text-base drop-shadow-lg'
                           : isScrolled || !isHomePage
@@ -214,7 +214,7 @@ const Header: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
                         ? 'text-blue-300 font-bold text-base drop-shadow-lg'
@@ -236,12 +236,12 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[120px]"
+                className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[120px]"
                 title="Change Language"
               >
                 <span className="mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
                 <span className="text-sm font-semibold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
-                <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-200 drop-shadow-sm ${
+                <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-150 drop-shadow-sm ${
                   isLangDropdownOpen ? 'rotate-180' : ''
                 }`} />
               </button>
@@ -252,8 +252,8 @@ const Header: React.FC = () => {
                   initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className={`absolute top-full mt-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden min-w-[140px] z-50 ${
+                  transition={{ duration: 0.15 }}
+                  className={`absolute top-full mt-2 bg-blue-900/95 backdrop-blur-md rounded-xl border border-blue-700/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
                     language === 'ar' ? 'right-0' : 'left-0'
                   }`}
                 >
@@ -306,7 +306,7 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="lg:hidden p-3 rounded-xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-200 hover:scale-110 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
               title={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X size={22} className="drop-shadow-sm" /> : <Menu size={22} className="drop-shadow-sm" />}
@@ -318,7 +318,7 @@ const Header: React.FC = () => {
         <motion.div
           initial={false}
           animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           className="lg:hidden overflow-hidden bg-blue-900/95 backdrop-blur-md rounded-xl mt-2 border border-blue-700/50"
         >
           <nav className="py-4">
@@ -332,7 +332,7 @@ const Header: React.FC = () => {
                         handleHomeClick();
                         setIsMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                         location.pathname === item.href && currentSection === ''
                           ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
                           : 'text-white/90 hover:text-white hover:bg-blue-800/30'
@@ -344,7 +344,7 @@ const Header: React.FC = () => {
                     <Link
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                      className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                         location.pathname === item.href
                           ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
                           : 'text-white/90 hover:text-white hover:bg-blue-800/30'
@@ -359,7 +359,7 @@ const Header: React.FC = () => {
                       scrollToSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-left px-6 py-3 transition-all duration-300 font-medium rounded-lg mx-2 ${
+                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                       location.pathname === '/' && isCurrentSection(item.href)
                         ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
                         : 'text-white/90 hover:text-white hover:bg-blue-800/30'
@@ -378,7 +378,7 @@ const Header: React.FC = () => {
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
-                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
+                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'en'
                     ? 'text-white bg-blue-800/50 font-semibold'
                     : 'text-white/90 hover:text-white hover:bg-blue-800/30'
@@ -402,7 +402,7 @@ const Header: React.FC = () => {
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
-                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-200 rounded-lg mx-0 ${
+                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'ar'
                     ? 'text-white bg-blue-800/50 font-semibold'
                     : 'text-white/90 hover:text-white hover:bg-blue-800/30'

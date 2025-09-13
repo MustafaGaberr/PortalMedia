@@ -48,7 +48,7 @@ const About: React.FC = () => {
                 <motion.div
                   key={index}
                   variants={scaleIn}
-                  className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200"
                 >
                   <div className="flex items-center space-x-4 rtl:space-x-reverse">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
@@ -75,15 +75,15 @@ const About: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-2xl"></div>
             </div>
             
-            {/* Decorative Elements */}
+            {/* Simplified Decorative Elements */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              animate={{ opacity: [0.1, 0.3, 0.1] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-green-400 to-green-500 rounded-full opacity-20"
             />
             <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              animate={{ opacity: [0.1, 0.2, 0.1] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
               className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-20"
             />
           </motion.div>

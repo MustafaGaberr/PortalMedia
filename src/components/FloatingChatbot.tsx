@@ -82,7 +82,7 @@ const ChatBot: React.FC = () => {
       >
         <button
           onClick={toggleChat}
-          className="btn-primary w-16 h-16 rounded-full shadow-glow hover:scale-110 transition-all duration-300 animate-pulse-glow focus:outline-none focus:ring-4 focus:ring-primary/30 flex items-center justify-center relative z-10"
+          className="btn-primary w-16 h-16 rounded-full shadow-glow hover:scale-110 transition-all duration-200 animate-pulse-glow focus:outline-none focus:ring-4 focus:ring-primary/30 flex items-center justify-center relative z-10"
         >
           {isOpen ? (
             <X className="w-7 h-7 text-white drop-shadow-lg relative z-10" />

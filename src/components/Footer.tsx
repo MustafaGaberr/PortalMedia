@@ -32,9 +32,9 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.2 }}
               className="mb-6"
             >
               <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4">
@@ -51,9 +51,9 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
           >
             <h3 className="text-lg font-bold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
@@ -84,9 +84,9 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
           >
             <h3 className="text-lg font-bold mb-4">{t('footer.servicesTitle')}</h3>
             <ul className="space-y-2">
@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.2 }}
               className="text-gray-400 text-sm mb-4 sm:mb-0"
             >
               {t('footer.rights')}

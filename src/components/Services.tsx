@@ -91,7 +91,7 @@ const Services: React.FC = () => {
                   animate={{ 
                     rotateY: flippedCard === index ? 180 : 0 
                   }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
                   {/* Front of card */}
                   <div className="absolute inset-0 w-full h-full bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden border border-gray-100">

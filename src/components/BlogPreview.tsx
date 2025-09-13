@@ -41,13 +41,13 @@ const BlogPreview: React.FC = () => {
               <motion.article
                 key={post.id}
                 variants={fadeInUp}
-                className="group bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                className="group bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-200"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-32 md:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-32 md:h-48 object-cover group-hover:scale-110 transition-transform duration-200"
                   />
                   <div className="absolute top-2 left-2 md:top-4 md:left-4">
                     <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
@@ -95,7 +95,7 @@ const BlogPreview: React.FC = () => {
           <motion.div variants={fadeInUp} className="text-center">
             <Link
               to="/blog"
-              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200"
             >
               {t('blog.viewAll')}
               <ArrowRight 
