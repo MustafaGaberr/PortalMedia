@@ -13,35 +13,6 @@ const PaymentPage: React.FC = () => {
   const [description, setDescription] = useState('');
   const [paymentCompleted, setPaymentCompleted] = useState(false);
 
-  const handlePaymentSuccess = (details: any) => {
-    console.log('Payment successful:', details);
-    setPaymentCompleted(true);
-    
-    // Extract payer name for success message
-    const payerName = details.payer?.name?.given_name || 
-                     details.payment_source?.paypal?.name?.given_name || 
-                     'valued customer';
-    
-    // Show success message
-    alert(`Payment successful! Thank you, ${payerName}! Your payment has been processed.`);
-    
-    // Reset form after a delay
-    setTimeout(() => {
-      setPaymentCompleted(false);
-      setAmount('');
-      setDescription('');
-    }, 3000);
-  };
-
-  const handlePaymentError = (error: any) => {
-    console.error('Payment error:', error);
-    alert('Payment failed. Please try again or contact support.');
-  };
-
-  const handlePaymentCancel = () => {
-    console.log('Payment cancelled by user');
-  };
-
   const features = [
     'SSL Encrypted Transactions',
     'PCI DSS Compliant',
@@ -73,7 +44,7 @@ const PaymentPage: React.FC = () => {
               {t('payment.title')}
             </h1>
             <p className="text-xl text-gray-600">
-              Secure PayPal Checkout - Pay with PayPal or Credit Card
+              Secure Payment Processing
             </p>
           </motion.div>
 
@@ -119,22 +90,18 @@ const PaymentPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* PayPal Checkout Integration */}
+                {/* Payment Integration */}
                 {amount && parseFloat(amount) > 0 ? (
                   <div className="border-t border-gray-200 pt-8">
                     <Payment
                       amount={amount}
                       description={description}
-                      onSuccess={handlePaymentSuccess}
-                      onError={handlePaymentError}
-                      onCancel={handlePaymentCancel}
-                      disabled={paymentCompleted}
                     />
                   </div>
                 ) : (
                   <div className="text-center p-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                    <p className="text-gray-600">Please enter an amount to proceed with PayPal Checkout</p>
-                    <p className="text-sm text-gray-500 mt-2">Both PayPal and Credit Card payments are supported</p>
+                    <p className="text-gray-600">Please enter an amount to proceed with payment</p>
+                    <p className="text-sm text-gray-500 mt-2">Both Credit Card and other payment methods are supported</p>
                   </div>
                 )}
               </div>
@@ -162,21 +129,13 @@ const PaymentPage: React.FC = () => {
                   <h3 className="text-xl font-bold text-gray-900">100% Secure</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Your payment is processed securely through PayPal's industry-leading platform.
+                  Your payment is processed securely through our industry-leading platform.
                 </p>
                 <div className="space-y-2 text-sm text-gray-600">
-                  <p>✓ PayPal Account Payment</p>
                   <p>✓ Credit/Debit Card Payment</p>
-                  <p>✓ No PayPal Account Required</p>
+                  <p>✓ Multiple Payment Options</p>
                   <p>✓ SSL Encryption Protected</p>
                 </div>
-              </div>
-
-              <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
-                <h4 className="font-semibold text-yellow-800 mb-2">Live Payment Mode Only</h4>
-                <p className="text-sm text-yellow-700">
-                  This system operates exclusively in live mode. All transactions are real and will be processed immediately.
-                </p>
               </div>
             </motion.div>
           </div>

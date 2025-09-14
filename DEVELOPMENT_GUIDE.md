@@ -1,184 +1,118 @@
-# Portal Media - Development Guide
+# Development Guide
 
-## 🏗️ Project Architecture
-
-This project follows a standard React app structure with an integrated API backend.
-
-### Project Structure
+## Project Structure
 
 ```
-PortalMedia/
-├── src/                  # React Source Code
-│   ├── components/       # UI Components
-│   ├── contexts/         # React Contexts
-│   ├── hooks/            # Custom Hooks
-│   ├── i18n/             # Internationalization
-│   ├── pages/            # Route Components
-│   └── ...
-├── Public/               # Static Assets
-├── api/                  # Express Backend
-│   ├── server.js         # API server
-│   ├── package.json      # Backend dependencies
-│   └── .env              # Backend secrets (secure)
-├── package.json          # Frontend dependencies & scripts
-├── vite.config.ts        # Vite configuration
-└── README.md             # Documentation
+├── Public/                 # Static assets
+│   ├── Assets/            # Images and media
+│   └── favicon.ico        # Site favicon
+├── src/                   # Frontend source code
+│   ├── components/        # React components
+│   ├── pages/             # Page components
+│   ├── contexts/          # React contexts
+│   ├── hooks/             # Custom hooks
+│   ├── i18n/              # Internationalization
+│   ├── App.tsx            # Main App component
+│   └── main.tsx           # Entry point
+├── .env                   # Frontend environment variables
+├── index.html             # Main HTML file
+└── vite.config.ts         # Vite configuration
 ```
 
-## 🚀 Development Workflow
+## Setup Instructions
 
-### Single Command Development
+### Prerequisites
 
-```bash
-# Start frontend development server
-npm run dev
+- Node.js 16+
+- npm
 
-# Start backend API server
-npm run server
+### Installation
 
-# Start both (requires concurrently installation)
-npm run dev:full
-```
+1. **Install frontend dependencies:**
+   ```bash
+   npm install
+   ```
 
-This runs:
+### Environment Configuration
 
-- **Frontend**: http://localhost:5173 (Vite Dev Server)
-- **Backend**: http://localhost:3001 (Express API)
+1. **Frontend Setup:**
+   ```bash
+   cp .env.template .env
+   # Edit .env with your configuration
+   ```
 
-### Individual Development
+## Development Workflow
 
-```bash
-# Frontend only
-npm run dev
+### Running the Project
 
-# Backend only
-npm run server
-```
+1. **Frontend only:**
+   ```bash
+   npm run dev
+   ```
+   Access at: http://localhost:5173
 
-## 🔐 Security Configuration
+## Component Development
 
-### Credential Separation
+### Creating New Components
 
-- **Backend** (`api/.env`): Contains PayPal secret (secure)
-- **Frontend** (`.env.local`): Contains only client ID (safe)
+1. Create component file in `src/components/`
+2. Use TypeScript with proper interfaces
+3. Follow existing styling patterns
+4. Export component properly
 
-### Git Protection
+### Styling
 
-```gitignore
-# Protects both environments
-api/.env              # Secret credentials
-.env.local            # Frontend environment variables
-```
+- Uses Tailwind CSS for styling
+- Custom CSS variables in `src/index.css`
+- Responsive design with mobile-first approach
+- Dark theme support
 
-## 📂 Component Organization
+### Internationalization
 
-### Frontend (`/src`)
+- Uses i18next for translations
+- Translation files in `src/i18n/`
+- Supports English and Arabic
+- RTL layout support for Arabic
 
-- All React/TypeScript files contained
-- Independent dependency management
-- Clean development environment
+## Testing
 
-### Backend (`/api`)
+### Manual Testing
 
-- API server isolated
-- Secure credential management
-- Independent deployment
-- Clean server environment
+1. **Navigation:** Test all navigation links
+2. **Forms:** Test all form submissions
+3. **Responsiveness:** Test on different screen sizes
+4. **Languages:** Test both English and Arabic
+5. **Animations:** Verify all animations work correctly
 
-### Root (`/`)
+### Browser Compatibility
 
-- Project orchestration
-- Combined development scripts
-- Unified documentation
-- Git configuration
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Mobile browsers
+- Test RTL layout in Arabic
 
-## 🛠️ Available Commands
+## Deployment
 
-```bash
-# Setup (one time)
-npm install              # Install frontend dependencies
-cd api && npm install    # Install backend dependencies
+Refer to DEPLOYMENT.md for detailed deployment instructions.
 
-# Development
-npm run dev              # Start frontend only
-npm run server           # Start backend only
-npm run dev:full         # Start both servers
+## Troubleshooting
 
-# Production
-npm run build            # Build frontend for production
+### Common Issues
 
-# Maintenance
-npm run lint             # Lint frontend
-cd api && npm run lint   # Lint backend
-```
+1. **Dependency issues:**
 
-## 📋 Development Checklist
+   - Delete `node_modules` and `package-lock.json`
+   - Run `npm install`
 
-### Initial Setup
+2. **Port conflicts:**
 
-- [x] Project structure organized
-- [x] Dependencies separated
-- [x] Environment variables secured
-- [x] Git protection configured
-- [x] Documentation updated
+   - Change ports in `vite.config.ts`
 
-### Daily Development
+3. **Environment variables not loading:**
+   - Check file names and paths
+   - Restart development server
 
-1. **Start Development**: `npm run dev` (frontend) or `npm run dev:full` (both)
-2. **Frontend**: http://localhost:5173
-3. **Backend API**: http://localhost:3001
-4. **Test PayPal**: Navigate to `/payment`
+### Getting Help
 
-### Before Deployment
-
-1. **Build**: `npm run build`
-2. **Test**: Verify all features work
-3. **Environment**: Configure production variables
-4. **Deploy**: Frontend static files + Backend server
-
-## 🎯 Architecture Benefits
-
-### Code Organization
-
-- **Separation of Concerns**: Frontend/Backend clearly separated
-- **Independent Dependencies**: Each project manages its own packages
-- **Clean Structure**: Logical file organization
-- **Scalable Architecture**: Easy to add new features
-
-### Security Enhancements
-
-- **Credential Isolation**: Secrets only in backend
-- **Git Protection**: All sensitive files excluded
-- **Environment Separation**: Clear distinction between public/private config
-- **Development Safety**: Prevents accidental exposure of secrets
-
-### Developer Experience
-
-- **Single Command**: Start entire stack with `npm run dev`
-- **Clear Documentation**: Each project has its own README
-- **Type Safety**: TypeScript properly configured
-- **Hot Reload**: Both frontend and backend support live reloading
-
-## 🚨 Important Notes
-
-### Environment Files
-
-- **DO NOT** commit `.env` files to Git
-- **USE** template files for new developers
-- **VERIFY** `.gitignore` excludes all environment files
-
-### Development Flow
-
-1. Code changes in `src/` → Frontend hot reload
-2. Code changes in `api/server.js` → Nodemon auto-restart
-3. Environment changes → Restart both servers
-
-### Production Deployment
-
-- **Frontend**: Build static files with `npm run build`
-- **Backend**: Deploy Node.js server with environment variables
-- **Database**: Add database configuration if needed
-
----
-
-**Professional development environment for scalable applications** 🚀
+- Check console for error messages
+- Review documentation
+- Consult team members

@@ -1,80 +1,51 @@
-# Production Deployment Guide
+# Deployment Guide
 
-## ✅ **Pre-deployment Checklist**
+## Environment Variables
 
-### 1. Environment Variables
-
-- **Frontend (.env.local):**
-
-  ```
-  VITE_PAYPAL_CLIENT_ID=your_paypal_client_id_here
-  VITE_PAYPAL_MODE=production
-  ```
-
-- **Backend (api/.env):**
-  ```
-  PAYPAL_CLIENT_ID=your_paypal_client_id_here
-  PAYPAL_CLIENT_SECRET=your_paypal_secret_key_here
-  PAYPAL_MODE=live
-  PORT=3001
-  ```
-
-### 2. Build Commands
+### Frontend (.env)
 
 ```bash
-# Install dependencies
-npm install
-
-# Build for production
-npm run build
-
-# Preview production build (optional)
-npm run preview
+# Portal Media Environment Variables
 ```
 
-### 3. Deployment Platforms
+## Deployment Steps
 
-#### **Vercel (Frontend)**
+1. **Build the frontend:**
 
-1. Connect your GitHub repository
-2. Set environment variables in Vercel dashboard:
-   - `VITE_PAYPAL_CLIENT_ID`
-   - `VITE_PAYPAL_MODE=production`
-3. Deploy automatically on push
+   ```bash
+   npm run build
+   ```
 
-#### **Railway/Heroku (Backend API)**
+2. **Deploy frontend build:**
+   - The build output will be in the `dist` folder
+   - Deploy this folder to your web server or CDN
 
-1. Deploy the `/api` folder as a separate service
-2. Set environment variables:
-   - `PAYPAL_CLIENT_ID`
-   - `PAYPAL_CLIENT_SECRET`
-   - `PAYPAL_MODE=live`
-   - `PORT=3001`
+## Security Best Practices
 
-### 4. Security Notes
+1. **Environment Variables:**
 
-- ✅ Only `VITE_PAYPAL_CLIENT_ID` is exposed to frontend (safe)
-- 🔒 `PAYPAL_CLIENT_SECRET` stays on backend only
-- 🔒 All sensitive data in backend environment variables
+   - Never commit .env files to version control
+   - Use .env.template files for documentation
+   - Rotate credentials regularly
 
-## 🚀 **Quick Deployment**
+2. **HTTPS:**
 
-### Option 1: Static Frontend Only
+   - Always use HTTPS in production
+   - Obtain SSL certificates from trusted providers
 
-```bash
-npm run build
-# Deploy /dist folder to Netlify, Vercel, etc.
-```
+3. **Regular Updates:**
+   - Keep dependencies updated
+   - Monitor for security vulnerabilities
+   - Run `npm audit` regularly
 
-### Option 2: Full Stack
+## Troubleshooting
 
-1. **Frontend**: Deploy to Vercel/Netlify
-2. **Backend**: Deploy to Railway/Heroku
-3. **Update API URLs**: Point frontend to your backend URL
+### Common Issues
 
-## 🛠️ **Fixed Issues**
+1. **Blank page after deployment:**
+   - Check browser console for errors
+   - Verify all environment variables are set
 
-- ✅ Removed conflicting rollup dependency
-- ✅ Environment variables properly configured
-- ✅ Build process optimized for production
-- ✅ Secure credential separation maintained
+### Support
+
+For deployment assistance, contact the development team or refer to the documentation.

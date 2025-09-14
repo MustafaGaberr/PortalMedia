@@ -106,7 +106,6 @@ const resources = {
         title: 'Secure Payment',
         subtitle: 'Choose Your Payment Method',
         visa: 'Pay with Visa',
-        paypal: 'Pay with PayPal',
         amount: 'Amount',
         description: 'Service Description',
         payNow: 'Pay Now'
@@ -250,7 +249,6 @@ const resources = {
         title: 'الدفع الآمن',
         subtitle: 'اختر طريقة الدفع',
         visa: 'الدفع بفيزا',
-        paypal: 'الدفع بباي بال',
         amount: 'المبلغ',
         description: 'وصف الخدمة',
         payNow: 'ادفع الآن'

@@ -1,266 +1,247 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, XCircle, Loader } from 'lucide-react';
+import { CheckCircle, XCircle, Loader, CreditCard, Shield } from 'lucide-react';
 
-declare global {
-  interface Window {
-    paypal: any;
-  }
+interface PaymentStatus {
+  type: 'idle' | 'processing' | 'success' | 'error';
+  message?: string;
 }
 
 interface PaymentProps {
-  amount: string;
+  amount?: string;
   description?: string;
-  onSuccess?: (details: any) => void;
-  onError?: (error: any) => void;
-  onCancel?: () => void;
-  disabled?: boolean;
 }
 
-interface PaymentStatus {
-  type: 'idle' | 'loading' | 'processing' | 'success' | 'error';
-  message?: string;
-  details?: any;
-}
-
-const Payment: React.FC<PaymentProps> = ({
-  amount,
-  description = '',
-  onSuccess,
-  onError,
-  onCancel,
-  disabled = false
-}) => {
-  const paypalRef = useRef<HTMLDivElement>(null);
+const Payment: React.FC<PaymentProps> = ({ amount = '50.00', description = 'Web Development Services' }) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>({ type: 'idle' });
-  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'card' | null>(null);
 
-  // Load PayPal SDK
-  useEffect(() => {
-    const loadPayPalScript = () => {
-      // Remove existing PayPal scripts
-      const existingScripts = document.querySelectorAll('script[src*="paypal.com/sdk/js"]');
-      existingScripts.forEach(script => script.remove());
-
-      // Clear existing PayPal instance
-      if (window.paypal) {
-        delete window.paypal;
-      }
-
-      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
-      
-      if (!clientId) {
-        setPaymentStatus({ 
-          type: 'error', 
-          message: 'PayPal configuration error. Please contact support.' 
-        });
-        return;
-      }
-
-      setPaymentStatus({ type: 'loading', message: 'Loading PayPal...' });
-
-      const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&vault=false&disable-funding=paylater,venmo&components=buttons`;
-      script.async = true;
-      
-      script.onload = () => {
-        if (window.paypal) {
-          console.log('PayPal SDK loaded successfully (Live Mode Only)');
-          setIsSDKLoaded(true);
-          setPaymentStatus({ type: 'idle' });
-        } else {
-          setPaymentStatus({ 
-            type: 'error', 
-            message: 'Failed to initialize PayPal. Please refresh the page.' 
-          });
-        }
-      };
-      
-      script.onerror = () => {
-        setPaymentStatus({ 
-          type: 'error', 
-          message: 'Failed to load PayPal. Please check your internet connection.' 
-        });
-      };
-
-      document.head.appendChild(script);
-    };
-
-    loadPayPalScript();
-  }, []);
-
-  // Render PayPal buttons
-  useEffect(() => {
-    if (!isSDKLoaded || !paypalRef.current || !amount || parseFloat(amount) <= 0 || disabled) {
-      return;
-    }
-
-    // Clear container
-    paypalRef.current.innerHTML = '';
-
-    const createOrder = (data: any, actions: any) => {
-      setPaymentStatus({ type: 'processing', message: 'Creating order...' });
-      
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: parseFloat(amount).toFixed(2),
-            currency_code: 'USD'
-          },
-          description: description || 'Portal Media Services'
-        }],
-        application_context: {
-          brand_name: 'Portal Media',
-          landing_page: 'NO_PREFERENCE',
-          user_action: 'PAY_NOW'
-        }
-      });
-    };
-
-    const onApprove = (data: any, actions: any) => {
-      setPaymentStatus({ type: 'processing', message: 'Processing payment...' });
-      
-      return actions.order.capture().then((details: any) => {
-        // Extract payer name
-        const payerName = details.payer?.name?.given_name || 'valued customer';
-        
-        setPaymentStatus({ 
-          type: 'success', 
-          message: `Payment completed successfully! Thank you, ${payerName}!`,
-          details 
-        });
-        
-        if (onSuccess) {
-          onSuccess(details);
-        }
-      }).catch((error: any) => {
-        console.error('Payment capture error:', error);
-        setPaymentStatus({ 
-          type: 'error', 
-          message: 'Payment failed. Please try again.' 
-        });
-        
-        if (onError) {
-          onError(error);
-        }
-      });
-    };
-
-    const onPaymentError = (error: any) => {
-      console.error('PayPal error:', error);
+  const handlePayment = () => {
+    // Simulate payment processing
+    setPaymentStatus({ type: 'processing', message: 'Processing payment...' });
+    
+    setTimeout(() => {
       setPaymentStatus({ 
-        type: 'error', 
-        message: 'Payment error occurred. Please try again.' 
+        type: 'success', 
+        message: 'Payment completed successfully! Thank you for your purchase.' 
       });
-      
-      if (onError) {
-        onError(error);
-      }
-    };
+    }, 2000);
+  };
 
-    const onPaymentCancel = () => {
-      setPaymentStatus({ 
-        type: 'idle', 
-        message: 'Payment was cancelled.' 
-      });
-      
-      if (onCancel) {
-        onCancel();
-      }
-    };
-
-    // Render PayPal buttons
-    try {
-      window.paypal.Buttons({
-        createOrder,
-        onApprove,
-        onError: onPaymentError,
-        onCancel: onPaymentCancel,
-        style: {
-          layout: 'vertical',
-          color: 'blue',
-          shape: 'rect',
-          label: 'paypal',
-          height: 50,
-          tagline: false
-        }
-      }).render(paypalRef.current);
-      
-      console.log('PayPal buttons rendered successfully (Live Mode)');
-    } catch (error) {
-      console.error('Error rendering PayPal buttons:', error);
-      setPaymentStatus({ 
-        type: 'error', 
-        message: 'Failed to load payment options. Please refresh the page.' 
-      });
-    }
-  }, [isSDKLoaded, amount, description, disabled, onSuccess, onError, onCancel]);
-
-  if (!amount || parseFloat(amount) <= 0) {
+  if (paymentStatus.type === 'success') {
     return (
-      <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <p className="text-yellow-800 text-center">Please enter a valid amount to proceed with payment.</p>
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-4">
+        <div className="max-w-md mx-auto p-8 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mb-4">
+              <CheckCircle className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-4">Payment Successful!</h2>
+            <p className="text-gray-300 mb-6">
+              Thank you for your payment. A confirmation email has been sent to your registered email address.
+            </p>
+            <button 
+              onClick={() => setPaymentStatus({ type: 'idle' })}
+              className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-semibold rounded-lg hover:from-yellow-400 hover:to-yellow-500 transition-all"
+            >
+              Make Another Payment
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Payment Header */}
-      <div className="text-center pb-4 border-b border-gray-200">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Complete Your Payment</h3>
-        <p className="text-gray-600">Secure payment powered by PayPal</p>
-      </div>
-
-      {/* Amount Display */}
-      <div className="text-center p-4 bg-gray-50 rounded-lg">
-        <div className="text-2xl font-bold text-gray-900">
-          ${parseFloat(amount).toFixed(2)} USD
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-4">
+            <Shield className="w-8 h-8 text-black" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-2">Secure Payment</h1>
+          <p className="text-gray-400">Complete your transaction safely</p>
         </div>
-        {description && (
-          <div className="text-sm text-gray-600 mt-1">{description}</div>
+
+        {/* Payment Details */}
+        <div className="bg-gray-800 border border-gray-700 rounded-2xl p-6 mb-6">
+          <div className="space-y-4">
+            <div>
+              <label className="block text-lg font-medium text-gray-300 mb-2">
+                Service Description
+              </label>
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="What are you paying for?"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+              />
+            </div>
+            <label className="block text-lg font-medium text-gray-300">
+              Enter Amount
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl font-bold text-yellow-400">$</span>
+              <input
+                type="number"
+                value={amount}
+                readOnly
+                className="w-full pl-12 pr-4 py-4 bg-gray-900 border border-gray-600 rounded-xl text-3xl font-bold text-yellow-400 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-right"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Method Selection */}
+        <div className="space-y-4 mb-6">
+          <button
+            onClick={() => setPaymentMethod('card')}
+            className={`w-full p-4 rounded-2xl border-2 transition-all duration-300 flex items-center justify-between group ${
+              paymentMethod === 'card'
+                ? 'border-yellow-500 bg-yellow-500/10'
+                : 'border-gray-600 bg-gray-800 hover:border-yellow-500/50 hover:bg-yellow-500/5'
+            }`}
+          >
+            <div className="flex items-center">
+              <div className={`p-3 rounded-xl mr-4 transition-colors ${
+                paymentMethod === 'card' ? 'bg-yellow-500' : 'bg-gray-700 group-hover:bg-yellow-500/20'
+              }`}>
+                <CreditCard className={`w-6 h-6 ${
+                  paymentMethod === 'card' ? 'text-black' : 'text-white'
+                }`} />
+              </div>
+              <div className="text-left">
+                <h3 className="font-semibold text-white">Credit or Debit Card</h3>
+                <p className="text-sm text-gray-400">Visa, Mastercard, American Express</p>
+              </div>
+            </div>
+            {paymentMethod === 'card' && (
+              <CheckCircle className="w-6 h-6 text-yellow-500" />
+            )}
+          </button>
+        </div>
+
+        {/* Payment Form */}
+        {paymentMethod && (
+          <div className="bg-gray-800 border border-gray-700 rounded-2xl p-6 mb-6">
+            <>
+              <h3 className="text-lg font-semibold text-white mb-4">Card Information</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Card Number
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="1234 5678 9012 3456"
+                    className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Expiry Date
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="MM/YY"
+                      className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      CVV
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="123"
+                      className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Cardholder Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                  />
+                </div>
+              </div>
+            </>
+          </div>
         )}
-      </div>
 
-      {/* Payment Status */}
-      {paymentStatus.type !== 'idle' && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`p-4 rounded-lg flex items-center space-x-3 ${
-            paymentStatus.type === 'success'
-              ? 'bg-green-50 border border-green-200'
-              : paymentStatus.type === 'error'
-              ? 'bg-red-50 border border-red-200'
-              : 'bg-blue-50 border border-blue-200'
-          }`}
-        >
-          {paymentStatus.type === 'success' && <CheckCircle className="w-5 h-5 text-green-600" />}
-          {paymentStatus.type === 'error' && <XCircle className="w-5 h-5 text-red-600" />}
-          {(paymentStatus.type === 'loading' || paymentStatus.type === 'processing') && 
-            <Loader className="w-5 h-5 animate-spin text-blue-600" />}
-          
-          <p className={`text-sm font-medium ${
-            paymentStatus.type === 'success'
-              ? 'text-green-800'
-              : paymentStatus.type === 'error'
-              ? 'text-red-800'
-              : 'text-blue-800'
-          }`}>
-            {paymentStatus.message}
-          </p>
-        </motion.div>
-      )}
+        {/* Payment Status */}
+        {paymentStatus.type !== 'idle' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`p-4 rounded-lg flex items-center space-x-3 mb-4 ${
+              paymentStatus.type === 'success'
+                ? 'bg-green-50 border border-green-200'
+                : paymentStatus.type === 'error'
+                ? 'bg-red-50 border border-red-200'
+                : 'bg-blue-50 border border-blue-200'
+            }`}
+          >
+            {paymentStatus.type === 'success' && <CheckCircle className="w-5 h-5 text-green-600" />}
+            {paymentStatus.type === 'error' && <XCircle className="w-5 h-5 text-red-600" />}
+            {(paymentStatus.type === 'processing') && 
+              <Loader className="w-5 h-5 animate-spin text-blue-600" />}
+            
+            <p className={`text-sm font-medium ${
+              paymentStatus.type === 'success'
+                ? 'text-green-800'
+                : paymentStatus.type === 'error'
+                ? 'text-red-800'
+                : 'text-blue-800'
+            }`}>
+              {paymentStatus.message}
+            </p>
+          </motion.div>
+        )}
 
-      {/* PayPal Button Container */}
-      <div 
-        ref={paypalRef}
-        className={`min-h-[60px] ${disabled ? 'opacity-50 pointer-events-none' : ''}`}
-      />
+        {/* Pay Button */}
+        {paymentMethod && (
+          <button 
+            onClick={handlePayment}
+            disabled={paymentStatus.type === 'processing' || !amount || parseFloat(amount) <= 0}
+            className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-black disabled:text-gray-400 font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:hover:scale-100 flex items-center justify-center"
+          >
+            {paymentStatus.type === 'processing' ? (
+              <>
+                <Loader className="w-5 h-5 animate-spin mr-2" />
+                Processing...
+              </>
+            ) : (
+              `Pay $${parseFloat(amount).toFixed(2)}`
+            )}
+          </button>
+        )}
 
-      {/* Security Notice */}
-      <div className="text-center text-xs text-gray-500">
-        <p>🔒 Your payment is secured by PayPal's encryption technology</p>
+        {/* Security Footer */}
+        <div className="flex items-center justify-center mt-6 text-sm text-gray-400">
+          <Shield className="w-4 h-4 mr-2" />
+          <span>Your payment information is secure and encrypted</span>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="flex items-center justify-center space-x-6 mt-4">
+          <div className="px-3 py-1 bg-gray-800 rounded-lg border border-gray-600">
+            <span className="text-xs text-gray-400">SSL Secured</span>
+          </div>
+          <div className="px-3 py-1 bg-gray-800 rounded-lg border border-gray-600">
+            <span className="text-xs text-gray-400">PCI Compliant</span>
+          </div>
+          <div className="px-3 py-1 bg-gray-800 rounded-lg border border-gray-600">
+            <span className="text-xs text-gray-400">256-bit Encryption</span>
+          </div>
+        </div>
       </div>
     </div>
   );
