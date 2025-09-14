@@ -86,16 +86,16 @@ const Contact: React.FC = () => {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61580536207617', label: 'Facebook', color: 'hover:text-blue-600' },
-    { icon: Instagram, href: 'https://www.instagram.com/portal._.media', label: 'Instagram', color: 'hover:text-pink-500' },
-    { icon: TiktokIcon, href: 'https://www.tiktok.com/@portal._.media', label: 'TikTok', color: 'hover:text-blue-500' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500' },
-    { icon: WhatsAppIcon, href: '#', label: 'WhatsApp', color: 'hover:text-green-500' }
+    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61580536207617', label: 'Facebook', color: 'hover:text-blue-600', target: '_blank' },
+    { icon: Instagram, href: 'https://www.instagram.com/portal._.media', label: 'Instagram', color: 'hover:text-pink-500', target: '_blank' },
+    { icon: TiktokIcon, href: 'https://www.tiktok.com/@portal._.media', label: 'TikTok', color: 'hover:text-blue-500', target: '_blank' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500', target: '_blank' },
+    { icon: WhatsAppIcon, href: '#', label: 'WhatsApp', color: 'hover:text-green-500', target: '_blank' }
   ];
 
   const contactInfo = [
-    { icon: Mail, text: 'info@portalmedia.com', href: 'mailto:info@portalmedia.com' },
-    { icon: Phone, text: '+972 52 617 7174', href: 'tel:+972526177174' },
+    { icon: Mail, text: 'info@portalksa.com', href: 'mailto:info@portalka.com' },
+    { icon: Phone, text: '+970 56 922 5413', href: 'tel:+970569225413' },
     { icon: MapPin, text: t('contact.address'), href: '#' }
   ];
 
@@ -313,6 +313,8 @@ const Contact: React.FC = () => {
                   <motion.a
                     key={index}
                     href={social.href}
+                    target={social.target}
+                    rel="noopener noreferrer"
                     className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-white transition-colors duration-200 border border-white/20 hover:border-current`}
                     whileHover={{ 
                       scale: 1.05, 
@@ -358,6 +360,7 @@ const Contact: React.FC = () => {
               </p>
               <motion.button
                 className="font-semibold py-3 px-6 rounded-xl transition-all duration-200"
+                onClick={() => window.open('https://wa.me/970569225413', '_blank')}
                 style={{ 
                   background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
                   color: '#212529'
