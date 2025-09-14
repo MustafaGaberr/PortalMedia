@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
     { icon: Instagram, href: 'https://www.instagram.com/portal._.media', label: 'Instagram', color: 'hover:text-pink-500', target: '_blank' },
     { icon: TiktokIcon, href: 'https://www.tiktok.com/@portal._.media', label: 'TikTok', color: 'hover:text-blue-500', target: '_blank' },
     { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500', target: '_blank' },
-    { icon: WhatsAppIcon, href: '#', label: 'WhatsApp', color: 'hover:text-green-500', target: '_blank' }
+    { icon: WhatsAppIcon, href: 'https://wa.me/970569225413', label: 'WhatsApp', color: 'hover:text-green-500', target: '_blank' }
   ];
 
   const contactInfo = [
