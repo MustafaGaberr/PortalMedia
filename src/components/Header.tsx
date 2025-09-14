@@ -192,9 +192,9 @@ const Header: React.FC = () => {
                     // Special handling for Home link
                     <button
                       onClick={handleHomeClick}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
+                          ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
                           ? 'text-yellow-300/90 hover:text-yellow-400'
                           : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
@@ -205,9 +205,9 @@ const Header: React.FC = () => {
                   ) : (
                     <Link
                       to={item.href}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href
-                          ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
+                          ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
                           ? 'text-yellow-300/90 hover:text-yellow-400'
                           : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
@@ -219,10 +219,10 @@ const Header: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                    className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
+                        ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
                         : isScrolled || !isHomePage
                         ? 'text-yellow-300/90 hover:text-yellow-400'
                         : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
