@@ -1,99 +1,59 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { Swiper as SwiperType } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+interface TeamMember {
+  id: number;
+  name: string;
+  title: string;
+  image: string;
+}
 
 const Team: React.FC = () => {
   const { t } = useLanguage();
-  const swiperRef = useRef<SwiperType>();
 
-  const teamMembers = [
+  const teamMembers: TeamMember[] = [
     {
+      id: 1,
       name: "Ammar Salaymeh",
       title: "CEO & Founder",
       image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg"
     },
     {
+      id: 2,
       name: "Lina Sharaf",
       title: "Creative Director",
       image: "/Assets/team/linasharaf.jpg"
     },
     {
+      id: 3,
       name: "Menna Muhammed",
       title: "Social Media Specialist",
       image: "/Assets/team/mennamuhammed.jpg"
     },
     {
+      id: 4,
       name: "Mustafa Gaber",
       title: "Web Developer",
       image: "/Assets/team/mustafagaber.jpg"
     },
     {
+      id: 5,
       name: "Omar Al-Amir",
       title: "Graphic Designer",
       image: "/Assets/team/omralamir.jpg"
     }
   ];
 
-  // Custom progress handler optimized for 5 unique cards
-  const onProgress = (swiper: SwiperType, progress: number) => {
-    const slides = swiper.slides;
-    
-    for (let i = 0; i < slides.length; i++) {
-      const slide = slides[i] as HTMLElement;
-      const slideProgress = (slide as any).progress;
-      
-      // Calculate transform values
-      let translateX = slideProgress * -50;
-      let scale = 1 - Math.abs(slideProgress) * 0.2;
-      let zIndex = 14 - Math.abs(slideProgress) * 2;
-      let opacity = 1 - Math.abs(slideProgress) * 0.33;
-      
-      // Apply bounds
-      scale = Math.max(scale, 0.4);
-      opacity = Math.max(opacity, 0);
-      zIndex = Math.max(Math.round(zIndex), 5);
-      
-      // Special handling for loop mode with limited slides
-      if (Math.abs(slideProgress) > 2) {
-        opacity = 0;
-        scale = 0.4;
-      }
-      
-      // Apply transforms
-      slide.style.transform = `translateX(${translateX}%) scale(${scale})`;
-      slide.style.zIndex = zIndex.toString();
-      slide.style.opacity = opacity.toString();
-      slide.style.transitionDuration = '0ms';
-      
-      // Animate content opacity
-      const content = slide.querySelector('.swiper-carousel-animate-opacity') as HTMLElement;
-      if (content) {
-        content.style.opacity = opacity.toString();
-        content.style.transitionDuration = '0ms';
-      }
-    }
-  };
-
-  // Add slide change handler to ensure proper looping
-  const onSlideChange = () => {
-    if (swiperRef.current) {
-      // Force update to ensure slides are properly positioned
-      setTimeout(() => {
-        if (swiperRef.current) {
-          swiperRef.current.update();
-        }
-      }, 100);
-    }
-  };
-
   return (
-    <section id="team" className="py-20 lg:py-32 bg-white overflow-hidden">
+    <section id="team" className="py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -105,82 +65,117 @@ const Team: React.FC = () => {
           </p>
         </div>
 
-        {/* Swiper Carousel */}
-        <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
+        {/* Swiper Container */}
+        <div className="relative">
           <Swiper
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            watchSlidesProgress={true}
-            onProgress={onProgress}
-            onSlideChange={onSlideChange}
-            spaceBetween={0}
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
             centeredSlides={true}
-            slidesPerView={5}
-            grabCursor={true}
             loop={true}
-            loopAdditionalSlides={5}
-            navigation={true}
             autoplay={{
-              delay: 5000,
+              delay: 4000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
-            modules={[Navigation, Autoplay]}
-            className="swiper-carousel"
-            style={{
-              '--swiper-navigation-color': 'var(--gold-dark)',
-              width: '100%',
-              height: '500px',
-              cursor: 'grab'
-            } as React.CSSProperties}
+            navigation={{
+              nextEl: '.swiper-button-next-custom',
+              prevEl: '.swiper-button-prev-custom',
+            }}
+            pagination={{
+              clickable: true,
+              bulletClass: 'swiper-pagination-bullet-custom',
+              bulletActiveClass: 'swiper-pagination-bullet-active-custom',
+            }}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 0,
-              },
               640: {
-                slidesPerView: 3,
-                spaceBetween: 0,
+                slidesPerView: 2,
+                spaceBetween: 20,
               },
               1024: {
-                slidesPerView: 5,
-                spaceBetween: 0,
+                slidesPerView: 3,
+                spaceBetween: 24,
               },
             }}
-            speed={600}
-            resistanceRatio={0.85}
-            centerInsufficientSlides={true}
+            className="pb-16"
           >
-            {teamMembers.map((member, index) => (
-              <SwiperSlide key={index}>
-                <div className="swiper-carousel-animate-opacity">
-                  <div className="relative w-80 h-96 mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
-                    {/* Member Image */}
-                    <img
-                      src={member.image}
+            {teamMembers.map((member) => (
+              <SwiperSlide key={member.id} className="h-auto">
+                <div className={`
+                  relative group h-80 rounded-2xl overflow-hidden
+                  transform transition-all duration-500 ease-out
+                  hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25
+                  cursor-pointer
+                `}>
+                  {/* Background Image */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src={member.image} 
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    
-                    {/* Member Info */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                      <h3 className="text-xl font-bold text-white mb-1">
+                  </div>
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                  
+                  {/* Content */}
+                  <div className="relative h-full flex flex-col justify-end p-6">
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-white transition-colors duration-300">
                         {member.name}
                       </h3>
-                      <p className="text-sm font-medium" style={{ color: 'var(--gold-light)' }}>
+                      <p className="text-yellow-400 font-semibold text-sm uppercase tracking-wider group-hover:text-yellow-300 transition-colors duration-300">
                         {member.title}
                       </p>
                     </div>
+                  </div>
+                  
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-2xl"></div>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Custom Navigation Buttons */}
+          <button className="swiper-button-prev-custom absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-white hover:text-purple-600 transition-all duration-300 hover:scale-110">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button className="swiper-button-next-custom absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-white hover:text-purple-600 transition-all duration-300 hover:scale-110">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
 
-      {/* Custom Styles have been moved to index.css */}
+      {/* Custom Styles */}
+      <style jsx global>{`
+        .swiper-pagination-bullet-custom {
+          width: 12px !important;
+          height: 12px !important;
+          background: rgba(255, 255, 255, 0.5) !important;
+          border-radius: 50% !important;
+          margin: 0 6px !important;
+          transition: all 0.3s ease !important;
+          cursor: pointer !important;
+        }
+        
+        .swiper-pagination-bullet-active-custom {
+          background: linear-gradient(45deg, #8b5cf6, #3b82f6) !important;
+          transform: scale(1.2) !important;
+        }
+        
+        .swiper-pagination-bullet-custom:hover {
+          background: rgba(255, 255, 255, 0.8) !important;
+          transform: scale(1.1) !important;
+        }
+      `}</style>
     </section>
   );
 };
