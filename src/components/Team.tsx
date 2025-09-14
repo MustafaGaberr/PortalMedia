@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { Swiper as SwiperType } from 'swiper';
 
@@ -16,31 +16,31 @@ const Team: React.FC = () => {
     {
       name: "Ammar Salaymeh",
       title: "CEO & Founder",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg"
     },
     {
       name: "Lina Sharaf",
       title: "Creative Director",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg"
+      image: "/Assets/team/linasharaf.jpg"
     },
     {
       name: "Menna Muhammed",
       title: "Social Media Specialist",
-      image: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg"
+      image: "/Assets/team/mennamuhammed.jpg"
     },
     {
       name: "Mustafa Gaber",
       title: "Web Developer",
-      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg"
+      image: "/Assets/team/mustafagaber.jpg"
     },
     {
       name: "Omar Al-Amir",
       title: "Graphic Designer",
-      image: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg"
+      image: "/Assets/team/omralamir.jpg"
     }
   ];
 
-  // Custom progress handler matching the reference HTML exactly
+  // Custom progress handler optimized for 5 unique cards
   const onProgress = (swiper: SwiperType, progress: number) => {
     const slides = swiper.slides;
     
@@ -48,18 +48,24 @@ const Team: React.FC = () => {
       const slide = slides[i] as HTMLElement;
       const slideProgress = (slide as any).progress;
       
-      // Calculate transform values based on reference HTML
-      let translateX = slideProgress * -50; // Convert to percentage
+      // Calculate transform values
+      let translateX = slideProgress * -50;
       let scale = 1 - Math.abs(slideProgress) * 0.2;
-      let zIndex = 14 - Math.abs(slideProgress);
+      let zIndex = 14 - Math.abs(slideProgress) * 2;
       let opacity = 1 - Math.abs(slideProgress) * 0.33;
       
       // Apply bounds
-      scale = Math.max(scale, 0);
+      scale = Math.max(scale, 0.4);
       opacity = Math.max(opacity, 0);
-      zIndex = Math.max(Math.round(zIndex), 7);
+      zIndex = Math.max(Math.round(zIndex), 5);
       
-      // Apply transforms exactly like the reference
+      // Special handling for loop mode with limited slides
+      if (Math.abs(slideProgress) > 2) {
+        opacity = 0;
+        scale = 0.4;
+      }
+      
+      // Apply transforms
       slide.style.transform = `translateX(${translateX}%) scale(${scale})`;
       slide.style.zIndex = zIndex.toString();
       slide.style.opacity = opacity.toString();
@@ -71,6 +77,18 @@ const Team: React.FC = () => {
         content.style.opacity = opacity.toString();
         content.style.transitionDuration = '0ms';
       }
+    }
+  };
+
+  // Add slide change handler to ensure proper looping
+  const onSlideChange = () => {
+    if (swiperRef.current) {
+      // Force update to ensure slides are properly positioned
+      setTimeout(() => {
+        if (swiperRef.current) {
+          swiperRef.current.update();
+        }
+      }, 100);
     }
   };
 
@@ -95,13 +113,20 @@ const Team: React.FC = () => {
             }}
             watchSlidesProgress={true}
             onProgress={onProgress}
+            onSlideChange={onSlideChange}
             spaceBetween={0}
             centeredSlides={true}
             slidesPerView={5}
             grabCursor={true}
             loop={true}
+            loopAdditionalSlides={5}
             navigation={true}
-            modules={[Navigation]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            modules={[Navigation, Autoplay]}
             className="swiper-carousel"
             style={{
               '--swiper-navigation-color': 'var(--gold-dark)',
@@ -123,6 +148,9 @@ const Team: React.FC = () => {
                 spaceBetween: 0,
               },
             }}
+            speed={600}
+            resistanceRatio={0.85}
+            centerInsufficientSlides={true}
           >
             {teamMembers.map((member, index) => (
               <SwiperSlide key={index}>
@@ -152,65 +180,7 @@ const Team: React.FC = () => {
         </div>
       </div>
 
-      {/* Custom Styles */}
-      <style jsx>{`
-        .swiper-carousel {
-          overflow: visible;
-        }
-        
-        .swiper-carousel :global(.swiper-slide) {
-          transition-duration: 0ms !important;
-          will-change: transform, opacity;
-        }
-        
-        .swiper-carousel :global(.swiper-wrapper) {
-          cursor: grab;
-          transition-duration: 0ms;
-        }
-        
-        .swiper-carousel-animate-opacity {
-          transition-duration: 0ms;
-        }
-        
-        .swiper-carousel :global(.swiper-button-next),
-        .swiper-carousel :global(.swiper-button-prev) {
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          margin-top: -25px;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-          transition: all 0.2s ease;
-        }
-        
-        .swiper-carousel :global(.swiper-button-next:hover),
-        .swiper-carousel :global(.swiper-button-prev:hover) {
-          background: rgba(255, 255, 255, 1);
-          transform: scale(1.1);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .swiper-carousel :global(.swiper-button-next::after),
-        .swiper-carousel :global(.swiper-button-prev::after) {
-          font-size: 20px;
-          font-weight: bold;
-          color: var(--gold-dark);
-        }
-        
-        @media (max-width: 768px) {
-          .swiper-carousel :global(.swiper-button-next),
-          .swiper-carousel :global(.swiper-button-prev) {
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-          }
-          
-          .team-swiper :global(.swiper-button-next::after),
-          .team-swiper :global(.swiper-button-prev::after) {
-            font-size: 16px;
-          }
-        }
-      `}</style>
+      {/* Custom Styles have been moved to index.css */}
     </section>
   );
 };

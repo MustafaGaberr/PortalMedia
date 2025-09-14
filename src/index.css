@@ -328,3 +328,61 @@ body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+/* Team Carousel Styles */
+.swiper-carousel {
+  overflow: visible;
+}
+
+.swiper-carousel .swiper-slide {
+  transition-duration: 0ms !important;
+  will-change: transform, opacity;
+}
+
+.swiper-carousel .swiper-wrapper {
+  cursor: grab;
+  transition-duration: 0ms;
+}
+
+.swiper-carousel-animate-opacity {
+  transition-duration: 0ms;
+}
+
+.swiper-carousel .swiper-button-next,
+.swiper-carousel .swiper-button-prev {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.swiper-carousel .swiper-button-next:hover,
+.swiper-carousel .swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-carousel .swiper-button-next::after,
+.swiper-carousel .swiper-button-prev::after {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--gold-dark);
+}
+
+@media (max-width: 768px) {
+  .swiper-carousel .swiper-button-next,
+  .swiper-carousel .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+  }
+  
+  .team-swiper .swiper-button-next::after,
+  .team-swiper .swiper-button-prev::after {
+    font-size: 16px;
+  }
+}

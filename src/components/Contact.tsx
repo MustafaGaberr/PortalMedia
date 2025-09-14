@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-white max-w-2xl mx-auto">
             {t('contact.readyToStart')}
           </p>
         </motion.div>
@@ -142,14 +142,17 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold text-black mb-6">{t('contact.sendMessage')}</h3>
+              <h3 className="text-2xl font-bold mb-6">
+                <span className="text-white">Send us </span>
+                <span style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>message</span>
+              </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     {t('contact.name')}
                   </label>
                   <input
@@ -168,7 +171,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     {t('contact.email')}
                   </label>
                   <input
@@ -187,7 +190,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     {t('contact.message')}
                   </label>
                   <textarea
@@ -242,27 +245,29 @@ const Contact: React.FC = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             {/* Contact Information */}
             <motion.div 
-              className="backdrop-blur-lg rounded-3xl p-8 border border-white/20"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.25)",
                 borderColor: "rgba(246, 217, 115, 0.3)"
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#212529' }}>{t('contact.contactInformation')}</h3>
+              <h3 className="text-2xl font-bold mb-6">
+                <span className="text-white">Contact </span>
+                <span style={{ color: 'var(--gold-light)' }}>Information</span>
+              </h3>
               
               <div className="space-y-4">
                 {contactInfo.map((item, index) => (
                   <motion.a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 rtl:space-x-reverse text-gray-700 transition-colors duration-200 group"
+                    className="flex items-center space-x-4 rtl:space-x-reverse text-white transition-colors duration-200 group"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--gold-dark)';
+                      e.currentTarget.style.color = 'var(--gold-light)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = '#374151'; // text-gray-700
+                      e.currentTarget.style.color = '#ffffff'; // white
                     }}
                     whileHover={{ x: isRTL ? -5 : 5 }}
                     transition={{ type: "spring", stiffness: 400 }}
@@ -271,17 +276,19 @@ const Contact: React.FC = () => {
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200"
                       style={{ backgroundColor: 'rgba(246, 217, 115, 0.2)' }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'rgba(246, 217, 115, 0.3)';
+                        e.currentTarget.style.backgroundColor = 'var(--gold-light)';
+                        e.currentTarget.style.color = '#212529';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = 'rgba(246, 217, 115, 0.2)';
+                        e.currentTarget.style.color = '#ffffff';
                       }}
                       whileHover={{ rotate: 180 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <item.icon className="w-6 h-6" />
+                      <item.icon className="w-6 h-6 text-white" />
                     </motion.div>
-                    <span className="text-lg">{item.text}</span>
+                    <span className="text-lg text-white">{item.text}</span>
                   </motion.a>
                 ))}
               </div>
@@ -289,37 +296,45 @@ const Contact: React.FC = () => {
 
             {/* Social Media */}
             <motion.div 
-              className="backdrop-blur-lg rounded-3xl p-8 border border-white/20"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.25)",
                 borderColor: "rgba(246, 217, 115, 0.3)"
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#212529' }}>{t('contact.follow')}</h3>
+              <h3 className="text-2xl font-bold mb-6">
+                <span className="text-white">Follow </span>
+                <span style={{ color: 'var(--gold-light)' }}>Us</span>
+              </h3>
               
               <div className="flex space-x-4 rtl:space-x-reverse">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
-                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-gray-700 ${social.color} transition-colors duration-200 border border-white/20 hover:border-current`}
+                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-white transition-colors duration-200 border border-white/20 hover:border-current`}
                     whileHover={{ 
                       scale: 1.05, 
                       rotate: 180,
                       boxShadow: "0 10px 20px -5px rgba(246, 217, 115, 0.3)"
                     }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--gold-light)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#ffffff'; // white
+                    }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400 }}
                     aria-label={social.label}
                   >
-                    <social.icon className="w-6 h-6" />
+                    <social.icon className="w-6 h-6 text-white" />
                   </motion.a>
                 ))}
               </div>
               
-              <p className="mt-6 text-sm" style={{ color: '#888888' }}>
+              <p className="mt-6 text-sm text-white">
                 {t('contact.stayConnected')}
               </p>
             </motion.div>
@@ -338,7 +353,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.15 }}
             >
               <h3 className="text-xl font-bold text-white mb-4">{t('contact.readyToStart')}</h3>
-              <p className="text-gray-700 mb-6">
+              <p className="text-white mb-6">
                 {t('contact.discussProject')}
               </p>
               <motion.button
