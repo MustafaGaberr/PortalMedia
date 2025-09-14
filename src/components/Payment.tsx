@@ -12,9 +12,11 @@ interface PaymentProps {
   description?: string;
 }
 
-const Payment: React.FC<PaymentProps> = ({ amount = '50.00', description = 'Web Development Services' }) => {
+const Payment: React.FC<PaymentProps> = ({ amount: initialAmount = '50.00', description: initialDescription = 'Web Development Services' }) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>({ type: 'idle' });
   const [paymentMethod, setPaymentMethod] = useState<'card' | null>(null);
+  const [amount, setAmount] = useState(initialAmount);
+  const [description, setDescription] = useState(initialDescription);
 
   const handlePayment = () => {
     // Simulate payment processing
@@ -87,8 +89,8 @@ const Payment: React.FC<PaymentProps> = ({ amount = '50.00', description = 'Web 
               <input
                 type="number"
                 value={amount}
-                readOnly
-                className="w-full pl-12 pr-4 py-4 bg-gray-900 border border-gray-600 rounded-xl text-3xl font-bold text-yellow-400 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-right"
+                onChange={(e) => setAmount(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 bg-gray-900 border border-gray-600 rounded-xl text-3xl font-bold text-black placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:ring-2 focus:ring-gray-400/20 transition-all text-right"
               />
             </div>
           </div>
@@ -182,11 +184,9 @@ const Payment: React.FC<PaymentProps> = ({ amount = '50.00', description = 'Web 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`p-4 rounded-lg flex items-center space-x-3 mb-4 ${
-              paymentStatus.type === 'success'
-                ? 'bg-green-50 border border-green-200'
-                : paymentStatus.type === 'error'
-                ? 'bg-red-50 border border-red-200'
-                : 'bg-blue-50 border border-blue-200'
+              paymentStatus.type === 'success' ? 'bg-green-50 border border-green-200' :
+              paymentStatus.type === 'error' ? 'bg-red-50 border border-red-200' :
+              'bg-blue-50 border border-blue-200'
             }`}
           >
             {paymentStatus.type === 'success' && <CheckCircle className="w-5 h-5 text-green-600" />}

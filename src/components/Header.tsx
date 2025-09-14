@@ -174,7 +174,7 @@ const Header: React.FC = () => {
               alt="Portal Media Logo" 
               className="w-12 h-12 object-contain drop-shadow-lg"
             />
-            <span className={`text-2xl font-bold drop-shadow-sm ${
+            <span className={`text-2xl font-bold drop-shadow-sm font-dallas ${
               isScrolled || !isHomePage
                 ? 'text-yellow-400'
                 : 'text-gradient'
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse font-hanimation">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
@@ -334,7 +334,7 @@ const Header: React.FC = () => {
           className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-yellow-600/50"
           style={{ backgroundColor: '#212529f2' }}
         >
-          <nav className="py-4">
+          <nav className="py-4 font-hanimation">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (

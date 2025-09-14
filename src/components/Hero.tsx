@@ -96,7 +96,7 @@ const Hero: React.FC = () => {
 
           <motion.button
             onClick={() => scrollToSection('about')}
-            className="group glass text-yellow-300 px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-yellow-600/30 hover:bg-yellow-600/20 transition-all duration-200 shadow-soft hover:shadow-glow"
+            className="group glass text-yellow-300 px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-yellow-600/30 hover:bg-yellow-600/20 transition-all duration-200 shadow-soft hover:shadow-glow hover:shadow-yellow-500/30"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

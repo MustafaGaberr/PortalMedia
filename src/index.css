@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Hanimation';
+  src: url('/Assets/fonts/Hanimation_Arabic_Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hanimation';
+  src: url('/Assets/fonts/Hanimation_Arabic_Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hanimation';
+  src: url('/Assets/fonts/Hanimation_Arabic_Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hanimation';
+  src: url('/Assets/fonts/Hanimation_Arabic_SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hanimation';
+  src: url('/Assets/fonts/Hanimation_Arabic_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dallas';
+  src: url('/Assets/fonts/dallas-print-shop-sans.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Modern CSS Variables - Black-Gold Theme */
 :root {
   --background: 0 0% 8%; /* Dark bootstrap-like background */
@@ -220,6 +269,7 @@ body {
   overflow-x: hidden;
   background: var(--bg-dark);
   color: var(--gold-light);
+  font-family: 'Hanimation', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif';
 }
 
 /* Ensure all containers don't exceed viewport width */

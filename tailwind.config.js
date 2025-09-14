@@ -55,8 +55,10 @@ export default {
         ring: 'hsl(var(--ring))',
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        arabic: ['Noto Sans Arabic', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Hanimation', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        arabic: ['Hanimation', 'Noto Sans Arabic', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        dallas: ['Dallas', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        hanimation: ['Hanimation', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',
