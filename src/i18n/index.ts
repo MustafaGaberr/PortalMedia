@@ -117,7 +117,7 @@ const resources = {
         quickLinks: 'Quick Links',
         servicesTitle: 'Services',
         contactInfo: 'Contact Info',
-        rights: '© 2024 Portal Media. All rights reserved.'
+        rights: '© 2025 Portal Media. All rights reserved.'
       },
       // Chatbot
       chatbot: {
@@ -261,7 +261,7 @@ const resources = {
         quickLinks: 'روابط سريعة',
         servicesTitle: 'الخدمات',
         contactInfo: 'معلومات الاتصال',
-        rights: '© 2024 بورتال ميديا. جميع الحقوق محفوظة.'
+        rights: '© 2025 بورتال ميديا. جميع الحقوق محفوظة.'
       },
       // Chatbot
       chatbot: {
