@@ -173,9 +173,9 @@ const PaymentPage: React.FC = () => {
               </div>
 
               <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
-                <h4 className="font-semibold text-yellow-800 mb-2">Live Payment Mode</h4>
+                <h4 className="font-semibold text-yellow-800 mb-2">Live Payment Mode Only</h4>
                 <p className="text-sm text-yellow-700">
-                  This is a live payment system. All transactions will be processed immediately and charged to your account.
+                  This system operates exclusively in live mode. All transactions are real and will be processed immediately.
                 </p>
               </div>
             </motion.div>

@@ -33,7 +33,6 @@ const loadPayPalSDK = (): Promise<void> => {
 
     // Get client ID from environment variable (safe for frontend)
     const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
-    const mode = import.meta.env.VITE_PAYPAL_MODE || 'sandbox';
     
     if (!clientId) {
       reject(new Error('PayPal Client ID not configured'));
@@ -42,7 +41,7 @@ const loadPayPalSDK = (): Promise<void> => {
 
     // Create script element
     const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&vault=false&disable-funding=paylater,venmo`;
     script.async = true;
     
     script.onload = () => {

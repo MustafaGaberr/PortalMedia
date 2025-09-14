@@ -14,7 +14,7 @@ const BlogPreview: React.FC = () => {
   const previewPosts = blogPosts.slice(0, 4);
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-20 lg:py-32" style={{ backgroundColor: '#212529' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -24,10 +24,10 @@ const BlogPreview: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-6">
               {t('blog.title')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-yellow-200 max-w-3xl mx-auto">
               {t('blog.subtitle')}
             </p>
           </motion.div>
@@ -95,7 +95,18 @@ const BlogPreview: React.FC = () => {
           <motion.div variants={fadeInUp} className="text-center">
             <Link
               to="/blog"
-              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200"
+              className="inline-flex items-center px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-200"
+              style={{
+                background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+                color: '#212529',
+                boxShadow: '0 4px 12px rgba(246, 217, 115, 0.25)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(246, 217, 115, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(246, 217, 115, 0.25)';
+              }}
             >
               {t('blog.viewAll')}
               <ArrowRight 

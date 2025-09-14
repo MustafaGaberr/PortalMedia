@@ -38,7 +38,7 @@ Edit `.env`:
 ```env
 PAYPAL_CLIENT_ID=your_paypal_client_id_here
 PAYPAL_CLIENT_SECRET=your_paypal_secret_key_here
-PAYPAL_MODE=sandbox
+PAYPAL_MODE=live
 ```
 
 ### Development

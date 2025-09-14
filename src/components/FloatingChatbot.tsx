@@ -82,7 +82,7 @@ const ChatBot: React.FC = () => {
       >
         <button
           onClick={toggleChat}
-          className="btn-primary w-16 h-16 rounded-full shadow-glow hover:scale-110 transition-all duration-200 animate-pulse-glow focus:outline-none focus:ring-4 focus:ring-primary/30 flex items-center justify-center relative z-10"
+          className="btn-primary w-16 h-16 rounded-full shadow-glow hover:scale-110 transition-all duration-200 animate-pulse-glow focus:outline-none focus:ring-4 focus:ring-yellow-500/30 flex items-center justify-center relative z-10"
         >
           {isOpen ? (
             <X className="w-7 h-7 text-white drop-shadow-lg relative z-10" />
@@ -106,7 +106,7 @@ const ChatBot: React.FC = () => {
                 {currentView !== 'main' && (
                   <button
                     onClick={goBack}
-                    className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur-sm hover:scale-110"
+                    className="p-2 text-gray-600 hover:text-yellow-600 hover:bg-yellow-50 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500/30 backdrop-blur-sm hover:scale-110"
                     title={t('chatbot.backToMainMenu')}
                   >
                     <ArrowLeft className={`w-5 h-5 drop-shadow-sm transition-transform duration-200 ${
@@ -182,7 +182,22 @@ const ChatBot: React.FC = () => {
                     <button
                       key={index}
                       onClick={() => handleQuickReply(replyKey)}
-                      className="text-xs h-8 px-3 py-1 rounded-lg border border-primary-500/30 text-primary-600 hover:bg-gradient-to-r hover:from-primary-500 hover:to-primary-600 hover:text-white hover:border-primary-400 transition-all duration-200 text-left focus:outline-none focus:ring-2 focus:ring-primary-500/50 shadow-sm hover:shadow-md"
+                      className="text-xs h-8 px-3 py-1 rounded-lg border text-left focus:outline-none focus:ring-2 shadow-sm hover:shadow-md transition-all duration-200"
+                      style={{
+                        borderColor: 'rgba(246, 217, 115, 0.3)',
+                        color: 'var(--gold-dark)',
+                        backgroundColor: 'rgba(246, 217, 115, 0.1)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-light), var(--gold-dark))';
+                        e.currentTarget.style.color = '#212529';
+                        e.currentTarget.style.borderColor = 'var(--gold-dark)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(246, 217, 115, 0.1)';
+                        e.currentTarget.style.color = 'var(--gold-dark)';
+                        e.currentTarget.style.borderColor = 'rgba(246, 217, 115, 0.3)';
+                      }}
                     >
                       {t(`chatbot.quickReplies.${replyKey}`)}
                     </button>
@@ -206,7 +221,11 @@ const ChatBot: React.FC = () => {
               <button
                 onClick={sendMessage}
                 disabled={!message.trim()}
-                className="px-4 py-3 btn-primary text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-md hover:shadow-lg border border-primary-400"
+                className="px-4 py-3 btn-primary rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 shadow-md hover:shadow-lg border"
+                style={{
+                  color: '#212529',
+                  borderColor: 'var(--gold-dark)'
+                }}
               >
                 <Send className="w-5 h-5 drop-shadow-sm" />
               </button>

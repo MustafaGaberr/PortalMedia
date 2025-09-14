@@ -20,10 +20,8 @@ app.use(express.json());
 // PayPal configuration
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
-const PAYPAL_MODE = process.env.PAYPAL_MODE || 'sandbox';
-const PAYPAL_API_BASE = PAYPAL_MODE === 'live'
-    ? 'https://api-m.paypal.com'
-    : 'https://api-m.sandbox.paypal.com';
+const PAYPAL_MODE = process.env.PAYPAL_MODE || 'live';
+const PAYPAL_API_BASE = 'https://api-m.paypal.com'; // Live mode only
 
 // Function to get PayPal access token
 async function getAccessToken() {
@@ -187,10 +185,12 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`\n🚀 PayPal Payment Server running on port ${PORT}`);
     console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
-    console.log(`🔧 PayPal Mode: ${PAYPAL_MODE}`);
+    console.log(`🔧 PayPal Mode: ${PAYPAL_MODE} (Live Only)`);
     console.log(`💳 Create Order: http://localhost:${PORT}/api/create-order`);
 
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
         console.warn('⚠️  Warning: PayPal credentials not found in environment variables');
+    } else {
+        console.log('✅ PayPal Live Mode Configuration Loaded');
     }
 });

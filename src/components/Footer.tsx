@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="text-yellow-300" style={{ backgroundColor: '#212529' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
@@ -38,12 +38,14 @@ const Footer: React.FC = () => {
               className="mb-6"
             >
               <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">P</span>
-                </div>
+                <img 
+                  src="/Assets/portal logo.png" 
+                  alt="Portal Media Logo" 
+                  className="w-12 h-12 object-contain"
+                />
                 <span className="text-2xl font-bold">Portal Media</span>
               </div>
-              <p className="text-gray-300 leading-relaxed max-w-md">
+              <p className="text-yellow-200 leading-relaxed max-w-md">
                 {t('footer.description')}
               </p>
             </motion.div>
@@ -62,7 +64,7 @@ const Footer: React.FC = () => {
                   {link.href.startsWith('/') ? (
                     <Link
                       to={link.href}
-                      className="text-gray-300 hover:text-green-400 transition-colors"
+                      className="text-yellow-200 hover:text-yellow-400 transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -72,7 +74,7 @@ const Footer: React.FC = () => {
                         const element = document.querySelector(link.href);
                         element?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="text-gray-300 hover:text-green-400 transition-colors"
+                      className="text-yellow-200 hover:text-yellow-400 transition-colors"
                     >
                       {link.name}
                     </button>
@@ -97,7 +99,7 @@ const Footer: React.FC = () => {
                       const element = document.querySelector(service.href);
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="text-gray-300 hover:text-green-400 transition-colors"
+                    className="text-yellow-200 hover:text-yellow-400 transition-colors"
                   >
                     {service.name}
                   </button>
@@ -108,13 +110,13 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t border-yellow-600/30 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
-              className="text-gray-400 text-sm mb-4 sm:mb-0"
+              className="text-yellow-200/70 text-sm mb-4 sm:mb-0"
             >
               {t('footer.rights')}
             </motion.p>

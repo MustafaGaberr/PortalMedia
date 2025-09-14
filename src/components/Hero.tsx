@@ -14,8 +14,8 @@ const Hero: React.FC = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-hero">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-900/80 via-primary-800/70 to-primary-900/80" />
+        <div className="absolute inset-0 bg-[url('/Assets/hero.jpeg')] bg-cover bg-center opacity-20" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Simplified Floating Elements - Reduced complexity for performance */}
@@ -29,7 +29,8 @@ const Hero: React.FC = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-20 left-10 w-20 h-20 bg-primary-400/20 rounded-full blur-xl"
+        className="absolute top-20 left-10 w-20 h-20 rounded-full blur-xl"
+        style={{ backgroundColor: 'rgba(246, 217, 115, 0.2)' }}
       />
       <motion.div
         animate={{
@@ -41,7 +42,8 @@ const Hero: React.FC = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute bottom-20 right-10 w-32 h-32 bg-primary-300/20 rounded-full blur-xl"
+        className="absolute bottom-20 right-10 w-32 h-32 rounded-full blur-xl"
+        style={{ backgroundColor: 'rgba(178, 121, 11, 0.2)' }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -52,19 +54,19 @@ const Hero: React.FC = () => {
           className="mb-8"
         >
           <motion.h1
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-yellow-300 mb-6"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.15 }}
           >
             <span className="block">{t('hero.title')}</span>
-            <span className="block bg-gradient-to-r from-primary-400 to-primary-300 bg-clip-text text-transparent animate-gradient">
+            <span className="block bg-clip-text text-transparent animate-gradient" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {t('hero.subtitle')}
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-xl lg:text-2xl text-primary-100 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl lg:text-2xl text-yellow-200 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.2 }}
@@ -81,7 +83,8 @@ const Hero: React.FC = () => {
         >
           <motion.button
             onClick={() => scrollToSection('contact')}
-            className="group btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-glow hover:shadow-elegant transition-all duration-200"
+            className="group btn-primary px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-glow hover:shadow-elegant transition-all duration-200"
+            style={{ color: '#212529' }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -93,7 +96,7 @@ const Hero: React.FC = () => {
 
           <motion.button
             onClick={() => scrollToSection('about')}
-            className="group glass text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-white/20 hover:bg-white/20 transition-all duration-200 shadow-soft hover:shadow-glow"
+            className="group glass text-yellow-300 px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-yellow-600/30 hover:bg-yellow-600/20 transition-all duration-200 shadow-soft hover:shadow-glow"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -112,15 +115,16 @@ const Hero: React.FC = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/5 shadow-lg hover:border-white/80 transition-all duration-200 hover:bg-white/10">
+        <div className="w-6 h-10 border-2 border-yellow-300/60 rounded-full flex justify-center backdrop-blur-sm shadow-lg hover:border-yellow-300/80 transition-all duration-200" style={{ backgroundColor: 'rgba(33, 37, 41, 0.2)' }}>
           <motion.div 
-            className="w-1.5 h-4 bg-gradient-to-b from-white to-white/70 rounded-full mt-2 shadow-sm"
+            className="w-1.5 h-4 rounded-full mt-2 shadow-sm"
+            style={{ background: 'linear-gradient(to bottom, var(--gold-light), rgba(246, 217, 115, 0.7))' }}
             animate={{ y: [0, 3, 0], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
         {/* Scroll hint text */}
-        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-white/60 text-xs font-medium whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-200">
+        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-xs font-medium whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-200" style={{ color: 'rgba(246, 217, 115, 0.6)' }}>
           Scroll Down
         </div>
       </motion.div>

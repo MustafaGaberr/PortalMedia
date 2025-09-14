@@ -1,222 +1,216 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Linkedin, Twitter, Mail } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import { useLanguage } from '../contexts/LanguageContext';
+import type { Swiper as SwiperType } from 'swiper';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const Team: React.FC = () => {
-  const { t, isRTL } = useLanguage();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  // Minimum swipe distance required
-  const minSwipeDistance = 50;
+  const { t } = useLanguage();
+  const swiperRef = useRef<SwiperType>();
 
   const teamMembers = [
     {
-      name: "Sarah Johnson",
+      name: "Ammar Salaymeh",
       title: "CEO & Founder",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-      bio: "Digital marketing strategist with 10+ years of experience in building successful campaigns.",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sarah@portalmedia.com"
-      }
+      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
     },
     {
-      name: "Mike Chen",
+      name: "Lina Sharaf",
       title: "Creative Director",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
-      bio: "Award-winning creative professional specializing in brand development and visual storytelling.",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "mike@portalmedia.com"
-      }
+      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg"
     },
     {
-      name: "Emily Davis",
-      title: "SEO Specialist",
-      image: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg",
-      bio: "Technical SEO expert with a proven track record of improving search rankings and organic traffic.",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "emily@portalmedia.com"
-      }
+      name: "Menna Muhammed",
+      title: "Social Media Specialist",
+      image: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg"
     },
     {
-      name: "Ahmed Al-Rashid",
-      title: "Social Media Manager",
-      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg",
-      bio: "Social media strategist focused on creating engaging content and building online communities.",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "ahmed@portalmedia.com"
-      }
+      name: "Mustafa Gaber",
+      title: "Web Developer",
+      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg"
     },
     {
-      name: "Lisa Park",
-      title: "Data Analyst",
-      image: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg",
-      bio: "Analytics expert who transforms data into actionable insights for marketing optimization.",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "lisa@portalmedia.com"
-      }
+      name: "Omar Al-Amir",
+      title: "Graphic Designer",
+      image: "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg"
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % teamMembers.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
-  };
-
-  const getVisibleMembers = () => {
-    const members = [];
-    // Show 2 members on mobile, 3 on desktop
-    const visibleCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 3;
-    for (let i = 0; i < visibleCount; i++) {
-      const index = (currentSlide + i) % teamMembers.length;
-      members.push({ ...teamMembers[index], slideIndex: i });
-    }
-    return members;
-  };
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+  // Custom progress handler matching the reference HTML exactly
+  const onProgress = (swiper: SwiperType, progress: number) => {
+    const slides = swiper.slides;
     
-    if (isLeftSwipe && !isRTL) {
-      nextSlide();
-    } else if (isRightSwipe && !isRTL) {
-      prevSlide();
-    } else if (isLeftSwipe && isRTL) {
-      prevSlide();
-    } else if (isRightSwipe && isRTL) {
-      nextSlide();
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i] as HTMLElement;
+      const slideProgress = (slide as any).progress;
+      
+      // Calculate transform values based on reference HTML
+      let translateX = slideProgress * -50; // Convert to percentage
+      let scale = 1 - Math.abs(slideProgress) * 0.2;
+      let zIndex = 14 - Math.abs(slideProgress);
+      let opacity = 1 - Math.abs(slideProgress) * 0.33;
+      
+      // Apply bounds
+      scale = Math.max(scale, 0);
+      opacity = Math.max(opacity, 0);
+      zIndex = Math.max(Math.round(zIndex), 7);
+      
+      // Apply transforms exactly like the reference
+      slide.style.transform = `translateX(${translateX}%) scale(${scale})`;
+      slide.style.zIndex = zIndex.toString();
+      slide.style.opacity = opacity.toString();
+      slide.style.transitionDuration = '0ms';
+      
+      // Animate content opacity
+      const content = slide.querySelector('.swiper-carousel-animate-opacity') as HTMLElement;
+      if (content) {
+        content.style.opacity = opacity.toString();
+        content.style.transitionDuration = '0ms';
+      }
     }
   };
 
   return (
     <section id="team" className="py-20 lg:py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div>
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              {t('team.title')}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('team.subtitle')}
-            </p>
-          </div>
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#212529' }}>
+            {t('team.title')}
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {t('team.subtitle')}
+          </p>
+        </div>
 
-          {/* Team Carousel */}
-          <div className="relative">
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevSlide}
-              className={`absolute ${isRTL ? 'right-2 md:right-0' : 'left-2 md:left-0'} top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
-            >
-              <ChevronLeft className={`w-4 h-4 md:w-6 md:h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className={`absolute ${isRTL ? 'left-2 md:left-0' : 'right-2 md:right-0'} top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 hover:bg-blue-50`}
-            >
-              <ChevronRight className={`w-4 h-4 md:w-6 md:h-6 text-blue-600 ${isRTL ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Team Members */}
-            <div 
-              className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mx-8 md:mx-16 transition-all duration-500 ease-in-out"
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-              style={{ transform: `translateX(0)` }}
-            >
-              {getVisibleMembers().map((member, index) => (
-                <div
-                  key={`${member.name}-${currentSlide}`}
-                  className={`bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden group opacity-0 animate-fade-in ${
-                    index === 1 && typeof window !== 'undefined' && window.innerWidth >= 768 ? 'md:scale-110 z-10' : 'md:scale-95'
-                  }`}
-                  style={{ 
-                    animationDelay: `${index * 150}ms`,
-                    animationFillMode: 'forwards'
-                  }}
-                >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
-                      {/* Social Links */}
-                      <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-3 rtl:space-x-reverse opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                        <a href={member.social.linkedin} className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                          <Linkedin className="w-5 h-5 text-white" />
-                        </a>
-                        <a href={member.social.twitter} className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                          <Twitter className="w-5 h-5 text-white" />
-                        </a>
-                        <a href={`mailto:${member.social.email}`} className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                          <Mail className="w-5 h-5 text-white" />
-                        </a>
-                      </div>
-                    </div>
+        {/* Swiper Carousel */}
+        <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            watchSlidesProgress={true}
+            onProgress={onProgress}
+            spaceBetween={0}
+            centeredSlides={true}
+            slidesPerView={5}
+            grabCursor={true}
+            loop={true}
+            navigation={true}
+            modules={[Navigation]}
+            className="swiper-carousel"
+            style={{
+              '--swiper-navigation-color': 'var(--gold-dark)',
+              width: '100%',
+              height: '500px',
+              cursor: 'grab'
+            } as React.CSSProperties}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+              },
+              640: {
+                slidesPerView: 3,
+                spaceBetween: 0,
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 0,
+              },
+            }}
+          >
+            {teamMembers.map((member, index) => (
+              <SwiperSlide key={index}>
+                <div className="swiper-carousel-animate-opacity">
+                  <div className="relative w-80 h-96 mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+                    {/* Member Image */}
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                     
-                    <div className="p-4 md:p-6">
-                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 md:mb-2">
+                    {/* Member Info */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                      <h3 className="text-xl font-bold text-white mb-1">
                         {member.name}
                       </h3>
-                      <p className="text-blue-600 font-semibold mb-2 md:mb-3 text-sm md:text-base">
+                      <p className="text-sm font-medium" style={{ color: 'var(--gold-light)' }}>
                         {member.title}
-                      </p>
-                      <p className="text-gray-600 text-xs md:text-sm leading-relaxed line-clamp-3">
-                        {member.bio}
                       </p>
                     </div>
                   </div>
-                ))}
-            </div>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center mt-12 space-x-2 rtl:space-x-reverse">
-              {teamMembers.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide 
-                      ? 'bg-blue-600 w-6' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
+
+      {/* Custom Styles */}
+      <style jsx>{`
+        .swiper-carousel {
+          overflow: visible;
+        }
+        
+        .swiper-carousel :global(.swiper-slide) {
+          transition-duration: 0ms !important;
+          will-change: transform, opacity;
+        }
+        
+        .swiper-carousel :global(.swiper-wrapper) {
+          cursor: grab;
+          transition-duration: 0ms;
+        }
+        
+        .swiper-carousel-animate-opacity {
+          transition-duration: 0ms;
+        }
+        
+        .swiper-carousel :global(.swiper-button-next),
+        .swiper-carousel :global(.swiper-button-prev) {
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          margin-top: -25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease;
+        }
+        
+        .swiper-carousel :global(.swiper-button-next:hover),
+        .swiper-carousel :global(.swiper-button-prev:hover) {
+          background: rgba(255, 255, 255, 1);
+          transform: scale(1.1);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .swiper-carousel :global(.swiper-button-next::after),
+        .swiper-carousel :global(.swiper-button-prev::after) {
+          font-size: 20px;
+          font-weight: bold;
+          color: var(--gold-dark);
+        }
+        
+        @media (max-width: 768px) {
+          .swiper-carousel :global(.swiper-button-next),
+          .swiper-carousel :global(.swiper-button-prev) {
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+          }
+          
+          .team-swiper :global(.swiper-button-next::after),
+          .team-swiper :global(.swiper-button-prev::after) {
+            font-size: 16px;
+          }
+        }
+      `}</style>
     </section>
   );
 };

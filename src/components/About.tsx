@@ -16,7 +16,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section id="about" className="py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -28,10 +28,10 @@ const About: React.FC = () => {
           {/* Content */}
           <motion.div variants={fadeInUp}>
             <motion.div variants={fadeInUp} className="mb-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
                 {t('about.title')}
               </h2>
-              <h3 className="text-xl text-green-500 font-semibold mb-6">
+              <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--gold-dark)' }}>
                 {t('about.subtitle')}
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
@@ -51,8 +51,8 @@ const About: React.FC = () => {
                   className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200"
                 >
                   <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                      <stat.icon className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}>
+                      <stat.icon className="w-6 h-6" style={{ color: '#212529' }} />
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
@@ -72,19 +72,21 @@ const About: React.FC = () => {
                 alt="Portal Media Team"
                 className="rounded-2xl shadow-2xl w-full h-96 object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-2xl"></div>
+              <div className="absolute inset-0 rounded-2xl" style={{ background: 'linear-gradient(to top, rgba(33, 37, 41, 0.2), transparent)' }}></div>
             </div>
             
             {/* Simplified Decorative Elements */}
             <motion.div
               animate={{ opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-green-400 to-green-500 rounded-full opacity-20"
+              className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20"
+              style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}
             />
             <motion.div
               animate={{ opacity: [0.1, 0.2, 0.1] }}
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-20"
+              className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full opacity-20"
+              style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}
             />
           </motion.div>
         </motion.div>

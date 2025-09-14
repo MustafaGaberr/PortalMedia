@@ -26,14 +26,24 @@ const ScrollToTop = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className={`fixed bottom-24 z-40 bg-gradient-to-r from-blue-600 to-blue-700 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hidden sm:flex ${
+          className={`fixed bottom-24 z-40 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-200 hidden sm:flex ${
             language === 'ar' ? 'left-6' : 'right-6'
           }`}
+          style={{
+            background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+            boxShadow: '0 4px 12px rgba(246, 217, 115, 0.25)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(246, 217, 115, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(246, 217, 115, 0.25)';
+          }}
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-5 h-5 text-white" />
+          <ArrowUp className="w-5 h-5" style={{ color: '#212529' }} />
         </motion.button>
       )}
     </>

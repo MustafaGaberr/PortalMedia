@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, XCircle, Loader, CreditCard } from 'lucide-react';
+import { CheckCircle, XCircle, Loader } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -18,55 +18,10 @@ interface PaymentProps {
 }
 
 interface PaymentStatus {
-  type: 'idle' | 'processing' | 'success' | 'error';
+  type: 'idle' | 'loading' | 'processing' | 'success' | 'error';
   message?: string;
   details?: any;
 }
-
-// Load PayPal SDK dynamically for LIVE mode
-const loadPayPalSDK = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    // Remove any existing PayPal scripts first
-    const existingScripts = document.querySelectorAll('script[src*="paypal.com/sdk/js"]');
-    existingScripts.forEach(script => script.remove());
-    
-    // Clear any existing PayPal instance
-    if (window.paypal) {
-      delete window.paypal;
-    }
-
-    // Get client ID from environment variable (LIVE mode)
-    const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
-    
-    if (!clientId) {
-      reject(new Error('PayPal Client ID not configured'));
-      return;
-    }
-
-    // Create script element for LIVE PayPal SDK with explicit live mode parameters
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&vault=false&components=buttons,card-fields&disable-funding=paylater,venmo`;
-    script.async = true;
-    
-    script.onload = () => {
-      if (window.paypal) {
-        console.log('PayPal SDK loaded successfully in LIVE mode');
-        console.log('PayPal environment:', window.paypal);
-        console.log('SDK URL used:', script.src);
-        resolve();
-      } else {
-        reject(new Error('PayPal SDK failed to load'));
-      }
-    };
-    
-    script.onerror = () => {
-      reject(new Error('Failed to load PayPal SDK'));
-    };
-
-    // Append to head
-    document.head.appendChild(script);
-  });
-};
 
 const Payment: React.FC<PaymentProps> = ({
   amount,
@@ -78,121 +33,125 @@ const Payment: React.FC<PaymentProps> = ({
 }) => {
   const paypalRef = useRef<HTMLDivElement>(null);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>({ type: 'idle' });
-  const [isSDKReady, setIsSDKReady] = useState(false);
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
+  // Load PayPal SDK
   useEffect(() => {
-    // Load PayPal SDK
-    const initializePayPal = async () => {
-      try {
-        await loadPayPalSDK();
-        setIsSDKReady(true);
-      } catch (error) {
-        console.error('Failed to load PayPal SDK:', error);
+    const loadPayPalScript = () => {
+      // Remove existing PayPal scripts
+      const existingScripts = document.querySelectorAll('script[src*="paypal.com/sdk/js"]');
+      existingScripts.forEach(script => script.remove());
+
+      // Clear existing PayPal instance
+      if (window.paypal) {
+        delete window.paypal;
+      }
+
+      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
+      
+      if (!clientId) {
         setPaymentStatus({ 
           type: 'error', 
-          message: 'Failed to load PayPal. Please refresh the page.' 
+          message: 'PayPal configuration error. Please contact support.' 
         });
+        return;
       }
+
+      setPaymentStatus({ type: 'loading', message: 'Loading PayPal...' });
+
+      const script = document.createElement('script');
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&vault=false&disable-funding=paylater,venmo&components=buttons`;
+      script.async = true;
+      
+      script.onload = () => {
+        if (window.paypal) {
+          console.log('PayPal SDK loaded successfully (Live Mode Only)');
+          setIsSDKLoaded(true);
+          setPaymentStatus({ type: 'idle' });
+        } else {
+          setPaymentStatus({ 
+            type: 'error', 
+            message: 'Failed to initialize PayPal. Please refresh the page.' 
+          });
+        }
+      };
+      
+      script.onerror = () => {
+        setPaymentStatus({ 
+          type: 'error', 
+          message: 'Failed to load PayPal. Please check your internet connection.' 
+        });
+      };
+
+      document.head.appendChild(script);
     };
-    
-    initializePayPal();
+
+    loadPayPalScript();
   }, []);
 
+  // Render PayPal buttons
   useEffect(() => {
-    if (!isSDKReady || !paypalRef.current || !amount || disabled || parseFloat(amount) <= 0) {
+    if (!isSDKLoaded || !paypalRef.current || !amount || parseFloat(amount) <= 0 || disabled) {
       return;
     }
 
-    // Clear any existing PayPal buttons
+    // Clear container
     paypalRef.current.innerHTML = '';
-    setPaymentStatus({ type: 'idle' });
 
-    const createOrder = async () => {
-      try {
-        setPaymentStatus({ type: 'processing', message: 'Creating order...' });
-        
-        const response = await fetch('/api/create-order', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+    const createOrder = (data: any, actions: any) => {
+      setPaymentStatus({ type: 'processing', message: 'Creating order...' });
+      
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: parseFloat(amount).toFixed(2),
+            currency_code: 'USD'
           },
-          body: JSON.stringify({
-            amount: parseFloat(amount).toFixed(2),
-            currency: 'USD',
-            description: description || 'Portal Media Services',
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status}`);
+          description: description || 'Portal Media Services'
+        }],
+        application_context: {
+          brand_name: 'Portal Media',
+          landing_page: 'NO_PREFERENCE',
+          user_action: 'PAY_NOW'
         }
-
-        const orderData = await response.json();
-        
-        if (!orderData.id) {
-          throw new Error('Invalid order response');
-        }
-
-        return orderData.id;
-      } catch (error) {
-        console.error('Create order error:', error);
-        setPaymentStatus({ 
-          type: 'error', 
-          message: `Failed to create order: ${error instanceof Error ? error.message : 'Unknown error'}` 
-        });
-        throw error;
-      }
+      });
     };
 
-    const onApprove = async (data: any) => {
-      try {
-        setPaymentStatus({ type: 'processing', message: 'Processing payment...' });
-
-        // Capture the payment through backend
-        const response = await fetch(`/api/capture-order/${data.orderID}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const details = await response.json();
-        
-        // Extract payer name from the response
-        const payerName = details.payer?.name?.given_name || 
-                         details.payment_source?.paypal?.name?.given_name || 
-                         details.payer?.name?.surname ||
-                         'valued customer';
+    const onApprove = (data: any, actions: any) => {
+      setPaymentStatus({ type: 'processing', message: 'Processing payment...' });
+      
+      return actions.order.capture().then((details: any) => {
+        // Extract payer name
+        const payerName = details.payer?.name?.given_name || 'valued customer';
         
         setPaymentStatus({ 
           type: 'success', 
-          message: `Payment successful! Thank you, ${payerName}!`,
+          message: `Payment completed successfully! Thank you, ${payerName}!`,
           details 
         });
-
+        
         if (onSuccess) {
           onSuccess(details);
         }
-        
-      } catch (error) {
+      }).catch((error: any) => {
         console.error('Payment capture error:', error);
-        const errorMessage = error instanceof Error ? error.message : 'Payment failed';
-        setPaymentStatus({ type: 'error', message: errorMessage });
+        setPaymentStatus({ 
+          type: 'error', 
+          message: 'Payment failed. Please try again.' 
+        });
         
         if (onError) {
           onError(error);
         }
-      }
+      });
     };
 
     const onPaymentError = (error: any) => {
-      console.error('PayPal payment error:', error);
-      const errorMessage = error?.message || 'Payment failed';
-      setPaymentStatus({ type: 'error', message: errorMessage });
+      console.error('PayPal error:', error);
+      setPaymentStatus({ 
+        type: 'error', 
+        message: 'Payment error occurred. Please try again.' 
+      });
       
       if (onError) {
         onError(error);
@@ -200,19 +159,19 @@ const Payment: React.FC<PaymentProps> = ({
     };
 
     const onPaymentCancel = () => {
-      setPaymentStatus({ type: 'idle', message: 'Payment cancelled' });
+      setPaymentStatus({ 
+        type: 'idle', 
+        message: 'Payment was cancelled.' 
+      });
       
       if (onCancel) {
         onCancel();
       }
     };
 
-    // Render PayPal Smart Buttons (includes both PayPal and Card options)
-    console.log('Rendering PayPal buttons with Client ID:', import.meta.env.VITE_PAYPAL_CLIENT_ID?.substring(0, 10) + '...');
-    console.log('PayPal SDK environment check:', window.paypal.version || 'Unknown');
-    
-    window.paypal
-      .Buttons({
+    // Render PayPal buttons
+    try {
+      window.paypal.Buttons({
         createOrder,
         onApprove,
         onError: onPaymentError,
@@ -224,22 +183,18 @@ const Payment: React.FC<PaymentProps> = ({
           label: 'paypal',
           height: 50,
           tagline: false
-        },
-        // Enable both PayPal and card funding sources
-        fundingSource: undefined, // This allows both PayPal and card options
-      })
-      .render(paypalRef.current);
-
-  }, [isSDKReady, amount, description, disabled, onSuccess, onError, onCancel]);
-
-  if (!isSDKReady) {
-    return (
-      <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
-        <Loader className="w-6 h-6 animate-spin text-blue-600" />
-        <span className="ml-2 text-gray-600">Loading PayPal...</span>
-      </div>
-    );
-  }
+        }
+      }).render(paypalRef.current);
+      
+      console.log('PayPal buttons rendered successfully (Live Mode)');
+    } catch (error) {
+      console.error('Error rendering PayPal buttons:', error);
+      setPaymentStatus({ 
+        type: 'error', 
+        message: 'Failed to load payment options. Please refresh the page.' 
+      });
+    }
+  }, [isSDKLoaded, amount, description, disabled, onSuccess, onError, onCancel]);
 
   if (!amount || parseFloat(amount) <= 0) {
     return (
@@ -254,32 +209,17 @@ const Payment: React.FC<PaymentProps> = ({
       {/* Payment Header */}
       <div className="text-center pb-4 border-b border-gray-200">
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Complete Your Payment</h3>
-        <p className="text-gray-600">Choose your preferred payment method below</p>
+        <p className="text-gray-600">Secure payment powered by PayPal</p>
       </div>
 
-      {/* Payment Options Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">PP</span>
-            </div>
-            <div>
-              <h4 className="font-semibold text-blue-900">Pay with PayPal</h4>
-              <p className="text-sm text-blue-700">Use your PayPal account</p>
-            </div>
-          </div>
+      {/* Amount Display */}
+      <div className="text-center p-4 bg-gray-50 rounded-lg">
+        <div className="text-2xl font-bold text-gray-900">
+          ${parseFloat(amount).toFixed(2)} USD
         </div>
-        
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-          <div className="flex items-center space-x-3">
-            <CreditCard className="w-8 h-8 text-green-600" />
-            <div>
-              <h4 className="font-semibold text-green-900">Pay with Card</h4>
-              <p className="text-sm text-green-700">Visa, MasterCard, etc.</p>
-            </div>
-          </div>
-        </div>
+        {description && (
+          <div className="text-sm text-gray-600 mt-1">{description}</div>
+        )}
       </div>
 
       {/* Payment Status */}
@@ -297,7 +237,8 @@ const Payment: React.FC<PaymentProps> = ({
         >
           {paymentStatus.type === 'success' && <CheckCircle className="w-5 h-5 text-green-600" />}
           {paymentStatus.type === 'error' && <XCircle className="w-5 h-5 text-red-600" />}
-          {paymentStatus.type === 'processing' && <Loader className="w-5 h-5 animate-spin text-blue-600" />}
+          {(paymentStatus.type === 'loading' || paymentStatus.type === 'processing') && 
+            <Loader className="w-5 h-5 animate-spin text-blue-600" />}
           
           <p className={`text-sm font-medium ${
             paymentStatus.type === 'success'
@@ -311,28 +252,15 @@ const Payment: React.FC<PaymentProps> = ({
         </motion.div>
       )}
 
-      {/* PayPal Smart Buttons Container */}
+      {/* PayPal Button Container */}
       <div 
-        id="paypal-button-container"
         ref={paypalRef}
-        className={`${disabled ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`min-h-[60px] ${disabled ? 'opacity-50 pointer-events-none' : ''}`}
       />
-
-      {/* Amount Display */}
-      <div className="text-center p-4 bg-gray-50 rounded-lg">
-        <div className="text-lg font-semibold text-gray-900">
-          Total: <span className="text-blue-600">${parseFloat(amount).toFixed(2)} USD</span>
-        </div>
-        {description && (
-          <div className="text-sm text-gray-600 mt-1">{description}</div>
-        )}
-      </div>
 
       {/* Security Notice */}
       <div className="text-center text-xs text-gray-500">
-        <p>🔒 Your payment is secured by PayPal's industry-leading encryption</p>
-        <p className="font-semibold text-red-600">⚠️ LIVE MODE: This is a real transaction and will be processed immediately</p>
-        <p className="text-blue-600">Client ID: {import.meta.env.VITE_PAYPAL_CLIENT_ID ? `${import.meta.env.VITE_PAYPAL_CLIENT_ID.substring(0, 8)}...` : 'Not configured'}</p>
+        <p>🔒 Your payment is secured by PayPal's encryption technology</p>
       </div>
     </div>
   );

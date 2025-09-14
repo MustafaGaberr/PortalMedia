@@ -22,6 +22,16 @@ const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
+const TiktokIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+  >
+    <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+  </svg>
+);
+
 const Contact: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const ref = useRef(null);
@@ -76,8 +86,9 @@ const Contact: React.FC = () => {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:text-blue-600' },
-    { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:text-pink-500' },
+    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61580536207617', label: 'Facebook', color: 'hover:text-blue-600' },
+    { icon: Instagram, href: 'https://www.instagram.com/portal._.media', label: 'Instagram', color: 'hover:text-pink-500' },
+    { icon: TiktokIcon, href: 'https://www.tiktok.com/@portal._.media', label: 'TikTok', color: 'hover:text-blue-500' },
     { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500' },
     { icon: WhatsAppIcon, href: '#', label: 'WhatsApp', color: 'hover:text-green-500' }
   ];
@@ -89,12 +100,12 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #212529, #343a40, #495057)' }}>
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ backgroundColor: 'var(--gold-light)' }}></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000" style={{ backgroundColor: 'var(--gold-dark)' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500" style={{ backgroundColor: 'var(--gold-darker)' }}></div>
       </div>
 
       <motion.div 
@@ -110,12 +121,12 @@ const Contact: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <MessageCircle className="w-16 h-16 text-blue-400 mx-auto" />
+            <MessageCircle className="w-16 h-16 mx-auto" style={{ color: 'var(--gold-light)' }} />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            {t('contact.getInTouch')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">{t('contact.touch')}</span>
+            {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             {t('contact.readyToStart')}
           </p>
         </motion.div>
@@ -126,19 +137,19 @@ const Contact: React.FC = () => {
             <motion.div 
               className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
               whileHover={{ 
-                boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
-                borderColor: "rgba(59, 130, 246, 0.3)"
+                boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.25)",
+                borderColor: "rgba(246, 217, 115, 0.3)"
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold text-white mb-6">{t('contact.sendMessage')}</h3>
+              <h3 className="text-2xl font-bold text-black mb-6">{t('contact.sendMessage')}</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t('contact.name')}
                   </label>
                   <input
@@ -147,7 +158,8 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
+                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
                     placeholder={t('contact.namePlaceholder')}
                   />
                 </motion.div>
@@ -156,7 +168,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t('contact.email')}
                   </label>
                   <input
@@ -165,7 +177,8 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
+                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
                     placeholder={t('contact.emailPlaceholder')}
                   />
                 </motion.div>
@@ -174,7 +187,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t('contact.message')}
                   </label>
                   <textarea
@@ -183,7 +196,8 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none"
+                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
                     placeholder={t('contact.messagePlaceholder')}
                   ></textarea>
                 </motion.div>
@@ -191,7 +205,18 @@ const Contact: React.FC = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse"
+                  className="w-full py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
+                  style={{ 
+                    background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+                    color: '#212529',
+                    border: '2px solid rgba(246, 217, 115, 0.3)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-dark), var(--gold-darker))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-light), var(--gold-dark))';
+                  }}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   animate={isSubmitting ? { scale: [1, 1.01, 1] } : {}}
@@ -217,26 +242,40 @@ const Contact: React.FC = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             {/* Contact Information */}
             <motion.div 
-              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
+              className="backdrop-blur-lg rounded-3xl p-8 border border-white/20"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
               whileHover={{ 
-                boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
-                borderColor: "rgba(59, 130, 246, 0.3)"
+                boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.25)",
+                borderColor: "rgba(246, 217, 115, 0.3)"
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold text-white mb-6">{t('contact.contactInformation')}</h3>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#212529' }}>{t('contact.contactInformation')}</h3>
               
               <div className="space-y-4">
                 {contactInfo.map((item, index) => (
                   <motion.a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 rtl:space-x-reverse text-gray-300 hover:text-blue-400 transition-colors duration-200 group"
+                    className="flex items-center space-x-4 rtl:space-x-reverse text-gray-700 transition-colors duration-200 group"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--gold-dark)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#374151'; // text-gray-700
+                    }}
                     whileHover={{ x: isRTL ? -5 : 5 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
                     <motion.div
-                      className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center group-hover:bg-blue-500/30 transition-colors duration-200"
+                      className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200"
+                      style={{ backgroundColor: 'rgba(246, 217, 115, 0.2)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(246, 217, 115, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(246, 217, 115, 0.2)';
+                      }}
                       whileHover={{ rotate: 180 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -250,25 +289,26 @@ const Contact: React.FC = () => {
 
             {/* Social Media */}
             <motion.div 
-              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
+              className="backdrop-blur-lg rounded-3xl p-8 border border-white/20"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
               whileHover={{ 
-                boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
-                borderColor: "rgba(59, 130, 246, 0.3)"
+                boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.25)",
+                borderColor: "rgba(246, 217, 115, 0.3)"
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold text-white mb-6">{t('contact.follow')}</h3>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#212529' }}>{t('contact.follow')}</h3>
               
               <div className="flex space-x-4 rtl:space-x-reverse">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
-                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-gray-300 ${social.color} transition-colors duration-200 border border-white/20 hover:border-current`}
+                    className={`w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-gray-700 ${social.color} transition-colors duration-200 border border-white/20 hover:border-current`}
                     whileHover={{ 
                       scale: 1.05, 
                       rotate: 180,
-                      boxShadow: "0 10px 20px -5px rgba(59, 130, 246, 0.3)"
+                      boxShadow: "0 10px 20px -5px rgba(246, 217, 115, 0.3)"
                     }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400 }}
@@ -279,26 +319,40 @@ const Contact: React.FC = () => {
                 ))}
               </div>
               
-              <p className="text-gray-400 mt-6 text-sm">
+              <p className="mt-6 text-sm" style={{ color: '#888888' }}>
                 {t('contact.stayConnected')}
               </p>
             </motion.div>
 
             {/* CTA Box */}
             <motion.div 
-              className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-lg rounded-3xl p-8 border border-blue-400/30"
+              className="backdrop-blur-lg rounded-3xl p-8 border"
+              style={{ 
+                background: 'linear-gradient(to right, rgba(246, 217, 115, 0.2), rgba(178, 121, 11, 0.2))',
+                borderColor: 'rgba(246, 217, 115, 0.3)'
+              }}
               whileHover={{ 
                 scale: 1.02,
-                boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.4)"
+                boxShadow: "0 25px 50px -12px rgba(246, 217, 115, 0.4)"
               }}
               transition={{ duration: 0.15 }}
             >
               <h3 className="text-xl font-bold text-white mb-4">{t('contact.readyToStart')}</h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-700 mb-6">
                 {t('contact.discussProject')}
               </p>
               <motion.button
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-200"
+                className="font-semibold py-3 px-6 rounded-xl transition-all duration-200"
+                style={{ 
+                  background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+                  color: '#212529'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-dark), var(--gold-darker))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-light), var(--gold-dark))';
+                }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -152,26 +152,31 @@ const Header: React.FC = () => {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled 
-          ? 'bg-blue-900/90 backdrop-blur-md border-b border-blue-700/50 shadow-lg' 
+          ? 'backdrop-blur-md border-b border-yellow-600/50 shadow-lg' 
           : isHomePage
           ? 'bg-transparent'
-          : 'bg-blue-900/90 backdrop-blur-md border-b border-blue-700/50 shadow-lg'
+          : 'backdrop-blur-md border-b border-yellow-600/50 shadow-lg'
       }`}
+      style={{
+        backgroundColor: isScrolled || !isHomePage ? '#212529e6' : 'transparent'
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+            className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer"
             onClick={handleLogoClick}
           >
-            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
-              <span className="text-white font-bold text-lg drop-shadow-sm">P</span>
-            </div>
+            <img 
+              src="/Assets/portal logo.png" 
+              alt="Portal Media Logo" 
+              className="w-12 h-12 object-contain drop-shadow-lg"
+            />
             <span className={`text-2xl font-bold drop-shadow-sm ${
               isScrolled || !isHomePage
-                ? 'text-white'
+                ? 'text-yellow-400'
                 : 'text-gradient'
             }`}>
               Portal Media
@@ -189,10 +194,10 @@ const Header: React.FC = () => {
                       onClick={handleHomeClick}
                       className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                          ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
                           : isScrolled || !isHomePage
-                          ? 'text-white/90 hover:text-blue-300'
-                          : 'text-white hover:text-primary-200 drop-shadow-sm'
+                          ? 'text-yellow-300/90 hover:text-yellow-400'
+                          : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
                       }`}
                     >
                       {item.name}
@@ -202,10 +207,10 @@ const Header: React.FC = () => {
                       to={item.href}
                       className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                         location.pathname === item.href
-                          ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                          ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
                           : isScrolled || !isHomePage
-                          ? 'text-white/90 hover:text-blue-300'
-                          : 'text-white hover:text-primary-200 drop-shadow-sm'
+                          ? 'text-yellow-300/90 hover:text-yellow-400'
+                          : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
                       }`}
                     >
                       {item.name}
@@ -217,10 +222,10 @@ const Header: React.FC = () => {
                     className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-blue-300 font-bold text-base drop-shadow-lg'
+                        ? 'text-yellow-400 font-bold text-base drop-shadow-lg'
                         : isScrolled || !isHomePage
-                        ? 'text-white/90 hover:text-blue-300'
-                        : 'text-white hover:text-primary-200 drop-shadow-sm'
+                        ? 'text-yellow-300/90 hover:text-yellow-400'
+                        : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
                     }`}
                   >
                     {item.name}
@@ -236,7 +241,10 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white/90 hover:text-white hover:bg-white/20 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[120px]"
+                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-yellow-600/30 text-yellow-300/90 hover:text-yellow-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 min-w-[120px]"
+                style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
                 title="Change Language"
               >
                 <span className="mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
@@ -253,16 +261,17 @@ const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className={`absolute top-full mt-2 bg-blue-900/95 backdrop-blur-md rounded-xl border border-blue-700/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
+                  className={`absolute top-full mt-2 backdrop-blur-md rounded-xl border border-yellow-600/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
                     language === 'ar' ? 'right-0' : 'left-0'
                   }`}
+                  style={{ backgroundColor: '#212529f2' }}
                 >
                   <button
                     onClick={() => handleLanguageChange('en')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-white/10 transition-all duration-200 ${
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-yellow-600/20 transition-all duration-200 ${
                       language === 'en' 
-                        ? 'bg-white/20 text-white font-semibold' 
-                        : 'text-white/90 hover:text-white'
+                        ? 'bg-yellow-600/30 text-yellow-300 font-semibold' 
+                        : 'text-yellow-300/90 hover:text-yellow-300'
                     }`}
                   >
                     <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
@@ -280,10 +289,10 @@ const Header: React.FC = () => {
                   </button>
                   <button
                     onClick={() => handleLanguageChange('ar')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-white/10 transition-all duration-200 ${
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-yellow-600/20 transition-all duration-200 ${
                       language === 'ar' 
-                        ? 'bg-white/20 text-white font-semibold' 
-                        : 'text-white/90 hover:text-white'
+                        ? 'bg-yellow-600/30 text-yellow-300 font-semibold' 
+                        : 'text-yellow-300/90 hover:text-yellow-300'
                     }`}
                   >
                     <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
@@ -306,7 +315,10 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-200 hover:scale-110 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-yellow-300 transition-all duration-200 hover:scale-110 border border-yellow-600/30 focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+              style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
               title={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X size={22} className="drop-shadow-sm" /> : <Menu size={22} className="drop-shadow-sm" />}
@@ -319,7 +331,8 @@ const Header: React.FC = () => {
           initial={false}
           animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          className="lg:hidden overflow-hidden bg-blue-900/95 backdrop-blur-md rounded-xl mt-2 border border-blue-700/50"
+          className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-yellow-600/50"
+          style={{ backgroundColor: '#212529f2' }}
         >
           <nav className="py-4">
             {navigation.map((item) => (
@@ -334,8 +347,8 @@ const Header: React.FC = () => {
                       }}
                       className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
-                          : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                          ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
+                          : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
                       }`}
                     >
                       {item.name}
@@ -346,8 +359,8 @@ const Header: React.FC = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                         location.pathname === item.href
-                          ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
-                          : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                          ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
+                          : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
                       }`}
                     >
                       {item.name}
@@ -361,8 +374,8 @@ const Header: React.FC = () => {
                     }}
                     className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-blue-300 bg-blue-800/50 border-l-4 border-blue-400 font-bold text-base'
-                        : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                        ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
+                        : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
                     }`}
                   >
                     {item.name}
@@ -372,16 +385,16 @@ const Header: React.FC = () => {
             ))}
             
             {/* Language Switcher in Mobile Menu */}
-            <div className="mx-2 mt-4 pt-4 border-t border-blue-700/50">
-              <p className="px-6 py-2 text-xs text-white/70 font-medium uppercase tracking-wide">
+            <div className="mx-2 mt-4 pt-4 border-t border-yellow-600/50">
+              <p className="px-6 py-2 text-xs text-yellow-300/70 font-medium uppercase tracking-wide">
                 Language / اللغة
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'en'
-                    ? 'text-white bg-blue-800/50 font-semibold'
-                    : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                    ? 'text-yellow-300 bg-yellow-600/20 font-semibold'
+                    : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -397,15 +410,15 @@ const Header: React.FC = () => {
                 </span>
                 <span className="text-sm font-medium">English</span>
                 {language === 'en' && (
-                  <span className="ml-auto text-white">✓</span>
+                  <span className="ml-auto text-yellow-300">✓</span>
                 )}
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'ar'
-                    ? 'text-white bg-blue-800/50 font-semibold'
-                    : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+                    ? 'text-yellow-300 bg-yellow-600/20 font-semibold'
+                    : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -421,7 +434,7 @@ const Header: React.FC = () => {
                 </span>
                 <span className="text-sm font-medium">العربية</span>
                 {language === 'ar' && (
-                  <span className="ml-auto text-white">✓</span>
+                  <span className="ml-auto text-yellow-300">✓</span>
                 )}
               </button>
             </div>
