@@ -68,7 +68,65 @@ const resources = {
         title: 'Latest Insights',
         subtitle: 'Stay Updated with Digital Marketing Trends',
         readMore: 'Read More',
-        viewAll: 'View All Posts'
+        viewAll: 'View All Posts',
+        posts: {
+          post1: {
+            title: 'The Future of Digital Marketing in 2024',
+            excerpt: 'Discover the latest trends and technologies that will shape digital marketing strategies in the coming year.',
+            content: 'Digital marketing is evolving at an unprecedented pace. With new technologies emerging and consumer behaviors shifting, businesses must adapt their strategies to stay competitive...',
+            author: 'Sarah Johnson',
+            readTime: '5 min read'
+          },
+          post2: {
+            title: 'Social Media ROI: How to Measure Success',
+            excerpt: 'Learn the most effective ways to measure and optimize your social media marketing return on investment.',
+            content: 'Measuring social media ROI can be challenging, but with the right metrics and tools, you can demonstrate clear value...',
+            author: 'Ahmed Hassan',
+            readTime: '4 min read'
+          },
+          post3: {
+            title: 'SEO Best Practices for 2024',
+            excerpt: 'Stay ahead with the latest SEO strategies and techniques that actually work in today\'s search landscape.',
+            content: 'Search engine optimization continues to evolve. Here are the proven strategies that will help your website rank higher...',
+            author: 'Maria Garcia',
+            readTime: '6 min read'
+          },
+          post4: {
+            title: 'Content Marketing That Converts',
+            excerpt: 'Create compelling content that drives engagement and converts visitors into customers.',
+            content: 'Great content is the foundation of any successful digital marketing strategy. Learn how to create content that resonates...',
+            author: 'Omar Al-Rashid',
+            readTime: '5 min read'
+          },
+          post5: {
+            title: 'PPC Campaign Optimization Tips',
+            excerpt: 'Maximize your pay-per-click advertising results with these proven optimization techniques.',
+            content: 'PPC advertising can be highly effective when done right. Here are the key strategies to optimize your campaigns...',
+            author: 'Lisa Chen',
+            readTime: '4 min read'
+          },
+          post6: {
+            title: 'Building a Strong Brand Identity',
+            excerpt: 'Develop a memorable brand that resonates with your target audience and stands out from competitors.',
+            content: 'A strong brand identity is crucial for business success. Learn how to create a brand that customers will remember...',
+            author: 'Khalid Al-Mansouri',
+            readTime: '7 min read'
+          },
+          post7: {
+            title: 'Email Marketing Strategies That Work',
+            excerpt: 'Boost your email marketing performance with these proven strategies and best practices.',
+            content: 'Email marketing remains one of the most effective digital marketing channels. Here\'s how to make it work for you...',
+            author: 'Jennifer Smith',
+            readTime: '5 min read'
+          },
+          post8: {
+            title: 'Data-Driven Marketing Decisions',
+            excerpt: 'Use analytics and data insights to make smarter marketing decisions and improve your results.',
+            content: 'Data is the key to successful marketing. Learn how to collect, analyze, and act on marketing data...',
+            author: 'Youssef Al-Zahra',
+            readTime: '6 min read'
+          }
+        }
       },
       // Team
       team: {
@@ -211,7 +269,65 @@ const resources = {
         title: 'أحدث الرؤى',
         subtitle: 'ابق محدثاً مع اتجاهات التسويق الرقمي',
         readMore: 'اقرأ المزيد',
-        viewAll: 'عرض جميع المقالات'
+        viewAll: 'عرض جميع المقالات',
+        posts: {
+          post1: {
+            title: 'مستقبل التسويق الرقمي في 2024',
+            excerpt: 'اكتشف أحدث الاتجاهات والتقنيات التي ستشكل استراتيجيات التسويق الرقمي في العام القادم.',
+            content: 'التسويق الرقمي يتطور بوتيرة غير مسبوقة. مع ظهور تقنيات جديدة وتغير سلوكيات المستهلكين، يجب على الشركات تكييف استراتيجياتها للبقاء في المقدمة...',
+            author: 'سارة أحمد',
+            readTime: '5 دقائق قراءة'
+          },
+          post2: {
+            title: 'عائد الاستثمار لوسائل التواصل الاجتماعي: كيفية قياس النجاح',
+            excerpt: 'تعلم الطرق الأكثر فعالية لقياس وتحسين عائد الاستثمار في تسويق وسائل التواصل الاجتماعي.',
+            content: 'يمكن أن يكون قياس عائد الاستثمار لوسائل التواصل الاجتماعي تحديًا، ولكن بالمعايير والأدوات الصحيحة، يمكنك إثبات القيمة الواضحة...',
+            author: 'أحمد حسن',
+            readTime: '4 دقائق قراءة'
+          },
+          post3: {
+            title: 'أفضل ممارسات تحسين محركات البحث لعام 2024',
+            excerpt: 'ابق في المقدمة مع أحدث استراتيجيات وتقنيات تحسين محركات البحث التي تعمل فعلاً في بيئة البحث اليوم.',
+            content: 'يستمر تحسين محركات البحث في التطور. إليك الاستراتيجيات المثبتة التي ستساعد موقعك على الترتيب الأعلى...',
+            author: 'ماريا غارسيا',
+            readTime: '6 دقائق قراءة'
+          },
+          post4: {
+            title: 'تسويق المحتوى الذي يحول الزوار إلى عملاء',
+            excerpt: 'أنشئ محتوى مقنعاً يدفع المشاركة ويحول الزوار إلى عملاء.',
+            content: 'المحتوى الرائع هو أساس أي استراتيجية تسويق رقمي ناجحة. تعلم كيفية إنشاء محتوى يتردد صداه...',
+            author: 'عمر الراشد',
+            readTime: '5 دقائق قراءة'
+          },
+          post5: {
+            title: 'نصائح تحسين حملات الإعلان المدفوع',
+            excerpt: 'قم بتحسين نتائج إعلانات الدفع مقابل النقر مع هذه التقنيات المثبتة للتحسين.',
+            content: 'يمكن أن يكون الإعلان المدفوع فعالاً جداً عند القيام به بشكل صحيح. إليك الاستراتيجيات الرئيسية لتحسين حملاتك...',
+            author: 'ليزا تشين',
+            readTime: '4 دقائق قراءة'
+          },
+          post6: {
+            title: 'بناء هوية تجارية قوية',
+            excerpt: 'طور علامة تجارية لا تُنسى تتردد صدى مع جمهورك المستهدف وتبرز من المنافسين.',
+            content: 'الهوية التجارية القوية ضرورية لنجاح الأعمال. تعلم كيفية إنشاء علامة تجارية سيتذكرها العملاء...',
+            author: 'خالد المنصوري',
+            readTime: '7 دقائق قراءة'
+          },
+          post7: {
+            title: 'استراتيجيات تسويق البريد الإلكتروني التي تعمل',
+            excerpt: 'عزز أداء تسويق البريد الإلكتروني مع هذه الاستراتيجيات والممارسات المثبتة.',
+            content: 'يظل تسويق البريد الإلكتروني أحد أكثر قنوات التسويق الرقمي فعالية. إليك كيفية جعله يعمل لصالحك...',
+            author: 'جينيفر سميث',
+            readTime: '5 دقائق قراءة'
+          },
+          post8: {
+            title: 'قرارات التسويق المبنية على البيانات',
+            excerpt: 'استخدم التحليلات ورؤى البيانات لاتخاذ قرارات تسويقية أذكى وتحسين نتائجك.',
+            content: 'البيانات هي مفتاح التسويق الناجح. تعلم كيفية جمع وتحليل والتصرف بناءً على بيانات التسويق...',
+            author: 'يوسف الزهراء',
+            readTime: '6 دقائق قراءة'
+          }
+        }
       },
       // Team
       team: {

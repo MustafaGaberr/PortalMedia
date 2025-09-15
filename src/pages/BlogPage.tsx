@@ -1,42 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight, Search, Filter } from 'lucide-react';
+import { Calendar, User, ArrowRight } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
-import { blogPosts } from '../data/blogPosts';
+import { useBlogPosts } from '../data/blogPosts';
 
 const BlogPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const { ref, controls } = useScrollAnimation();
   const { id } = useParams();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const blogPosts = useBlogPosts();
 
-  const categories = ['all', 'Marketing', 'Social Media', 'SEO', 'Content', 'PPC', 'Branding'];
-
-  const filteredPosts = React.useMemo(() => {
-    return blogPosts.filter(post => {
-      const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchTerm, selectedCategory]);
-
-  // Ensure filteredPosts is never undefined or null
-  const validFilteredPosts = filteredPosts || [];
+  // Loading state
+  if (!blogPosts || blogPosts.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+          <p className="text-yellow-300">{t('blog.loading')}</p>
+        </div>
+      </div>
+    );
+  }
 
   // If viewing a single post
   if (id) {
-    const post = blogPosts.find(p => p.id === parseInt(id));
+    const postId = parseInt(id);
+    const post = blogPosts.find(p => p.id === postId);
+    
+    
     if (!post) {
       return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Post not found</h1>
-            <Link to="/blog" className="text-blue-600 hover:text-blue-700">
-              Back to blog
+            <h1 className="text-3xl font-bold text-yellow-300 mb-4">
+              {t('blog.postNotFound', 'المقال غير موجود')}
+            </h1>
+            <Link 
+              to="/blog" 
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300"
+            >
+              {t('blog.backToBlog', 'العودة للمدونة')}
             </Link>
           </div>
         </div>
@@ -44,55 +49,61 @@ const BlogPage: React.FC = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gray-50 pt-24 pb-16">
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-24 pb-16">
+        <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <img
-                src={post.image}
-                alt={post.title}
-                className="w-full h-64 md:h-96 object-cover"
-              />
-              
-              <div className="p-8 md:p-12">
-                <div className="flex items-center space-x-4 rtl:space-x-reverse mb-6">
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+            <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-elegant overflow-hidden border border-yellow-400/20">
+              <div className="relative overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div className="absolute top-6 left-6">
+                  <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                     {post.category}
                   </span>
-                  <span className="text-gray-500 text-sm">{post.readTime}</span>
                 </div>
-                
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <div className="absolute top-6 right-6">
+                  <span className="bg-black/50 backdrop-blur-sm text-yellow-300 px-3 py-1 rounded-full text-sm font-medium">
+                    {post.readTime}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="p-8 md:p-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-yellow-300 mb-6 leading-tight">
                   {post.title}
                 </h1>
                 
-                <div className="flex items-center space-x-4 rtl:space-x-reverse mb-8 pb-8 border-b border-gray-200">
-                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-600">
-                    <User className="w-4 h-4" />
-                    <span>{post.author}</span>
+                <div className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-yellow-400/20">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200">
+                    <User className="w-5 h-5" />
+                    <span className="font-medium">{post.author}</span>
                   </div>
-                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-600">
-                    <Calendar className="w-4 h-4" />
-                    <span>{post.date}</span>
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200">
+                    <Calendar className="w-5 h-5" />
+                    <span className="font-medium">{post.date}</span>
                   </div>
                 </div>
                 
-                <div className="prose max-w-none">
-                  <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-xl text-yellow-100 mb-8 leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <div className="text-lg text-gray-800 leading-relaxed">
+                  <div className="text-lg text-yellow-50 leading-relaxed space-y-6">
                     {post.content && (
                       <>
-                        <p className="mb-6">{post.content}</p>
-                        <p className="mb-6">
+                        <p>{post.content}</p>
+                        <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
-                        <p className="mb-6">
+                        <p>
                           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                       </>
@@ -105,12 +116,12 @@ const BlogPage: React.FC = () => {
             <div className="mt-8 text-center">
               <Link
                 to="/blog"
-                className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <ArrowRight 
-                  className={`w-4 h-4 mr-2 rtl:ml-2 rtl:mr-0 rotate-180 ${isRTL ? 'rotate-0' : ''}`} 
+                  className={`w-5 h-5 mr-3 rtl:ml-3 rtl:mr-0 rotate-180 ${isRTL ? 'rotate-0' : ''}`} 
                 />
-                Back to Blog
+                {t('blog.backToBlog')}
               </Link>
             </div>
           </motion.div>
@@ -120,7 +131,7 @@ const BlogPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -130,74 +141,41 @@ const BlogPage: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-yellow-300 mb-6">
               {t('blog.title')}
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-yellow-200 max-w-3xl mx-auto leading-relaxed">
               {t('blog.subtitle')}
             </p>
           </motion.div>
 
-          {/* Search and Filter */}
-          <motion.div variants={fadeInUp} className="mb-12">
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-              <div className="flex flex-col lg:flex-row gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 rtl:right-3 rtl:left-auto top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search articles..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 rtl:pr-10 rtl:pl-4 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                
-                <div className="relative">
-                  <Filter className="absolute left-3 rtl:right-3 rtl:left-auto top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="pl-10 rtl:pr-10 rtl:pl-4 pr-8 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white min-w-[150px]"
-                  >
-                    {categories.map(category => (
-                      <option key={category} value={category}>
-                        {category === 'all' ? 'All Categories' : category}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </motion.div>
 
           {/* Blog Posts Grid */}
           <motion.div 
-            key={`${searchTerm}-${selectedCategory}`}
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {validFilteredPosts.length > 0 ? (
-              validFilteredPosts.map((post) => (
+            {blogPosts.map((post) => (
               <motion.article
                 key={post.id}
                 variants={fadeInUp}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                className="group bg-white/10 backdrop-blur-lg rounded-2xl shadow-elegant overflow-hidden hover:shadow-2xl transition-all duration-500 border border-yellow-400/20 hover:border-yellow-400/40"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4">
-                    <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
                       {post.category}
                     </span>
                   </div>
                   {post.readTime && (
                     <div className="absolute top-4 right-4">
-                      <span className="bg-black/50 text-white px-2 py-1 rounded text-xs">
+                      <span className="bg-black/50 backdrop-blur-sm text-yellow-300 px-2 py-1 rounded-lg text-xs font-medium">
                         {post.readTime}
                       </span>
                     </div>
@@ -205,19 +183,19 @@ const BlogPage: React.FC = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-yellow-300 mb-3 line-clamp-2 group-hover:text-yellow-200 transition-colors duration-300">
                     {post.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
+                  <p className="text-yellow-100/80 mb-4 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-500">
+                  <div className="flex items-center justify-between mb-4 text-sm">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <User className="w-4 h-4" />
                       <span>{post.author}</span>
                     </div>
-                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-500">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <Calendar className="w-4 h-4" />
                       <span>{post.date}</span>
                     </div>
@@ -225,24 +203,16 @@ const BlogPage: React.FC = () => {
                   
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                    className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300 group-hover:translate-x-1 transform"
                   >
                     {t('blog.readMore')}
                     <ArrowRight 
-                      className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} 
+                      className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 group-hover:translate-x-1 transition-transform duration-300 ${isRTL ? 'rotate-180' : ''}`} 
                     />
                   </Link>
                 </div>
               </motion.article>
-            ))
-            ) : (
-              <motion.div 
-                variants={fadeInUp} 
-                className="col-span-full text-center py-16"
-              >
-                <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
-              </motion.div>
-            )}
+            ))}
           </motion.div>
         </motion.div>
       </div>

@@ -153,9 +153,8 @@ const Team: React.FC = () => {
           </button>
         </div>
       </div>
-
       {/* Custom Styles */}
-      <style jsx global>{`
+      <style>{`
         .swiper-pagination-bullet-custom {
           width: 12px !important;
           height: 12px !important;
