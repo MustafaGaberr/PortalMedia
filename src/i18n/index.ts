@@ -37,30 +37,66 @@ const resources = {
       // Services
       services: {
         title: 'Our Services',
-        subtitle: 'Comprehensive Digital Solutions',
+        subtitle: 'Comprehensive Digital Solutions for Your Business',
         seo: {
-          title: 'SEO Optimization',
-          description: 'Boost your search rankings with our advanced SEO strategies and technical expertise.'
+          title: 'Programming & Development',
+          description: 'Complete web and mobile development solutions for your business needs.',
+          points: [
+            'Web Design & Development',
+            'Mobile App Development (iOS & Android)',
+            'Hosting & Domain Services',
+            'Website Performance Optimization'
+          ]
         },
         social: {
-          title: 'Social Media Marketing',
-          description: 'Engage your audience across all social platforms with targeted campaigns.'
+          title: 'Social Media Management',
+          description: 'Comprehensive social media management to build and engage your online community.',
+          points: [
+            'Facebook, Instagram, TikTok',
+            'Monthly Content Calendar',
+            'Community Management',
+            'Performance Reports'
+          ]
         },
         ppc: {
-          title: 'PPC Advertising',
-          description: 'Maximize ROI with our data-driven pay-per-click advertising campaigns.'
+          title: 'Content Creation',
+          description: 'Creative and engaging content that drives audience engagement and conversions.',
+          points: [
+            'Social Media Posts',
+            'Reels & Short Videos',
+            'Ad/Explainer Scripts',
+            'Creative Copywriting'
+          ]
         },
         content: {
-          title: 'Content Creation',
-          description: 'Compelling content that tells your brand story and converts visitors.'
+          title: 'Digital Advertising',
+          description: 'Strategic paid advertising campaigns that deliver measurable results and maximize ROI.',
+          points: [
+            'Paid Ad Campaigns',
+            'Audience Targeting',
+            'Campaign Optimization',
+            'Performance Reports'
+          ]
         },
         analytics: {
-          title: 'Analytics & Insights',
-          description: 'Deep insights and analytics to optimize your marketing performance.'
+          title: 'Graphic Design & Branding',
+          description: 'Complete visual identity and design solutions that make your brand stand out.',
+          points: [
+            'Logo & Brand Identity',
+            'Social Media Designs',
+            'Motion Graphics & Ads',
+            'UI/UX Design'
+          ]
         },
         branding: {
-          title: 'Brand Development',
-          description: 'Build a strong brand identity that resonates with your target audience.'
+          title: 'Analytics & Reporting',
+          description: 'Data-driven insights and comprehensive reporting to optimize your digital performance.',
+          points: [
+            'Website Traffic Analysis',
+            'Social Media Insights',
+            'Ad Campaign Reports',
+            'Monthly Strategy Plans'
+          ]
         }
       },
       // Blog
@@ -74,60 +110,46 @@ const resources = {
         loading: 'Loading articles...',
         posts: {
           post1: {
-            title: 'The Future of Digital Marketing in 2024',
-            excerpt: 'Discover the latest trends and technologies that will shape digital marketing strategies in the coming year.',
-            content: 'Digital marketing is evolving at an unprecedented pace. With new technologies emerging and consumer behaviors shifting, businesses must adapt their strategies to stay competitive...',
+            title: 'Complete Guide to Web Development: From Design to Launch',
+            excerpt: 'Everything you need to know about modern web development, from choosing the right technology stack to optimizing performance.',
+            content: 'Web development has evolved dramatically in recent years. With new frameworks, tools, and best practices emerging constantly, staying updated is crucial for success. In this comprehensive guide, we\'ll explore the entire web development process from initial concept to final deployment. We\'ll cover everything from selecting the right programming languages and frameworks to implementing responsive design principles and optimizing for search engines. Whether you\'re a beginner looking to start your journey or an experienced developer wanting to stay current with the latest trends, this guide will provide valuable insights and practical tips to help you build exceptional websites that deliver outstanding user experiences.',
             author: 'Sarah Johnson',
-            readTime: '5 min read'
+            readTime: '8 min read'
           },
           post2: {
-            title: 'Social Media ROI: How to Measure Success',
-            excerpt: 'Learn the most effective ways to measure and optimize your social media marketing return on investment.',
-            content: 'Measuring social media ROI can be challenging, but with the right metrics and tools, you can demonstrate clear value...',
+            title: 'Social Media Management: Building Your Brand Online',
+            excerpt: 'Learn how to effectively manage your social media presence across all platforms and build a strong online community.',
+            content: 'Social media management is more than just posting content. It\'s about building relationships, engaging with your audience, and creating a consistent brand voice across all platforms. In today\'s digital landscape, having a strong social media presence is essential for business success. This comprehensive guide will walk you through the fundamentals of social media management, from developing a content strategy to measuring your success. We\'ll explore platform-specific best practices, content creation techniques, community management strategies, and analytics tools that will help you build a thriving online community and drive meaningful engagement with your target audience.',
             author: 'Ahmed Hassan',
-            readTime: '4 min read'
-          },
-          post3: {
-            title: 'SEO Best Practices for 2024',
-            excerpt: 'Stay ahead with the latest SEO strategies and techniques that actually work in today\'s search landscape.',
-            content: 'Search engine optimization continues to evolve. Here are the proven strategies that will help your website rank higher...',
-            author: 'Maria Garcia',
             readTime: '6 min read'
           },
+          post3: {
+            title: 'Content Creation Mastery: Engaging Your Audience',
+            excerpt: 'Discover the secrets of creating compelling content that drives engagement and builds lasting connections with your audience.',
+            content: 'Great content is the foundation of any successful digital strategy. Whether it\'s social media posts, blog articles, or video content, quality matters more than quantity. In this detailed exploration of content creation, we\'ll dive deep into the art and science of crafting content that resonates with your audience. From understanding your target demographic to developing a unique brand voice, we\'ll cover everything you need to know to create content that not only captures attention but also drives action. Learn about different content formats, storytelling techniques, visual design principles, and how to repurpose content across multiple platforms for maximum impact.',
+            author: 'Maria Garcia',
+            readTime: '7 min read'
+          },
           post4: {
-            title: 'Content Marketing That Converts',
-            excerpt: 'Create compelling content that drives engagement and converts visitors into customers.',
-            content: 'Great content is the foundation of any successful digital marketing strategy. Learn how to create content that resonates...',
+            title: 'Digital Advertising: Maximizing Your ROI',
+            excerpt: 'Master the art of digital advertising with proven strategies that deliver measurable results and maximize your return on investment.',
+            content: 'Digital advertising can be complex, but with the right approach, it can be incredibly effective. Learn how to create campaigns that convert, target the right audience, and optimize for maximum ROI. In this comprehensive guide, we\'ll explore the world of digital advertising from strategy development to campaign execution and optimization. We\'ll cover different advertising platforms, audience targeting techniques, ad creative best practices, and advanced optimization strategies. Whether you\'re running Google Ads, Facebook campaigns, or exploring newer platforms like TikTok, this guide will provide you with the knowledge and tools needed to create successful advertising campaigns that drive real business results.',
             author: 'Omar Al-Rashid',
             readTime: '5 min read'
           },
           post5: {
-            title: 'PPC Campaign Optimization Tips',
-            excerpt: 'Maximize your pay-per-click advertising results with these proven optimization techniques.',
-            content: 'PPC advertising can be highly effective when done right. Here are the key strategies to optimize your campaigns...',
+            title: 'Design & Graphics: Creating Visual Impact',
+            excerpt: 'Explore the world of graphic design and learn how to create stunning visuals that capture attention and communicate your message effectively.',
+            content: 'Visual design plays a crucial role in digital marketing success. From logos to social media graphics, good design can make or break your brand. In this comprehensive exploration of graphic design and branding, we\'ll cover everything from basic design principles to advanced techniques for creating compelling visual content. Learn about color theory, typography, layout design, and how to create a cohesive visual identity that resonates with your target audience. We\'ll also explore modern design trends, tools, and techniques that will help you create professional-quality graphics that enhance your brand\'s online presence and drive engagement.',
             author: 'Lisa Chen',
-            readTime: '4 min read'
+            readTime: '6 min read'
           },
           post6: {
-            title: 'Building a Strong Brand Identity',
-            excerpt: 'Develop a memorable brand that resonates with your target audience and stands out from competitors.',
-            content: 'A strong brand identity is crucial for business success. Learn how to create a brand that customers will remember...',
+            title: 'Analytics & Reporting: Making Data-Driven Decisions',
+            excerpt: 'Learn how to use analytics and reporting to make informed decisions and continuously improve your digital marketing performance.',
+            content: 'Data is the key to understanding what works and what doesn\'t in your digital marketing efforts. Learn how to collect, analyze, and act on data to continuously improve your results. In this detailed guide to analytics and reporting, we\'ll explore the essential metrics every marketer should track, how to set up proper tracking systems, and how to interpret data to make informed decisions. We\'ll cover everything from basic web analytics to advanced attribution modeling, social media insights, and conversion tracking. Discover how to create meaningful reports that provide actionable insights and help you optimize your marketing strategies for better results.',
             author: 'Khalid Al-Mansouri',
-            readTime: '7 min read'
-          },
-          post7: {
-            title: 'Email Marketing Strategies That Work',
-            excerpt: 'Boost your email marketing performance with these proven strategies and best practices.',
-            content: 'Email marketing remains one of the most effective digital marketing channels. Here\'s how to make it work for you...',
-            author: 'Jennifer Smith',
             readTime: '5 min read'
-          },
-          post8: {
-            title: 'Data-Driven Marketing Decisions',
-            excerpt: 'Use analytics and data insights to make smarter marketing decisions and improve your results.',
-            content: 'Data is the key to successful marketing. Learn how to collect, analyze, and act on marketing data...',
-            author: 'Youssef Al-Zahra',
-            readTime: '6 min read'
           }
         }
       },
@@ -262,30 +284,66 @@ const resources = {
       // Services
       services: {
         title: 'خدماتنا',
-        subtitle: 'حلول رقمية شاملة',
+        subtitle: 'حلول رقمية شاملة لعملك',
         seo: {
-          title: 'تحسين محركات البحث',
-          description: 'عزز ترتيبك في البحث من خلال استراتيجيات تحسين محركات البحث المتقدمة والخبرة التقنية.'
+          title: 'البرمجة والتطوير',
+          description: 'حلول تطوير المواقع والتطبيقات الشاملة لاحتياجات عملك.',
+          points: [
+            'تصميم وبرمجة المواقع',
+            'تطوير تطبيقات الموبايل (iOS و Android)',
+            'خدمات الاستضافة والدومين',
+            'تحسين أداء المواقع'
+          ]
         },
         social: {
-          title: 'التسويق عبر وسائل التواصل الاجتماعي',
-          description: 'تفاعل مع جمهورك عبر جميع المنصات الاجتماعية من خلال حملات مستهدفة.'
+          title: 'إدارة السوشيال ميديا',
+          description: 'إدارة شاملة لوسائل التواصل الاجتماعي لبناء وتفاعل مجتمعك على الإنترنت.',
+          points: [
+            'فيسبوك، إنستجرام، تيك توك',
+            'خطة المحتوى الشهرية',
+            'إدارة المجتمع',
+            'تقارير الأداء'
+          ]
         },
         ppc: {
-          title: 'إعلانات الدفع بالنقرة',
-          description: 'اعظم العائد على الاستثمار من خلال حملات الإعلان بالدفع لكل نقرة المدفوعة بالبيانات.'
+          title: 'كتابة المحتوى',
+          description: 'محتوى إبداعي وجذاب يدفع مشاركة الجمهور والتحويلات.',
+          points: [
+            'بوستات السوشيال ميديا',
+            'الريلز والفيديوهات القصيرة',
+            'سكريبتات الإعلانات والشرح',
+            'الكتابة الإبداعية'
+          ]
         },
         content: {
-          title: 'إنشاء المحتوى',
-          description: 'محتوى مقنع يحكي قصة علامتك التجارية ويحول الزوار.'
+          title: 'الإعلانات الرقمية',
+          description: 'حملات إعلانية مدفوعة استراتيجية تحقق نتائج قابلة للقياس وتعظم العائد على الاستثمار.',
+          points: [
+            'حملات الإعلانات المدفوعة',
+            'استهداف الجمهور',
+            'تحسين الحملات',
+            'تقارير الأداء'
+          ]
         },
         analytics: {
-          title: 'التحليلات والرؤى',
-          description: 'رؤى وتحليلات عميقة لتحسين أداء التسويق الخاص بك.'
+          title: 'التصميم الجرافيكي والبراندينج',
+          description: 'حلول الهوية البصرية والتصميم الشاملة التي تجعل علامتك التجارية تبرز.',
+          points: [
+            'الشعار والهوية التجارية',
+            'تصاميم السوشيال ميديا',
+            'الموشن جرافيك والإعلانات',
+            'تصميم واجهات المستخدم'
+          ]
         },
         branding: {
-          title: 'تطوير العلامة التجارية',
-          description: 'بناء هوية علامة تجارية قوية تتردد صداها مع جمهورك المستهدف.'
+          title: 'التحليلات والتقارير',
+          description: 'رؤى مدفوعة بالبيانات وتقارير شاملة لتحسين أدائك الرقمي.',
+          points: [
+            'تحليل حركة المرور للموقع',
+            'رؤى السوشيال ميديا',
+            'تقارير حملات الإعلانات',
+            'الخطط الاستراتيجية الشهرية'
+          ]
         }
       },
       // Blog
@@ -299,60 +357,46 @@ const resources = {
         loading: 'جاري تحميل المقالات...',
         posts: {
           post1: {
-            title: 'مستقبل التسويق الرقمي في 2024',
-            excerpt: 'اكتشف أحدث الاتجاهات والتقنيات التي ستشكل استراتيجيات التسويق الرقمي في العام القادم.',
-            content: 'التسويق الرقمي يتطور بوتيرة غير مسبوقة. مع ظهور تقنيات جديدة وتغير سلوكيات المستهلكين، يجب على الشركات تكييف استراتيجياتها للبقاء في المقدمة...',
+            title: 'دليل شامل لتطوير المواقع: من التصميم إلى الإطلاق',
+            excerpt: 'كل ما تحتاج لمعرفته عن تطوير المواقع الحديثة، من اختيار التقنيات المناسبة إلى تحسين الأداء.',
+            content: 'تطوير المواقع تطور بشكل كبير في السنوات الأخيرة. مع ظهور أطر عمل وأدوات وممارسات جديدة باستمرار، البقاء محدثاً أمر بالغ الأهمية للنجاح. في هذا الدليل الشامل، سنستكشف عملية تطوير المواقع بالكامل من المفهوم الأولي إلى النشر النهائي. سنغطي كل شيء من اختيار لغات البرمجة والأطر المناسبة إلى تطبيق مبادئ التصميم المتجاوب وتحسين محركات البحث. سواء كنت مبتدئاً تبحث عن بدء رحلتك أو مطوراً خبيراً تريد البقاء محدثاً بأحدث الاتجاهات، سيوفر لك هذا الدليل رؤى قيمة ونصائح عملية لمساعدتك في بناء مواقع استثنائية توفر تجارب مستخدم متميزة.',
             author: 'سارة أحمد',
-            readTime: '5 دقائق قراءة'
+            readTime: '8 دقائق قراءة'
           },
           post2: {
-            title: 'عائد الاستثمار لوسائل التواصل الاجتماعي: كيفية قياس النجاح',
-            excerpt: 'تعلم الطرق الأكثر فعالية لقياس وتحسين عائد الاستثمار في تسويق وسائل التواصل الاجتماعي.',
-            content: 'يمكن أن يكون قياس عائد الاستثمار لوسائل التواصل الاجتماعي تحديًا، ولكن بالمعايير والأدوات الصحيحة، يمكنك إثبات القيمة الواضحة...',
+            title: 'إدارة السوشيال ميديا: بناء علامتك التجارية على الإنترنت',
+            excerpt: 'تعلم كيفية إدارة حضورك على وسائل التواصل الاجتماعي بفعالية عبر جميع المنصات وبناء مجتمع قوي على الإنترنت.',
+            content: 'إدارة وسائل التواصل الاجتماعي أكثر من مجرد نشر محتوى. إنها تتعلق ببناء العلاقات والتفاعل مع جمهورك وإنشاء صوت علامة تجارية متسق عبر جميع المنصات. في المشهد الرقمي اليوم، وجود حضور قوي على وسائل التواصل الاجتماعي ضروري لنجاح الأعمال. سيرشدك هذا الدليل الشامل عبر أساسيات إدارة وسائل التواصل الاجتماعي، من تطوير استراتيجية المحتوى إلى قياس نجاحك. سنستكشف أفضل الممارسات الخاصة بكل منصة، تقنيات إنشاء المحتوى، استراتيجيات إدارة المجتمع، وأدوات التحليلات التي ستساعدك في بناء مجتمع مزدهر على الإنترنت وتحقيق تفاعل هادف مع جمهورك المستهدف.',
             author: 'أحمد حسن',
-            readTime: '4 دقائق قراءة'
-          },
-          post3: {
-            title: 'أفضل ممارسات تحسين محركات البحث لعام 2024',
-            excerpt: 'ابق في المقدمة مع أحدث استراتيجيات وتقنيات تحسين محركات البحث التي تعمل فعلاً في بيئة البحث اليوم.',
-            content: 'يستمر تحسين محركات البحث في التطور. إليك الاستراتيجيات المثبتة التي ستساعد موقعك على الترتيب الأعلى...',
-            author: 'ماريا غارسيا',
             readTime: '6 دقائق قراءة'
           },
+          post3: {
+            title: 'إتقان إنشاء المحتوى: جذب جمهورك',
+            excerpt: 'اكتشف أسرار إنشاء محتوى مقنع يدفع المشاركة ويبني روابط دائمة مع جمهورك.',
+            content: 'المحتوى الرائع هو أساس أي استراتيجية رقمية ناجحة. سواء كان منشورات وسائل التواصل الاجتماعي أو مقالات مدونة أو محتوى فيديو، الجودة مهمة أكثر من الكمية. في هذا الاستكشاف التفصيلي لإنشاء المحتوى، سنتعمق في فن وعلم صياغة محتوى يتردد صداه مع جمهورك. من فهم جمهورك المستهدف إلى تطوير صوت علامة تجارية فريد، سنغطي كل ما تحتاج لمعرفته لإنشاء محتوى لا يلفت الانتباه فحسب، بل يدفع أيضاً إلى العمل. تعلم عن تنسيقات المحتوى المختلفة، تقنيات السرد، مبادئ التصميم البصري، وكيفية إعادة استخدام المحتوى عبر منصات متعددة للحصول على أقصى تأثير.',
+            author: 'ماريا غارسيا',
+            readTime: '7 دقائق قراءة'
+          },
           post4: {
-            title: 'تسويق المحتوى الذي يحول الزوار إلى عملاء',
-            excerpt: 'أنشئ محتوى مقنعاً يدفع المشاركة ويحول الزوار إلى عملاء.',
-            content: 'المحتوى الرائع هو أساس أي استراتيجية تسويق رقمي ناجحة. تعلم كيفية إنشاء محتوى يتردد صداه...',
+            title: 'الإعلانات الرقمية: تعظيم عائد الاستثمار',
+            excerpt: 'أتقن فن الإعلانات الرقمية باستراتيجيات مثبتة تحقق نتائج قابلة للقياس وتعظم عائد استثمارك.',
+            content: 'الإعلانات الرقمية يمكن أن تكون معقدة، ولكن بالنهج الصحيح، يمكن أن تكون فعالة بشكل لا يصدق. تعلم كيفية إنشاء حملات تحول، تستهدف الجمهور الصحيح، وتحسن لأقصى عائد على الاستثمار. في هذا الدليل الشامل، سنستكشف عالم الإعلانات الرقمية من تطوير الاستراتيجية إلى تنفيذ الحملة والتحسين. سنغطي منصات الإعلان المختلفة، تقنيات استهداف الجمهور، أفضل ممارسات الإبداع الإعلاني، واستراتيجيات التحسين المتقدمة. سواء كنت تدير إعلانات جوجل، حملات فيسبوك، أو تستكشف منصات أحدث مثل تيك توك، سيوفر لك هذا الدليل المعرفة والأدوات اللازمة لإنشاء حملات إعلانية ناجحة تحقق نتائج أعمال حقيقية.',
             author: 'عمر الراشد',
             readTime: '5 دقائق قراءة'
           },
           post5: {
-            title: 'نصائح تحسين حملات الإعلان المدفوع',
-            excerpt: 'قم بتحسين نتائج إعلانات الدفع مقابل النقر مع هذه التقنيات المثبتة للتحسين.',
-            content: 'يمكن أن يكون الإعلان المدفوع فعالاً جداً عند القيام به بشكل صحيح. إليك الاستراتيجيات الرئيسية لتحسين حملاتك...',
+            title: 'التصميم والجرافيك: خلق تأثير بصري',
+            excerpt: 'استكشف عالم التصميم الجرافيكي وتعلم كيفية إنشاء صور مذهلة تجذب الانتباه وتوصل رسالتك بفعالية.',
+            content: 'التصميم البصري يلعب دوراً حاسماً في نجاح التسويق الرقمي. من الشعارات إلى رسوم وسائل التواصل الاجتماعي، التصميم الجيد يمكن أن ينجح أو يفشل علامتك التجارية. في هذا الاستكشاف الشامل للتصميم الجرافيكي والبراندينج، سنغطي كل شيء من مبادئ التصميم الأساسية إلى التقنيات المتقدمة لإنشاء محتوى بصري مقنع. تعلم عن نظرية الألوان، الطباعة، تصميم التخطيط، وكيفية إنشاء هوية بصرية متماسكة تتردد صدى مع جمهورك المستهدف. سنستكشف أيضاً اتجاهات التصميم الحديثة، الأدوات، والتقنيات التي ستساعدك في إنشاء رسوم عالية الجودة تعزز حضور علامتك التجارية على الإنترنت وتدفع التفاعل.',
             author: 'ليزا تشين',
-            readTime: '4 دقائق قراءة'
+            readTime: '6 دقائق قراءة'
           },
           post6: {
-            title: 'بناء هوية تجارية قوية',
-            excerpt: 'طور علامة تجارية لا تُنسى تتردد صدى مع جمهورك المستهدف وتبرز من المنافسين.',
-            content: 'الهوية التجارية القوية ضرورية لنجاح الأعمال. تعلم كيفية إنشاء علامة تجارية سيتذكرها العملاء...',
+            title: 'التحليلات والتقارير: اتخاذ قرارات مدفوعة بالبيانات',
+            excerpt: 'تعلم كيفية استخدام التحليلات والتقارير لاتخاذ قرارات مدروسة وتحسين أداء التسويق الرقمي باستمرار.',
+            content: 'البيانات هي مفتاح فهم ما يعمل وما لا يعمل في جهود التسويق الرقمي الخاصة بك. تعلم كيفية جمع وتحليل والتصرف بناءً على البيانات لتحسين نتائجك باستمرار. في هذا الدليل التفصيلي للتحليلات والتقارير، سنستكشف المقاييس الأساسية التي يجب على كل مسوق تتبعها، كيفية إعداد أنظمة التتبع المناسبة، وكيفية تفسير البيانات لاتخاذ قرارات مدروسة. سنغطي كل شيء من التحليلات الأساسية للمواقع إلى نمذجة الإسناد المتقدمة، رؤى وسائل التواصل الاجتماعي، وتتبع التحويلات. اكتشف كيفية إنشاء تقارير ذات معنى توفر رؤى قابلة للتنفيذ وتساعدك في تحسين استراتيجيات التسويق الخاصة بك للحصول على نتائج أفضل.',
             author: 'خالد المنصوري',
-            readTime: '7 دقائق قراءة'
-          },
-          post7: {
-            title: 'استراتيجيات تسويق البريد الإلكتروني التي تعمل',
-            excerpt: 'عزز أداء تسويق البريد الإلكتروني مع هذه الاستراتيجيات والممارسات المثبتة.',
-            content: 'يظل تسويق البريد الإلكتروني أحد أكثر قنوات التسويق الرقمي فعالية. إليك كيفية جعله يعمل لصالحك...',
-            author: 'جينيفر سميث',
             readTime: '5 دقائق قراءة'
-          },
-          post8: {
-            title: 'قرارات التسويق المبنية على البيانات',
-            excerpt: 'استخدم التحليلات ورؤى البيانات لاتخاذ قرارات تسويقية أذكى وتحسين نتائجك.',
-            content: 'البيانات هي مفتاح التسويق الناجح. تعلم كيفية جمع وتحليل والتصرف بناءً على بيانات التسويق...',
-            author: 'يوسف الزهراء',
-            readTime: '6 دقائق قراءة'
           }
         }
       },

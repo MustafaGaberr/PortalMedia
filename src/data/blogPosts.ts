@@ -26,9 +26,9 @@ export const useBlogPosts = () => {
       image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg",
       authorKey: 'blog.posts.post1.author',
       date: "Dec 15, 2024",
-      category: "Marketing",
+      category: "Programming",
       readTimeKey: 'blog.posts.post1.readTime',
-      tags: ["تسويق رقمي", "اتجاهات", "2024"]
+      tags: ["برمجة", "تطوير مواقع", "تقنيات"]
     },
     {
       id: 2,
@@ -40,7 +40,7 @@ export const useBlogPosts = () => {
       date: "Dec 12, 2024",
       category: "Social Media",
       readTimeKey: 'blog.posts.post2.readTime',
-      tags: ["وسائل التواصل", "ROI", "قياس الأداء"]
+      tags: ["سوشيال ميديا", "إدارة", "مجتمع"]
     },
     {
       id: 3,
@@ -50,9 +50,9 @@ export const useBlogPosts = () => {
       image: "https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg",
       authorKey: 'blog.posts.post3.author',
       date: "Dec 10, 2024",
-      category: "SEO",
+      category: "Content",
       readTimeKey: 'blog.posts.post3.readTime',
-      tags: ["SEO", "تحسين محركات البحث", "جوجل"]
+      tags: ["محتوى", "كتابة", "إبداع"]
     },
     {
       id: 4,
@@ -62,9 +62,9 @@ export const useBlogPosts = () => {
       image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
       authorKey: 'blog.posts.post4.author',
       date: "Dec 8, 2024",
-      category: "Content",
+      category: "Advertising",
       readTimeKey: 'blog.posts.post4.readTime',
-      tags: ["محتوى", "تحويلات", "استراتيجية"]
+      tags: ["إعلانات", "ROI", "حملات"]
     },
     {
       id: 5,
@@ -74,9 +74,9 @@ export const useBlogPosts = () => {
       image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg",
       authorKey: 'blog.posts.post5.author',
       date: "Dec 5, 2024",
-      category: "PPC",
+      category: "Design",
       readTimeKey: 'blog.posts.post5.readTime',
-      tags: ["PPC", "إعلانات", "تحسين"]
+      tags: ["تصميم", "جرافيك", "براندينج"]
     },
     {
       id: 6,
@@ -86,33 +86,9 @@ export const useBlogPosts = () => {
       image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
       authorKey: 'blog.posts.post6.author',
       date: "Dec 3, 2024",
-      category: "Branding",
+      category: "Analytics",
       readTimeKey: 'blog.posts.post6.readTime',
-      tags: ["هوية تجارية", "علامة تجارية", "اتساق"]
-    },
-    {
-      id: 7,
-      titleKey: 'blog.posts.post7.title',
-      excerptKey: 'blog.posts.post7.excerpt',
-      contentKey: 'blog.posts.post7.content',
-      image: "https://images.pexels.com/photos/159106/pexels-photo-159106.jpeg",
-      authorKey: 'blog.posts.post7.author',
-      date: "Dec 1, 2024",
-      category: "Marketing",
-      readTimeKey: 'blog.posts.post7.readTime',
-      tags: ["بريد إلكتروني", "تسويق", "حملات"]
-    },
-    {
-      id: 8,
-      titleKey: 'blog.posts.post8.title',
-      excerptKey: 'blog.posts.post8.excerpt',
-      contentKey: 'blog.posts.post8.content',
-      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg",
-      authorKey: 'blog.posts.post8.author',
-      date: "Nov 28, 2024",
-      category: "Marketing",
-      readTimeKey: 'blog.posts.post8.readTime',
-      tags: ["تحليل البيانات", "ذكاء الأعمال", "قرارات"]
+      tags: ["تحليلات", "بيانات", "تقارير"]
     }
   ];
 

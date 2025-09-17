@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Share2, MousePointer, PenTool, BarChart3, Palette } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Code, Share2, PenTool, Target, Palette, BarChart3 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useScrollAnimation, fadeInUp, staggerContainer } from '../hooks/useScrollAnimation';
 
@@ -11,46 +11,46 @@ const Services: React.FC = () => {
 
   const services = [
     {
-      icon: Search,
+      icon: Code,
       title: t('services.seo.title'),
       description: t('services.seo.description'),
       gradient: 'gold-primary',
-      details: ['Keyword Research', 'Technical SEO', 'Link Building', 'Content Optimization'],
+      details: ['Web Design & Development', 'Mobile App Development (iOS & Android)', 'Hosting & Domain Services', 'Website Performance Optimization'],
     },
     {
       icon: Share2,
       title: t('services.social.title'),
       description: t('services.social.description'),
       gradient: 'gold-secondary',
-      details: ['Facebook Ads', 'Instagram Marketing', 'LinkedIn Campaigns', 'Twitter Growth'],
-    },
-    {
-      icon: MousePointer,
-      title: t('services.ppc.title'),
-      description: t('services.ppc.description'),
-      gradient: 'from-purple-500 to-purple-600',
-      details: ['Google Ads', 'Bing Ads', 'Campaign Optimization', 'ROI Tracking'],
+      details: ['Facebook, Instagram, TikTok', 'Monthly Content Calendar', 'Community Management', 'Performance Reports'],
     },
     {
       icon: PenTool,
+      title: t('services.ppc.title'),
+      description: t('services.ppc.description'),
+      gradient: 'from-purple-500 to-purple-600',
+      details: ['Social Media Posts', 'Reels & Short Videos', 'Ad/Explainer Scripts', 'Creative Copywriting'],
+    },
+    {
+      icon: Target,
       title: t('services.content.title'),
       description: t('services.content.description'),
       gradient: 'from-orange-500 to-orange-600',
-      details: ['Blog Writing', 'Video Content', 'Infographics', 'Email Marketing'],
-    },
-    {
-      icon: BarChart3,
-      title: t('services.analytics.title'),
-      description: t('services.analytics.description'),
-      gradient: 'from-red-500 to-red-600',
-      details: ['Google Analytics', 'Data Visualization', 'Performance Reports', 'Conversion Tracking'],
+      details: ['Paid Ad Campaigns', 'Audience Targeting', 'Campaign Optimization', 'Performance Reports'],
     },
     {
       icon: Palette,
+      title: t('services.analytics.title'),
+      description: t('services.analytics.description'),
+      gradient: 'from-red-500 to-red-600',
+      details: ['Logo & Brand Identity', 'Social Media Designs', 'Motion Graphics & Ads', 'UI/UX Design'],
+    },
+    {
+      icon: BarChart3,
       title: t('services.branding.title'),
       description: t('services.branding.description'),
       gradient: 'from-indigo-500 to-indigo-600',
-      details: ['Logo Design', 'Brand Guidelines', 'Visual Identity', 'Brand Strategy'],
+      details: ['Website Traffic Analysis', 'Social Media Insights', 'Ad Campaign Reports', 'Monthly Strategy Plans'],
     },
   ];
 

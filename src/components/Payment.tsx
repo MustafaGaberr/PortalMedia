@@ -12,7 +12,7 @@ interface PaymentProps {
   description?: string;
 }
 
-const Payment: React.FC<PaymentProps> = ({ amount: initialAmount = '50.00', description: initialDescription = 'Web Development Services' }) => {
+const Payment: React.FC<PaymentProps> = ({ amount: initialAmount = '0.00', description: initialDescription = 'EX: Web Development Services' }) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>({ type: 'idle' });
   const [paymentMethod, setPaymentMethod] = useState<'card' | null>(null);
   const [amount, setAmount] = useState(initialAmount);

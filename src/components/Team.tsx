@@ -24,7 +24,7 @@ const Team: React.FC = () => {
       id: 1,
       name: "Ammar Salaymeh",
       title: "CEO & Founder",
-      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg"
+      image: "/Assets/team/Ammar.jpg"
     },
     {
       id: 2,
