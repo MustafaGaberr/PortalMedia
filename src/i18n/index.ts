@@ -69,6 +69,9 @@ const resources = {
         subtitle: 'Stay Updated with Digital Marketing Trends',
         readMore: 'Read More',
         viewAll: 'View All Posts',
+        backToBlog: 'Back to Blog',
+        articleNotFound: 'Article Not Found',
+        loading: 'Loading articles...',
         posts: {
           post1: {
             title: 'The Future of Digital Marketing in 2024',
@@ -166,7 +169,28 @@ const resources = {
         visa: 'Pay with Visa',
         amount: 'Amount',
         description: 'Service Description',
-        payNow: 'Pay Now'
+        payNow: 'Pay Now',
+        paymentDetails: 'Payment Details',
+        amountUSD: 'Amount (USD)',
+        serviceDescription: 'Service Description',
+        enterAmount: 'Please enter an amount to proceed with payment',
+        bothMethods: 'Both Credit Card and other payment methods are supported',
+        securePayment: 'Secure Payment',
+        sslEncrypted: 'SSL Encrypted Transactions',
+        pciCompliant: 'PCI DSS Compliant',
+        support24: '24/7 Support',
+        instantConfirmation: 'Instant Confirmation',
+        secureGuarantee: '100% Secure',
+        paymentProcessed: 'Your payment is processed securely through our industry-leading platform.',
+        creditCardPayment: 'Credit/Debit Card Payment',
+        multipleOptions: 'Multiple Payment Options',
+        sslProtected: 'SSL Encryption Protected',
+        paymentSuccessful: 'Payment Successful!',
+        thankYou: 'Thank you! Your payment has been processed successfully.',
+        backToHome: 'Back to Home',
+        paymentFailed: 'Payment failed. Please try again.',
+        tryAgain: 'Try Again',
+        backToHomeLink: 'Back to Home'
       },
       // Footer
       footer: {
@@ -270,6 +294,9 @@ const resources = {
         subtitle: 'ابق محدثاً مع اتجاهات التسويق الرقمي',
         readMore: 'اقرأ المزيد',
         viewAll: 'عرض جميع المقالات',
+        backToBlog: 'العودة للمدونة',
+        articleNotFound: 'المقال غير موجود',
+        loading: 'جاري تحميل المقالات...',
         posts: {
           post1: {
             title: 'مستقبل التسويق الرقمي في 2024',
@@ -367,7 +394,28 @@ const resources = {
         visa: 'الدفع بفيزا',
         amount: 'المبلغ',
         description: 'وصف الخدمة',
-        payNow: 'ادفع الآن'
+        payNow: 'ادفع الآن',
+        paymentDetails: 'تفاصيل الدفع',
+        amountUSD: 'المبلغ (دولار أمريكي)',
+        serviceDescription: 'وصف الخدمة',
+        enterAmount: 'يرجى إدخال مبلغ للمتابعة',
+        bothMethods: 'كل من بطاقات الائتمان وطرق الدفع الأخرى مدعومة',
+        securePayment: 'دفع آمن',
+        sslEncrypted: 'معاملات مشفرة بـ SSL',
+        pciCompliant: 'متوافق مع PCI DSS',
+        support24: 'دعم على مدار الساعة',
+        instantConfirmation: 'تأكيد فوري',
+        secureGuarantee: '100% آمن',
+        paymentProcessed: 'معالجة الدفع بشكل آمن من خلال منصتنا الرائدة في الصناعة',
+        creditCardPayment: 'دفع بالبطاقة الائتمانية/الخصم',
+        multipleOptions: 'خيارات دفع متعددة',
+        sslProtected: 'محمي بتشفير SSL',
+        paymentSuccessful: 'تم الدفع بنجاح!',
+        thankYou: 'شكراً لك! تم معالجة دفعتك بنجاح.',
+        backToHome: 'العودة للرئيسية',
+        paymentFailed: 'فشل الدفع. يرجى المحاولة مرة أخرى.',
+        tryAgain: 'حاول مرة أخرى',
+        backToHomeLink: 'العودة للرئيسية'
       },
       // Footer
       footer: {

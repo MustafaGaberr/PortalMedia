@@ -35,13 +35,13 @@ const BlogPage: React.FC = () => {
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-yellow-300 mb-4">
-              {t('blog.postNotFound', 'المقال غير موجود')}
+              {t('blog.articleNotFound')}
             </h1>
             <Link 
               to="/blog" 
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300"
             >
-              {t('blog.backToBlog', 'العودة للمدونة')}
+              {t('blog.backToBlog')}
             </Link>
           </div>
         </div>
