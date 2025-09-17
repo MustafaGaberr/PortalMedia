@@ -68,7 +68,7 @@ const About: React.FC = () => {
           <motion.div variants={fadeInUp} className="relative hidden lg:block">
             <div className="relative z-10">
               <img
-                src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+                src="/Assets/About pic.jpg"
                 alt="Portal Media Team"
                 className="rounded-2xl shadow-2xl w-full h-96 object-cover"
               />
