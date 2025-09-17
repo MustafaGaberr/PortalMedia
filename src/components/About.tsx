@@ -25,7 +25,6 @@ const About: React.FC = () => {
           variants={staggerContainer}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
         >
-          {/* Content */}
           <motion.div variants={fadeInUp}>
             <motion.div variants={fadeInUp} className="mb-8">
               <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
@@ -39,7 +38,6 @@ const About: React.FC = () => {
               </p>
             </motion.div>
 
-            {/* Stats */}
             <motion.div 
               variants={staggerContainer}
               className="grid grid-cols-2 gap-6"
@@ -64,7 +62,6 @@ const About: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Image */}
           <motion.div variants={fadeInUp} className="relative hidden lg:block">
             <div className="relative z-10">
               <img
@@ -75,7 +72,6 @@ const About: React.FC = () => {
               <div className="absolute inset-0 rounded-2xl" style={{ background: 'linear-gradient(to top, rgba(33, 37, 41, 0.2), transparent)' }}></div>
             </div>
             
-            {/* Simplified Decorative Elements */}
             <motion.div
               animate={{ opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}

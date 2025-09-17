@@ -56,12 +56,29 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setFormData({ name: '', email: '', message: '' });
-    alert(t('contact.successMessage'));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setFormData({ name: '', email: '', message: '' });
+        alert(result.message);
+      } else {
+        alert(result.message || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -101,7 +118,6 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #212529, #343a40, #495057)' }}>
-      {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ backgroundColor: 'var(--gold-light)' }}></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000" style={{ backgroundColor: 'var(--gold-dark)' }}></div>
@@ -114,7 +130,6 @@ const Contact: React.FC = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        {/* Header */}
         <motion.div variants={itemVariants} className="text-center mb-16">
           <motion.div
             className="inline-block mb-4"
@@ -132,7 +147,6 @@ const Contact: React.FC = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Contact Form */}
           <motion.div variants={itemVariants}>
             <motion.div 
               className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
@@ -241,9 +255,7 @@ const Contact: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Info & Social */}
           <motion.div variants={itemVariants} className="space-y-8">
-            {/* Contact Information */}
             <motion.div 
               className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
               whileHover={{ 
@@ -294,7 +306,6 @@ const Contact: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Social Media */}
             <motion.div 
               className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
               whileHover={{ 
@@ -341,7 +352,6 @@ const Contact: React.FC = () => {
               </p>
             </motion.div>
 
-            {/* CTA Box */}
             <motion.div 
               className="backdrop-blur-lg rounded-3xl p-8 border"
               style={{ 

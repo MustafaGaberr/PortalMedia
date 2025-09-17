@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Shield, ArrowLeft, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-
-// PayPal SDK will be loaded dynamically
-declare global {
-  interface Window {
-    paypal?: {
-      Buttons: (config: {
-        createOrder: (data: unknown, actions: { order: { create: (order: unknown) => Promise<string> } }) => Promise<string>;
-        onApprove: (data: unknown, actions: { order: { capture: () => Promise<unknown> } }) => Promise<unknown>;
-        onError: (err: Error) => void;
-      }) => { render: (selector: string) => void };
-    };
-  }
-}
+import { usePayPal } from '../hooks/usePayPal';
 
 const PaymentPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
@@ -25,56 +13,54 @@ const PaymentPage: React.FC = () => {
 
   // PayPal Client ID
   const PAYPAL_CLIENT_ID = "AVxvJihkm9g5iQWUMlhBNCCu1rKxKL5dkM2VsOuPRBgnsMXM2du4UZks1AAxruY5D7yfjhpUYwtubhY8";
+  
+  // Use PayPal hook
+  const { isReady: paypalReady, isLoading: paypalLoading, containerRef: paypalContainerRef, renderButtons, cleanup } = usePayPal(PAYPAL_CLIENT_ID);
 
-  // Load PayPal SDK
+  // Handle PayPal button rendering
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`;
-    script.async = true;
-    document.body.appendChild(script);
+    if (!paypalReady) return;
 
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
+    const amountValue = parseFloat(amount);
+    
+    if (amountValue > 0) {
+      // Clean up existing buttons first
+      cleanup();
+      
+      // Debounced render to prevent rapid re-renders
+      const timeoutId = setTimeout(() => {
+        renderButtons({
+          createOrder: (_data: unknown, actions: { order: { create: (order: unknown) => Promise<string> } }) => {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: amount,
+                  currency_code: 'USD'
+                },
+                description: description
+              }]
+            });
+          },
+          onApprove: (_data: unknown, actions: { order: { capture: () => Promise<unknown> } }) => {
+            return actions.order.capture().then((details: unknown) => {
+              console.log('Payment completed:', details);
+              setPaymentStatus('success');
+            });
+          },
+          onError: (err: Error) => {
+            console.error('PayPal error:', err);
+            setPaymentStatus('error');
+          }
+        });
+      }, 300);
 
-  // Initialize PayPal when amount is valid
-  useEffect(() => {
-    if (parseFloat(amount) > 0 && window.paypal) {
-      // Clear previous buttons
-      const container = document.getElementById('paypal-button-container');
-      if (container) {
-        container.innerHTML = '';
-      }
-
-      // Create new PayPal buttons
-      window.paypal.Buttons({
-        createOrder: (_data: unknown, actions: { order: { create: (order: unknown) => Promise<string> } }) => {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: amount,
-                currency_code: 'USD'
-              },
-              description: description
-            }]
-          });
-        },
-        onApprove: (_data: unknown, actions: { order: { capture: () => Promise<unknown> } }) => {
-          return actions.order.capture().then((details: unknown) => {
-            console.log('Payment completed:', details);
-            setPaymentStatus('success');
-          });
-        },
-        onError: (err: Error) => {
-          console.error('PayPal error:', err);
-          setPaymentStatus('error');
-        }
-      }).render('#paypal-button-container');
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    } else {
+      cleanup();
     }
-  }, [amount, description]);
+  }, [amount, description, paypalReady, cleanup, renderButtons]);
 
   if (paymentStatus === 'success') {
     return (
@@ -179,11 +165,19 @@ const PaymentPage: React.FC = () => {
             </div>
 
             {/* PayPal Button Container */}
-            {parseFloat(amount) > 0 && (
-              <div className="mb-6">
-                <div id="paypal-button-container" className="w-full"></div>
-              </div>
-            )}
+            <div className="mb-6">
+              <div ref={paypalContainerRef} className="w-full"></div>
+              {parseFloat(amount) <= 0 && (
+                <div className="text-center text-gray-500 text-sm py-4">
+                  {t('payment.enterAmountToShow')}
+                </div>
+              )}
+              {paypalLoading && parseFloat(amount) > 0 && (
+                <div className="text-center text-gray-500 text-sm py-4">
+                  Loading payment options...
+                </div>
+              )}
+            </div>
 
             {/* Error Message */}
             {paymentStatus === 'error' && (
