@@ -5,16 +5,29 @@ let paypalSDKLoaded = false;
 let paypalSDKLoading = false;
 let paypalButtonsInstance: any = null;
 
-// Suppress PayPal warnings in development
-if (process.env.NODE_ENV === 'development') {
-  const originalConsoleWarn = console.warn;
-  console.warn = (...args) => {
-    if (args[0]?.includes?.('global_session_not_found')) {
-      return; // Suppress this specific warning
-    }
-    originalConsoleWarn.apply(console, args);
-  };
-}
+// Suppress PayPal warnings and errors
+const originalConsoleWarn = console.warn;
+const originalConsoleError = console.error;
+
+console.warn = (...args) => {
+  if (args[0]?.includes?.('global_session_not_found') || 
+      args[0]?.includes?.('geolocation') ||
+      args[0]?.includes?.('permissions policy') ||
+      args[0]?.includes?.('Potential permissions policy violation')) {
+    return; // Suppress these specific warnings
+  }
+  originalConsoleWarn.apply(console, args);
+};
+
+console.error = (...args) => {
+  if ((args[0]?.includes?.('404') && args[0]?.includes?.('paypalobjects.com')) ||
+      (args[0]?.includes?.('GET') && args[0]?.includes?.('ar-EG')) ||
+      (args[0]?.includes?.('400') && args[0]?.includes?.('paypal.com')) ||
+      (args[0]?.includes?.('ERR_ABORTED') && args[0]?.includes?.('paypal.com'))) {
+    return; // Suppress PayPal errors
+  }
+  originalConsoleError.apply(console, args);
+};
 
 export const usePayPal = (clientId: string) => {
   const [isReady, setIsReady] = useState(false);
@@ -33,9 +46,17 @@ export const usePayPal = (clientId: string) => {
     paypalSDKLoading = true;
     setIsLoading(true);
 
-    const loadSDK = () => {
+    const loadSDK = (retryCount = 0) => {
       const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&enable-funding=card&disable-funding=credit,bancontact,blik,eps,giropay,ideal,mercadopago,mybank,p24,sepa,sofort,venmo`;
+      
+      // Use simpler URL on retry
+      if (retryCount === 0) {
+        script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture&enable-funding=card&disable-funding=credit,bancontact,blik,eps,giropay,ideal,mercadopago,mybank,p24,sepa,sofort,venmo`;
+      } else {
+        // Fallback to basic URL
+        script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+      }
+      
       script.async = true;
       script.defer = true;
       
@@ -44,12 +65,19 @@ export const usePayPal = (clientId: string) => {
         paypalSDKLoading = false;
         setIsLoading(false);
         setIsReady(true);
+        console.log('PayPal SDK loaded successfully');
       };
       
       script.onerror = () => {
         paypalSDKLoading = false;
         setIsLoading(false);
         console.error('Failed to load PayPal SDK');
+        
+        // Retry once after a delay with simpler URL
+        if (retryCount === 0) {
+          console.log('Retrying PayPal SDK load with simpler URL...');
+          setTimeout(() => loadSDK(1), 2000);
+        }
       };
       
       document.head.appendChild(script);
