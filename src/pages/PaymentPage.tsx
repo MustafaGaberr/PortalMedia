@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { Check, Shield, ArrowLeft, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 import { usePayPal } from '../hooks/usePayPal';
 
 const PaymentPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
+  const { showToast } = useToast();
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
@@ -45,11 +47,13 @@ const PaymentPage: React.FC = () => {
             return actions.order.capture().then((details: unknown) => {
               console.log('Payment completed:', details);
               setPaymentStatus('success');
+              showToast('success', 'تم الدفع بنجاح! شكراً لك.');
             });
           },
           onError: (err: Error) => {
             console.error('PayPal error:', err);
             setPaymentStatus('error');
+            showToast('error', 'فشل في الدفع. يرجى المحاولة مرة أخرى.');
           }
         });
       }, 300);

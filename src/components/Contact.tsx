@@ -11,6 +11,8 @@ import {
   MessageCircle 
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
+import emailjs from '@emailjs/browser';
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg 
@@ -34,12 +36,13 @@ const TiktokIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 const Contact: React.FC = () => {
   const { t, isRTL } = useLanguage();
+  const { showToast } = useToast();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    from_email: '',
     message: ''
   });
   
@@ -57,25 +60,22 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const result = await emailjs.sendForm(
+        'service_h0ebui6',
+        'template_d0usfwp',
+        e.currentTarget as HTMLFormElement,
+        '6qzJTUZvh6OFG-QcB'
+      );
 
-      const result = await response.json();
-
-      if (result.success) {
-        setFormData({ name: '', email: '', message: '' });
-        alert(result.message);
+      if (result.status === 200) {
+        setFormData({ from_name: '', from_email: '', message: '' });
+        showToast('success', 'تم إرسال الرسالة بنجاح!');
       } else {
-        alert(result.message || 'Failed to send message. Please try again.');
+        showToast('error', 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.');
       }
     } catch (error) {
       console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again later.');
+      showToast('error', 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.');
     } finally {
       setIsSubmitting(false);
     }
@@ -171,13 +171,13 @@ const Contact: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="from_name"
+                    value={formData.from_name}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
                     style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
-                    placeholder={t('contact.namePlaceholder')}
+                    placeholder="Your Name"
                   />
                 </motion.div>
 
@@ -190,13 +190,13 @@ const Contact: React.FC = () => {
                   </label>
                   <input
                     type="email"
-                    name="email"
-                    value={formData.email}
+                    name="from_email"
+                    value={formData.from_email}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
                     style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
-                    placeholder={t('contact.emailPlaceholder')}
+                    placeholder="Your Email"
                   />
                 </motion.div>
 
@@ -215,7 +215,7 @@ const Contact: React.FC = () => {
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none"
                     style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
-                    placeholder={t('contact.messagePlaceholder')}
+                    placeholder="Your Message"
                   ></textarea>
                 </motion.div>
 

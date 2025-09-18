@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ToastProvider, useToast } from './contexts/ToastContext';
 
 // Components
 import Header from './components/Header';
@@ -9,12 +10,15 @@ import Footer from './components/Footer';
 import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
+import ToastContainer from './components/ToastContainer';
 
 // Pages
 import BlogPage from './pages/BlogPage';
 import PaymentPage from './pages/PaymentPage';
 
 const AppContent: React.FC = () => {
+  const { toasts, removeToast } = useToast();
+  
   return (
     <Router>
       <ScrollToTopOnRouteChange />
@@ -31,6 +35,7 @@ const AppContent: React.FC = () => {
         <Footer />
         <FloatingChatbot />
         <ScrollToTopButton />
+        <ToastContainer toasts={toasts} onClose={removeToast} />
       </div>
     </Router>
   );
@@ -39,7 +44,9 @@ const AppContent: React.FC = () => {
 function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </LanguageProvider>
   );
 }
