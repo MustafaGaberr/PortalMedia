@@ -224,31 +224,32 @@ const resources = {
         rights: '© 2025 Portal Media. All rights reserved.'
       },
       // Chatbot
-      chatbot: {
-        tooltip: 'Chat with us',
-        title: 'Portal Media Chat',
-        onlineStatus: 'Online now',
-        greeting: 'Hello! 👋 I\'m here to help you learn more about Portal Media\'s services. How can I assist you today?',
+      chat: {
+        header: 'Portal Media Support',
+        welcome: 'How can we help you today?',
         placeholder: 'Type your message...',
-        quickRepliesTitle: 'Quick replies:',
-        quickReplies: {
-          services: 'Tell me about your services',
-          business: 'How can you help my business?',
-          different: 'What makes you different?',
-          getStarted: 'I want to get started'
-        },
-        backButton: 'Back',
-        backToMain: 'Let\'s go back to the main menu. How else can I help you?',
-        backToMainMenu: 'Back to Main Menu',
-        servicesTitle: 'Our Services',
-        contactTitle: 'Contact Us',
-        responses: {
-          services: 'We offer comprehensive digital marketing services including SEO, social media marketing, content creation, analytics, paid advertising, and mobile marketing. Each service is tailored to your specific business needs!',
-          business: 'We help businesses grow by increasing online visibility, driving qualified traffic, improving conversions, and building strong brand presence across digital channels.',
-          different: 'What sets us apart is our data-driven approach, creative excellence, and dedicated team of experts. We focus on delivering measurable results and building long-term partnerships.',
-          getStarted: 'Excellent! I\'d love to connect you with our team. Please use the contact form or call us directly. We offer free consultations to discuss your specific needs.',
-          default: 'Thank you for your message! One of our experts will get back to you shortly. In the meantime, feel free to explore our services.'
-        }
+        backToOptions: 'Back to Options',
+        defaultResponse: 'Thank you for your message! Our team will get back to you soon. In the meantime, feel free to explore our services.',
+        question1: 'What services do you offer?',
+        answer1: 'We offer comprehensive digital marketing services including Programming & Development, Social Media Management, Content Creation, Digital Advertising, Graphic Design & Branding, and Analytics & Reporting. Each service is tailored to your specific business needs!',
+        question2: 'How can you help my business grow?',
+        answer2: 'We help businesses grow by increasing online visibility, driving qualified traffic, improving conversions, and building strong brand presence across digital channels. Our data-driven approach ensures measurable results.',
+        question3: 'What makes you different from competitors?',
+        answer3: 'What sets us apart is our data-driven approach, creative excellence, and dedicated team of experts. We focus on delivering measurable results and building long-term partnerships with our clients.',
+        question4: 'Do you offer free consultations?',
+        answer4: 'Yes! We offer free consultations to discuss your specific needs and how we can help your business grow. Contact us to schedule your free consultation today.',
+        question5: 'What is your pricing structure?',
+        answer5: 'Our pricing varies based on the services and scope of work. We offer flexible packages to fit different budgets. Contact us for a personalized quote based on your specific needs.',
+        question6: 'How long does it take to see results?',
+        answer6: 'Results vary depending on the service and industry, but typically you can expect to see initial improvements within 2-4 weeks, with significant results within 2-3 months of consistent implementation.',
+        question7: 'Do you work with small businesses?',
+        answer7: 'Absolutely! We work with businesses of all sizes, from startups to large enterprises. Our services are scalable and can be customized to fit any budget and business size.',
+        question8: 'What industries do you specialize in?',
+        answer8: 'We work across various industries including e-commerce, healthcare, technology, real estate, education, and more. Our team has experience in multiple sectors and can adapt our strategies accordingly.',
+        question9: 'How do I get started?',
+        answer9: 'Getting started is easy! Simply contact us through our website, call us directly, or use this chat. We\'ll schedule a free consultation to discuss your needs and create a customized plan for your business.',
+        question10: 'Do you provide ongoing support?',
+        answer10: 'Yes! We believe in building long-term partnerships. We provide ongoing support, regular reporting, and continuous optimization to ensure your digital marketing efforts remain effective and up-to-date.'
       }
     }
   },
@@ -472,31 +473,32 @@ const resources = {
         rights: '© 2025 بورتال ميديا. جميع الحقوق محفوظة.'
       },
       // Chatbot
-      chatbot: {
-        tooltip: 'تحدث معنا',
-        title: 'محادثة بورتال ميديا',
-        onlineStatus: 'متاح الآن',
-        greeting: 'مرحباً! 👋 أنا هنا لمساعدتك في التعرف على خدمات بورتال ميديا. كيف يمكنني مساعدتك اليوم؟',
+      chat: {
+        header: 'دعم بورتال ميديا',
+        welcome: 'كيف يمكننا مساعدتك اليوم؟',
         placeholder: 'اكتب رسالتك...',
-        quickRepliesTitle: 'إجابات سريعة:',
-        quickReplies: {
-          services: 'أخبرني عن خدماتكم',
-          business: 'كيف يمكنكم مساعدة عملي؟',
-          different: 'ما الذي يميزكم؟',
-          getStarted: 'أريد البدء'
-        },
-        backButton: 'العودة',
-        backToMain: 'لنعود إلى القائمة الرئيسية. كيف يمكنني مساعدتك أيضاً؟',
-        backToMainMenu: 'العودة للقائمة الرئيسية',
-        servicesTitle: 'خدماتنا',
-        contactTitle: 'اتصل بنا',
-        responses: {
-          services: 'نقدم خدمات تسويق رقمي شاملة تشمل تحسين محركات البحث، تسويق وسائل التواصل الاجتماعي، إنشاء المحتوى، التحليلات، الإعلان المدفوع، والتسويق المحمول. كل خدمة مُصممة خصيصاً لاحتياجات عملك!',
-          business: 'نساعد الأعمال على النمو من خلال زيادة الظهور على الإنترنت، وجذب زيارات مؤهلة، وتحسين التحويلات، وبناء حضور قوي للعلامة التجارية عبر القنوات الرقمية.',
-          different: 'ما يميزنا هو نهجنا المبني على البيانات، والتميز الإبداعي، وفريق الخبراء المتفاني. نركز على تحقيق نتائج قابلة للقياس وبناء شراكات طويلة المدى.',
-          getStarted: 'ممتاز! أحب أن أصلك بفريقنا. يرجى استخدام نموذج الاتصال أو الاتصال بنا مباشرة. نقدم استشارات مجانية لمناقشة احتياجاتك المحددة.',
-          default: 'شكراً لرسالتك! سيتواصل معك أحد خبرائنا قريباً. في هذه الأثناء، لا تتردد في استكشاف خدماتنا.'
-        }
+        backToOptions: 'العودة للخيارات',
+        defaultResponse: 'شكراً لرسالتك! سيتواصل معك فريقنا قريباً. في هذه الأثناء، لا تتردد في استكشاف خدماتنا.',
+        question1: 'ما هي الخدمات التي تقدمونها؟',
+        answer1: 'نقدم خدمات تسويق رقمي شاملة تشمل البرمجة والتطوير، إدارة وسائل التواصل الاجتماعي، إنشاء المحتوى، الإعلانات الرقمية، التصميم الجرافيكي والبراندينج، والتحليلات والتقارير. كل خدمة مُصممة خصيصاً لاحتياجات عملك!',
+        question2: 'كيف يمكنكم مساعدة عملي على النمو؟',
+        answer2: 'نساعد الأعمال على النمو من خلال زيادة الظهور على الإنترنت، وجذب زيارات مؤهلة، وتحسين التحويلات، وبناء حضور قوي للعلامة التجارية عبر القنوات الرقمية. نهجنا المبني على البيانات يضمن نتائج قابلة للقياس.',
+        question3: 'ما الذي يميزكم عن المنافسين؟',
+        answer3: 'ما يميزنا هو نهجنا المبني على البيانات، والتميز الإبداعي، وفريق الخبراء المتفاني. نركز على تحقيق نتائج قابلة للقياس وبناء شراكات طويلة المدى مع عملائنا.',
+        question4: 'هل تقدمون استشارات مجانية؟',
+        answer4: 'نعم! نقدم استشارات مجانية لمناقشة احتياجاتك المحددة وكيف يمكننا مساعدة عملك على النمو. اتصل بنا لجدولة استشارتك المجانية اليوم.',
+        question5: 'ما هو هيكل التسعير لديكم؟',
+        answer5: 'تختلف أسعارنا حسب الخدمات ونطاق العمل. نقدم حزم مرنة تناسب الميزانيات المختلفة. اتصل بنا للحصول على عرض سعر مخصص حسب احتياجاتك.',
+        question6: 'كم من الوقت يستغرق ظهور النتائج؟',
+        answer6: 'تختلف النتائج حسب الخدمة والصناعة، لكن عادة يمكنك توقع رؤية تحسينات أولية خلال 2-4 أسابيع، مع نتائج كبيرة خلال 2-3 أشهر من التنفيذ المستمر.',
+        question7: 'هل تعملون مع الشركات الصغيرة؟',
+        answer7: 'بالطبع! نعمل مع الشركات من جميع الأحجام، من الشركات الناشئة إلى المؤسسات الكبيرة. خدماتنا قابلة للتوسع ويمكن تخصيصها لتناسب أي ميزانية وحجم عمل.',
+        question8: 'ما هي الصناعات التي تتخصصون فيها؟',
+        answer8: 'نعمل عبر صناعات مختلفة تشمل التجارة الإلكترونية، الرعاية الصحية، التكنولوجيا، العقارات، التعليم، والمزيد. فريقنا لديه خبرة في قطاعات متعددة ويمكنه تكييف استراتيجياتنا وفقاً لذلك.',
+        question9: 'كيف أبدأ؟',
+        answer9: 'البدء سهل! ببساطة اتصل بنا عبر موقعنا، أو اتصل بنا مباشرة، أو استخدم هذه المحادثة. سنقوم بجدولة استشارة مجانية لمناقشة احتياجاتك وإنشاء خطة مخصصة لعملك.',
+        question10: 'هل تقدمون دعماً مستمراً؟',
+        answer10: 'نعم! نحن نؤمن ببناء شراكات طويلة المدى. نقدم دعماً مستمراً، تقارير منتظمة، وتحسيناً مستمراً لضمان بقاء جهود التسويق الرقمي فعالة ومحدثة.'
       }
     }
   }
