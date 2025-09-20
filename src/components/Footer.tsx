@@ -43,9 +43,9 @@ const Footer: React.FC = () => {
                   alt="Portal Media Logo" 
                   className="w-12 h-12 object-contain"
                 />
-                <span className="text-2xl font-bold">Portal Media</span>
+                <span className="text-2xl font-bold font-cairo">Portal Media</span>
               </div>
-              <p className="text-yellow-200 leading-relaxed max-w-md">
+              <p className="text-yellow-200 leading-relaxed max-w-md font-cairo">
                 {t('footer.description')}
               </p>
             </motion.div>
@@ -57,14 +57,14 @@ const Footer: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.05 }}
           >
-            <h3 className="text-lg font-bold mb-4">{t('footer.quickLinks')}</h3>
+            <h3 className="text-lg font-bold mb-4 font-cairo">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   {link.href.startsWith('/') ? (
                     <Link
                       to={link.href}
-                      className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                      className="text-yellow-200 hover:text-yellow-400 transition-colors font-cairo"
                     >
                       {link.name}
                     </Link>
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
                         const element = document.querySelector(link.href);
                         element?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                      className="text-yellow-200 hover:text-yellow-400 transition-colors font-cairo"
                     >
                       {link.name}
                     </button>
@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.1 }}
           >
-            <h3 className="text-lg font-bold mb-4">{t('footer.servicesTitle')}</h3>
+            <h3 className="text-lg font-bold mb-4 font-cairo">{t('footer.servicesTitle')}</h3>
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
-              className="text-yellow-200/70 text-sm mb-4 sm:mb-0"
+              className="text-yellow-200/70 text-sm mb-4 sm:mb-0 font-cairo"
             >
               {t('footer.rights')}
             </motion.p>

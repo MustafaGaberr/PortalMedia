@@ -166,7 +166,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer"
+            className="flex items-center space-x-4 rtl:space-x-reverse cursor-pointer"
             onClick={handleLogoClick}
           >
             <img 
@@ -174,7 +174,7 @@ const Header: React.FC = () => {
               alt="Portal Media Logo" 
               className="w-10 h-10 object-contain drop-shadow-lg"
             />
-            <span className={`text-xl font-bold drop-shadow-sm font-dallas ${
+            <span className={`text-xl font-bold drop-shadow-sm font-dallas mt-1 ${
               isScrolled || !isHomePage
                 ? 'text-yellow-400'
                 : 'text-gradient'
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse font-hanimation">
+          <nav className="hidden lg:flex items-center space-x-6 rtl:space-x-reverse font-cairo">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
@@ -192,7 +192,7 @@ const Header: React.FC = () => {
                     // Special handling for Home link
                     <button
                       onClick={handleHomeClick}
-                      className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
                         location.pathname === item.href && currentSection === ''
                           ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
@@ -205,7 +205,7 @@ const Header: React.FC = () => {
                   ) : (
                     <Link
                       to={item.href}
-                      className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
+                      className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
                         location.pathname === item.href
                           ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
@@ -219,7 +219,7 @@ const Header: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 ${
+                    className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 mt-1 ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
                         ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
@@ -241,14 +241,14 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-yellow-600/30 text-yellow-300/90 hover:text-yellow-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 min-w-[120px]"
+                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-yellow-600/30 text-yellow-300/90 hover:text-yellow-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 min-w-[120px] mt-1"
                 style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
                 title="Change Language"
               >
                 <span className="mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
-                <span className="text-sm font-semibold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
+                <span className="text-base font-semibold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
                 <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-150 drop-shadow-sm ${
                   isLangDropdownOpen ? 'rotate-180' : ''
                 }`} />
@@ -285,7 +285,7 @@ const Header: React.FC = () => {
                         title="United States"
                       />
                     </span>
-                    <span className="text-sm font-medium">English</span>
+                    <span className="text-base font-medium">English</span>
                   </button>
                   <button
                     onClick={() => handleLanguageChange('ar')}
@@ -306,7 +306,7 @@ const Header: React.FC = () => {
                         title="Saudi Arabia"
                       />
                     </span>
-                    <span className="text-sm font-medium">العربية</span>
+                    <span className="text-base font-medium">العربية</span>
                   </button>
                 </motion.div>
               )}
@@ -315,7 +315,7 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-yellow-300 transition-all duration-200 hover:scale-110 border border-yellow-600/30 focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-yellow-300 transition-all duration-200 hover:scale-110 border border-yellow-600/30 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 mt-1"
               style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
@@ -334,7 +334,7 @@ const Header: React.FC = () => {
           className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-yellow-600/50"
           style={{ backgroundColor: '#212529f2' }}
         >
-          <nav className="py-4 font-hanimation">
+          <nav className="py-4 font-cairo">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
@@ -345,7 +345,7 @@ const Header: React.FC = () => {
                         handleHomeClick();
                         setIsMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
+                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-base leading-6 ${
                         location.pathname === item.href && currentSection === ''
                           ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
                           : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
@@ -357,7 +357,7 @@ const Header: React.FC = () => {
                     <Link
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
+                      className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
                         location.pathname === item.href
                           ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
                           : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
@@ -372,7 +372,7 @@ const Header: React.FC = () => {
                       scrollToSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 ${
+                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
                       location.pathname === '/' && isCurrentSection(item.href)
                         ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
                         : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
@@ -386,7 +386,7 @@ const Header: React.FC = () => {
             
             {/* Language Switcher in Mobile Menu */}
             <div className="mx-2 mt-4 pt-4 border-t border-yellow-600/50">
-              <p className="px-6 py-2 text-xs text-yellow-300/70 font-medium uppercase tracking-wide">
+              <p className="px-6 py-2 text-sm text-yellow-300/70 font-medium uppercase tracking-wide">
                 Language / اللغة
               </p>
               <button
@@ -408,7 +408,7 @@ const Header: React.FC = () => {
                     title="United States"
                   />
                 </span>
-                <span className="text-sm font-medium">English</span>
+                <span className="text-base font-medium">English</span>
                 {language === 'en' && (
                   <span className="ml-auto text-yellow-300">✓</span>
                 )}
@@ -432,7 +432,7 @@ const Header: React.FC = () => {
                     title="Saudi Arabia"
                   />
                 </span>
-                <span className="text-sm font-medium">العربية</span>
+                <span className="text-base font-medium">العربية</span>
                 {language === 'ar' && (
                   <span className="ml-auto text-yellow-300">✓</span>
                 )}

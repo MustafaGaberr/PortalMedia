@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
           className="mb-8"
         >
           <motion.h1
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-yellow-300 mb-6"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-yellow-300 mb-6 font-cairo"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.15 }}
@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
           </motion.h1>
 
           <motion.p
-            className="text-xl lg:text-2xl text-yellow-200 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl lg:text-2xl text-yellow-200 max-w-4xl mx-auto leading-relaxed font-cairo"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: 0.2 }}
@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
         >
           <motion.button
             onClick={() => scrollToSection('contact')}
-            className="group btn-primary px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-glow hover:shadow-elegant transition-all duration-200"
+            className="group btn-primary px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-glow hover:shadow-elegant transition-all duration-200 font-cairo"
             style={{ color: '#212529' }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -96,7 +96,7 @@ const Hero: React.FC = () => {
 
           <motion.button
             onClick={() => scrollToSection('about')}
-            className="group glass text-yellow-300 px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-yellow-600/30 hover:bg-yellow-600/20 transition-all duration-200 shadow-soft hover:shadow-glow hover:shadow-yellow-500/30"
+            className="group glass text-yellow-300 px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 border border-yellow-600/30 hover:bg-yellow-600/20 transition-all duration-200 shadow-soft hover:shadow-glow hover:shadow-yellow-500/30 font-cairo"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

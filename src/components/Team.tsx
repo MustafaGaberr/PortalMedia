@@ -57,10 +57,10 @@ const Team: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#212529' }}>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: '#212529' }}>
             {t('team.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto font-cairo">
             {t('team.subtitle')}
           </p>
         </div>
@@ -122,10 +122,10 @@ const Team: React.FC = () => {
                   {/* Content */}
                   <div className="relative h-full flex flex-col justify-end p-6">
                     <div className="text-center">
-                      <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-white transition-colors duration-300">
+                      <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-white transition-colors duration-300 font-cairo">
                         {member.name}
                       </h3>
-                      <p className="text-yellow-400 font-semibold text-sm uppercase tracking-wider group-hover:text-yellow-300 transition-colors duration-300">
+                      <p className="text-yellow-400 font-semibold text-sm uppercase tracking-wider group-hover:text-yellow-300 transition-colors duration-300 font-cairo">
                         {member.title}
                       </p>
                     </div>

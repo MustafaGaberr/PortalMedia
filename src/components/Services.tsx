@@ -65,10 +65,10 @@ const Services: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6 font-cairo">
               {t('services.title')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-cairo">
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -112,10 +112,10 @@ const Services: React.FC = () => {
                       }}>
                         <service.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }} />
                       </div>
-                      <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-2 md:mb-4 line-clamp-2">
+                      <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-2 md:mb-4 line-clamp-2 font-cairo">
                         {service.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed text-xs md:text-base line-clamp-3">
+                      <p className="text-gray-600 leading-relaxed text-xs md:text-base line-clamp-3 font-cairo">
                         {service.description}
                       </p>
                     </div>
@@ -134,7 +134,7 @@ const Services: React.FC = () => {
                   }}>
                     <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center text-white">
                       <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }} />
-                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }}>{service.title}</h3>
+                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6 font-cairo" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }}>{service.title}</h3>
                       <ul className="space-y-2 md:space-y-3">
                         {service.details.map((detail, detailIndex) => (
                           <motion.li
@@ -145,7 +145,7 @@ const Services: React.FC = () => {
                               x: flippedCard === index ? 0 : -20
                             }}
                             transition={{ delay: detailIndex * 0.1 }}
-                            className="flex items-center justify-center text-xs md:text-base"
+                            className="flex items-center justify-center text-xs md:text-base font-cairo"
                             style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }}
                           >
                             <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0" style={{ backgroundColor: service.gradient.includes('gold') ? '#212529' : 'white' }}></div>

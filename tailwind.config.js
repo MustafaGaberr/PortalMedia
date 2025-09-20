@@ -55,10 +55,11 @@ export default {
         ring: 'hsl(var(--ring))',
       },
       fontFamily: {
-        sans: ['Hanimation', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        arabic: ['Hanimation', 'Noto Sans Arabic', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Cairo', 'Hanimation', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        arabic: ['Cairo', 'Hanimation', 'Noto Sans Arabic', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         dallas: ['Dallas', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         hanimation: ['Hanimation', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        cairo: ['Cairo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

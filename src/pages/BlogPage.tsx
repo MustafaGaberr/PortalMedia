@@ -34,12 +34,12 @@ const BlogPage: React.FC = () => {
       return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-yellow-300 mb-4">
+            <h1 className="text-3xl font-bold text-yellow-300 mb-4 font-cairo">
               {t('blog.articleNotFound')}
             </h1>
             <Link 
               to="/blog" 
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 font-cairo"
             >
               {t('blog.backToBlog')}
             </Link>
@@ -77,26 +77,26 @@ const BlogPage: React.FC = () => {
               </div>
               
               <div className="p-8 md:p-12">
-                <h1 className="text-4xl md:text-5xl font-bold text-yellow-300 mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl font-bold text-yellow-300 mb-6 leading-tight font-cairo">
                   {post.title}
                 </h1>
                 
                 <div className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-yellow-400/20">
                   <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200">
                     <User className="w-5 h-5" />
-                    <span className="font-medium">{post.author}</span>
+                    <span className="font-medium font-cairo">{post.author}</span>
                   </div>
                   <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200">
                     <Calendar className="w-5 h-5" />
-                    <span className="font-medium">{post.date}</span>
+                    <span className="font-medium font-cairo">{post.date}</span>
                   </div>
                 </div>
                 
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-xl text-yellow-100 mb-8 leading-relaxed">
+                  <p className="text-xl text-yellow-100 mb-8 leading-relaxed font-cairo">
                     {post.excerpt}
                   </p>
-                  <div className="text-lg text-yellow-50 leading-relaxed">
+                  <div className="text-lg text-yellow-50 leading-relaxed font-cairo">
                     {post.content && (
                       <div 
                         className="whitespace-pre-line"
@@ -113,7 +113,7 @@ const BlogPage: React.FC = () => {
             <div className="mt-8 text-center">
               <Link
                 to="/blog"
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl font-cairo"
               >
                 <ArrowRight 
                   className={`w-5 h-5 mr-3 rtl:ml-3 rtl:mr-0 rotate-180 ${isRTL ? 'rotate-0' : ''}`} 
@@ -138,10 +138,10 @@ const BlogPage: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h1 className="text-5xl lg:text-6xl font-bold text-yellow-300 mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-yellow-300 mb-6 font-cairo">
               {t('blog.title')}
             </h1>
-            <p className="text-xl text-yellow-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-yellow-200 max-w-3xl mx-auto leading-relaxed font-cairo">
               {t('blog.subtitle')}
             </p>
           </motion.div>
@@ -180,27 +180,27 @@ const BlogPage: React.FC = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-yellow-300 mb-3 line-clamp-2 group-hover:text-yellow-200 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-yellow-300 mb-3 line-clamp-2 group-hover:text-yellow-200 transition-colors duration-300 font-cairo">
                     {post.title}
                   </h3>
-                  <p className="text-yellow-100/80 mb-4 line-clamp-3 leading-relaxed">
+                  <p className="text-yellow-100/80 mb-4 line-clamp-3 leading-relaxed font-cairo">
                     {post.excerpt}
                   </p>
                   
                   <div className="flex items-center justify-between mb-4 text-sm">
                     <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <User className="w-4 h-4" />
-                      <span>{post.author}</span>
+                      <span className="font-cairo">{post.author}</span>
                     </div>
                     <div className="flex items-center space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <Calendar className="w-4 h-4" />
-                      <span>{post.date}</span>
+                      <span className="font-cairo">{post.date}</span>
                     </div>
                   </div>
                   
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300 group-hover:translate-x-1 transform"
+                    className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300 group-hover:translate-x-1 transform font-cairo"
                   >
                     {t('blog.readMore')}
                     <ArrowRight 

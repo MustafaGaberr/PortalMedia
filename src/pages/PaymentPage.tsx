@@ -78,15 +78,15 @@ const PaymentPage: React.FC = () => {
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <Check className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 font-cairo">
             {t('payment.paymentSuccessful')}
           </h1>
-          <p className="text-gray-600 text-lg mb-8">
+          <p className="text-gray-600 text-lg mb-8 font-cairo">
             {t('payment.thankYou')}
           </p>
           <Link
             to="/"
-            className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-cairo"
           >
             <ArrowLeft className="w-5 h-5 mr-3 rtl:ml-3 rtl:mr-0" />
             {t('payment.backToHome')}
@@ -103,7 +103,7 @@ const PaymentPage: React.FC = () => {
         <div className="mb-8 text-center">
           <Link
             to="/"
-            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-cairo"
           >
             <ArrowLeft className="w-4 h-4 mr-2 rtl:ml-2 rtl:mr-0" />
             {t('payment.backToHomeLink')}
@@ -112,10 +112,10 @@ const PaymentPage: React.FC = () => {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-cairo">
             {t('payment.title')}
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 font-cairo">
             {t('payment.subtitle')}
           </p>
         </div>
@@ -123,11 +123,11 @@ const PaymentPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Payment Details Card */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('payment.paymentDetails')}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 font-cairo">{t('payment.paymentDetails')}</h2>
             
             {/* Amount Input */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2 font-cairo">
                 {t('payment.amountUSD')} *
               </label>
               <div className="relative">
@@ -138,7 +138,7 @@ const PaymentPage: React.FC = () => {
                   min="0"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className={`w-full py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'}`}
+                  className={`w-full py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-cairo ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'}`}
                   placeholder="0.00"
                 />
               </div>
@@ -146,24 +146,24 @@ const PaymentPage: React.FC = () => {
 
             {/* Description Input */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2 font-cairo">
                 {t('payment.serviceDescription')}
               </label>
               <input
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-cairo"
                 placeholder={t('payment.description')}
               />
             </div>
 
             {/* Instructions */}
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-gray-600 mb-2 font-cairo">
                 {t('payment.enterAmount')}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 font-cairo">
                 {t('payment.bothMethods')}
               </p>
             </div>
@@ -172,12 +172,12 @@ const PaymentPage: React.FC = () => {
             <div className="mb-6">
               <div ref={paypalContainerRef} className="w-full"></div>
               {parseFloat(amount) <= 0 && (
-                <div className="text-center text-gray-500 text-sm py-4">
+                <div className="text-center text-gray-500 text-sm py-4 font-cairo">
                   {t('payment.enterAmountToShow')}
                 </div>
               )}
               {paypalLoading && parseFloat(amount) > 0 && (
-                <div className="text-center text-gray-500 text-sm py-4">
+                <div className="text-center text-gray-500 text-sm py-4 font-cairo">
                   Loading payment options...
                 </div>
               )}
@@ -186,12 +186,12 @@ const PaymentPage: React.FC = () => {
             {/* Error Message */}
             {paymentStatus === 'error' && (
               <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600 text-sm text-center">
+                <p className="text-red-600 text-sm text-center font-cairo">
                   {t('payment.paymentFailed')}
                 </p>
                 <button
                   onClick={() => setPaymentStatus('idle')}
-                  className="w-full mt-2 px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                  className="w-full mt-2 px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors font-cairo"
                 >
                   {t('payment.tryAgain')}
                 </button>
@@ -203,7 +203,7 @@ const PaymentPage: React.FC = () => {
           <div className="space-y-6">
             {/* Secure Payment Features */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('payment.securePayment')}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4 font-cairo">{t('payment.securePayment')}</h3>
               <div className="space-y-3">
                 {[
                   t('payment.sslEncrypted'),
@@ -213,7 +213,7 @@ const PaymentPage: React.FC = () => {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <Check className="w-5 h-5 text-green-500 mr-3 rtl:ml-3 rtl:mr-0 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-gray-700 font-cairo">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -223,9 +223,9 @@ const PaymentPage: React.FC = () => {
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <div className="flex items-center mb-4">
                 <Shield className="w-6 h-6 text-blue-600 mr-3 rtl:ml-3 rtl:mr-0" />
-                <h3 className="text-xl font-bold text-gray-900">{t('payment.secureGuarantee')}</h3>
+                <h3 className="text-xl font-bold text-gray-900 font-cairo">{t('payment.secureGuarantee')}</h3>
               </div>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 font-cairo">
                 {t('payment.paymentProcessed')}
               </p>
               <div className="space-y-2">
@@ -236,7 +236,7 @@ const PaymentPage: React.FC = () => {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <Check className="w-4 h-4 text-green-500 mr-3 rtl:ml-3 rtl:mr-0 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">{feature}</span>
+                    <span className="text-sm text-gray-700 font-cairo">{feature}</span>
                   </div>
                 ))}
               </div>

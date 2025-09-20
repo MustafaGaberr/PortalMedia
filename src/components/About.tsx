@@ -27,13 +27,13 @@ const About: React.FC = () => {
         >
           <motion.div variants={fadeInUp}>
             <motion.div variants={fadeInUp} className="mb-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6 font-cairo">
                 {t('about.title')}
               </h2>
-              <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--gold-dark)' }}>
+              <h3 className="text-xl font-semibold mb-6 font-cairo" style={{ color: 'var(--gold-dark)' }}>
                 {t('about.subtitle')}
               </h3>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed font-cairo">
                 {t('about.description')}
               </p>
             </motion.div>
@@ -53,8 +53,8 @@ const About: React.FC = () => {
                       <stat.icon className="w-6 h-6" style={{ color: '#212529' }} />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                      <div className="text-sm text-gray-600">{stat.label}</div>
+                      <div className="text-2xl font-bold text-gray-900 font-cairo">{stat.value}</div>
+                      <div className="text-sm text-gray-600 font-cairo">{stat.label}</div>
                     </div>
                   </div>
                 </motion.div>

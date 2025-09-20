@@ -23,10 +23,10 @@ const BlogPreview: React.FC = () => {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-6 font-cairo">
               {t('blog.title')}
             </h2>
-            <p className="text-xl text-yellow-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-yellow-200 max-w-3xl mx-auto leading-relaxed font-cairo">
               {t('blog.subtitle')}
             </p>
           </motion.div>
@@ -56,29 +56,29 @@ const BlogPreview: React.FC = () => {
                 </div>
                 
                 <div className="p-4 md:p-6">
-                  <h3 className="text-sm md:text-lg font-bold text-yellow-300 mb-2 md:mb-3 line-clamp-2 group-hover:text-yellow-200 transition-colors duration-300">
+                  <h3 className="text-sm md:text-lg font-bold text-yellow-300 mb-2 md:mb-3 line-clamp-2 group-hover:text-yellow-200 transition-colors duration-300 font-cairo">
                     {post.title}
                   </h3>
-                  <p className="text-yellow-100/80 mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 text-xs md:text-sm leading-relaxed">
+                  <p className="text-yellow-100/80 mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 text-xs md:text-sm leading-relaxed font-cairo">
                     {post.excerpt}
                   </p>
                   
                   <div className="flex items-center justify-between mb-3 md:mb-4 text-xs md:text-sm">
                     <div className="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <User className="w-3 h-3 md:w-4 md:h-4" />
-                      <span className="hidden md:inline">{post.author}</span>
-                      <span className="md:hidden">{post.author.split(' ')[0]}</span>
+                      <span className="hidden md:inline font-cairo">{post.author}</span>
+                      <span className="md:hidden font-cairo">{post.author.split(' ')[0]}</span>
                     </div>
                     <div className="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse text-yellow-200/70">
                       <Calendar className="w-3 h-3 md:w-4 md:h-4" />
-                      <span className="hidden md:inline">{post.date}</span>
-                      <span className="md:hidden">{post.date.split(' ')[0]} {post.date.split(' ')[1]}</span>
+                      <span className="hidden md:inline font-cairo">{post.date}</span>
+                      <span className="md:hidden font-cairo">{post.date.split(' ')[0]} {post.date.split(' ')[1]}</span>
                     </div>
                   </div>
                   
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300 text-xs md:text-sm group-hover:translate-x-1 transform"
+                    className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300 text-xs md:text-sm group-hover:translate-x-1 transform font-cairo"
                   >
                     {t('blog.readMore')}
                     <ArrowRight 
@@ -99,7 +99,7 @@ const BlogPreview: React.FC = () => {
           >
             <Link
               to="/blog"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform font-cairo"
             >
               {t('blog.viewAll')}
               <ArrowRight 

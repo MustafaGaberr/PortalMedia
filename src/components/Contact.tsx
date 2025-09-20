@@ -138,10 +138,10 @@ const Contact: React.FC = () => {
           >
             <MessageCircle className="w-16 h-16 mx-auto" style={{ color: 'var(--gold-light)' }} />
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-cairo">
             {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
           </h2>
-          <p className="text-xl text-white max-w-2xl mx-auto">
+          <p className="text-xl text-white max-w-2xl mx-auto font-cairo">
             {t('contact.readyToStart')}<br />
             {t('contact.readyToStartSecond')}
           </p>
@@ -157,7 +157,7 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Send us </span>
                 <span style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>message</span>
               </h3>
@@ -167,7 +167,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-white mb-2">
+                  <label className="block text-sm font-medium text-white mb-2 font-cairo">
                     {t('contact.name')}
                   </label>
                   <input
@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
                     value={formData.from_name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 font-cairo"
                     style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
                     placeholder="Your Name"
                   />
@@ -186,7 +186,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-white mb-2">
+                  <label className="block text-sm font-medium text-white mb-2 font-cairo">
                     {t('contact.email')}
                   </label>
                   <input
@@ -195,7 +195,7 @@ const Contact: React.FC = () => {
                     value={formData.from_email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 font-cairo"
                     style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
                     placeholder="Your Email"
                   />
@@ -205,7 +205,7 @@ const Contact: React.FC = () => {
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <label className="block text-sm font-medium text-white mb-2">
+                  <label className="block text-sm font-medium text-white mb-2 font-cairo">
                     {t('contact.message')}
                   </label>
                   <textarea
@@ -223,7 +223,7 @@ const Contact: React.FC = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
+                  className="w-full py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent font-cairo"
                   style={{ 
                     background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
                     color: '#212529',
@@ -265,7 +265,7 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Contact </span>
                 <span style={{ color: 'var(--gold-light)' }}>Information</span>
               </h3>
@@ -301,7 +301,7 @@ const Contact: React.FC = () => {
                     >
                       <item.icon className="w-6 h-6 text-white" />
                     </motion.div>
-                    <span className="text-lg text-white">{item.text}</span>
+                    <span className="text-lg text-white font-cairo">{item.text}</span>
                   </motion.a>
                 ))}
               </div>
@@ -315,7 +315,7 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Follow </span>
                 <span style={{ color: 'var(--gold-light)' }}>Us</span>
               </h3>
@@ -348,7 +348,7 @@ const Contact: React.FC = () => {
                 ))}
               </div>
               
-              <p className="mt-6 text-sm text-white">
+              <p className="mt-6 text-sm text-white font-cairo">
                 {t('contact.stayConnected')}
               </p>
             </motion.div>
@@ -365,15 +365,15 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-xl font-bold text-white mb-4">
+              <h3 className="text-xl font-bold text-white mb-4 font-cairo">
                 {t('contact.readyToStart')}<br />
                 {t('contact.readyToStartSecond')}
               </h3>
-              <p className="text-white mb-6">
+              <p className="text-white mb-6 font-cairo">
                 {t('contact.discussProject')}
               </p>
               <motion.button
-                className="font-semibold py-3 px-6 rounded-xl transition-all duration-200"
+                className="font-semibold py-3 px-6 rounded-xl transition-all duration-200 font-cairo"
                 onClick={() => window.open('https://wa.me/970569225413', '_blank')}
                 style={{ 
                   background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
