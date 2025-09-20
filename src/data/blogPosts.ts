@@ -26,9 +26,9 @@ export const useBlogPosts = () => {
       image: "/Assets/article1.jpg",
       authorKey: 'blog.posts.post1.author',
       date: "Dec 15, 2024",
-      category: "Programming",
+      category: "Social Media",
       readTimeKey: 'blog.posts.post1.readTime',
-      tags: ["برمجة", "تطوير مواقع", "تقنيات"]
+      tags: ["إنستغرام", "مبيعات", "تسويق"]
     },
     {
       id: 2,
@@ -38,9 +38,9 @@ export const useBlogPosts = () => {
       image: "/Assets/article2.jpeg",
       authorKey: 'blog.posts.post2.author',
       date: "Dec 12, 2024",
-      category: "Social Media",
+      category: "AI & Technology",
       readTimeKey: 'blog.posts.post2.readTime',
-      tags: ["سوشيال ميديا", "إدارة", "مجتمع"]
+      tags: ["ذكاء اصطناعي", "تسويق شخصي", "تقنية"]
     },
     {
       id: 3,
@@ -50,9 +50,9 @@ export const useBlogPosts = () => {
       image: "/Assets/article3.jpeg",
       authorKey: 'blog.posts.post3.author',
       date: "Dec 10, 2024",
-      category: "Content",
+      category: "Psychology",
       readTimeKey: 'blog.posts.post3.readTime',
-      tags: ["محتوى", "كتابة", "إبداع"]
+      tags: ["سيكولوجيا", "سوشيال ميديا", "تأثير"]
     },
     {
       id: 4,
@@ -62,33 +62,9 @@ export const useBlogPosts = () => {
       image: "/Assets/article4.jpeg",
       authorKey: 'blog.posts.post4.author',
       date: "Dec 8, 2024",
-      category: "Advertising",
-      readTimeKey: 'blog.posts.post4.readTime',
-      tags: ["إعلانات", "ROI", "حملات"]
-    },
-    {
-      id: 5,
-      titleKey: 'blog.posts.post5.title',
-      excerptKey: 'blog.posts.post5.excerpt',
-      contentKey: 'blog.posts.post5.content',
-      image: "/Assets/article5.jpeg",
-      authorKey: 'blog.posts.post5.author',
-      date: "Dec 5, 2024",
-      category: "Design",
-      readTimeKey: 'blog.posts.post5.readTime',
-      tags: ["تصميم", "جرافيك", "براندينج"]
-    },
-    {
-      id: 6,
-      titleKey: 'blog.posts.post6.title',
-      excerptKey: 'blog.posts.post6.excerpt',
-      contentKey: 'blog.posts.post6.content',
-      image: "/Assets/article6.jpeg",
-      authorKey: 'blog.posts.post6.author',
-      date: "Dec 3, 2024",
       category: "Analytics",
-      readTimeKey: 'blog.posts.post6.readTime',
-      tags: ["تحليلات", "بيانات", "تقارير"]
+      readTimeKey: 'blog.posts.post4.readTime',
+      tags: ["تحليل البيانات", "نمو", "عملاء"]
     }
   ];
 

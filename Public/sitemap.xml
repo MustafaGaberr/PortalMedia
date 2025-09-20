@@ -4,13 +4,26 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
+  <!-- Home -->
+  <url>
+    <loc>https://portalksa.com/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>1.0</priority>
+  </url>
 
-<url>
-  <loc>https://portalksa.com/</loc>
-  <lastmod>2025-09-18T01:22:54+00:00</lastmod>
-</url>
+  <!-- Payment -->
+  <url>
+    <loc>https://portalksa.com/payment</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.8</priority>
+  </url>
 
+  <!-- Blog -->
+  <url>
+    <loc>https://portalksa.com/blog</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.7</priority>
+  </url>
 
 </urlset>

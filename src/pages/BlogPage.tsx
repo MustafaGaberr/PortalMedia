@@ -96,17 +96,14 @@ const BlogPage: React.FC = () => {
                   <p className="text-xl text-yellow-100 mb-8 leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <div className="text-lg text-yellow-50 leading-relaxed space-y-6">
+                  <div className="text-lg text-yellow-50 leading-relaxed">
                     {post.content && (
-                      <>
-                        <p>{post.content}</p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <p>
-                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                      </>
+                      <div 
+                        className="whitespace-pre-line"
+                        dangerouslySetInnerHTML={{ 
+                          __html: post.content.replace(/\n/g, '<br>') 
+                        }}
+                      />
                     )}
                   </div>
                 </div>
