@@ -117,7 +117,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #212529, #343a40, #495057)' }}>
+    <section id="contact" ref={ref} className="py-20 px-6 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #212529, #343a40, #495057)' }}>
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ backgroundColor: 'var(--gold-light)' }}></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000" style={{ backgroundColor: 'var(--gold-dark)' }}></div>
@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
       </div>
 
       <motion.div 
-        className="max-w-7xl mx-auto relative z-10"
+        className="max-w-7xl mx-auto relative z-10 px-2 sm:px-0"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -142,11 +142,12 @@ const Contact: React.FC = () => {
             {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
           </h2>
           <p className="text-xl text-white max-w-2xl mx-auto">
-            {t('contact.readyToStart')}
+            {t('contact.readyToStart')}<br />
+            {t('contact.readyToStartSecond')}
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start px-2 sm:px-0">
           <motion.div variants={itemVariants}>
             <motion.div 
               className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20"
@@ -364,7 +365,10 @@ const Contact: React.FC = () => {
               }}
               transition={{ duration: 0.15 }}
             >
-              <h3 className="text-xl font-bold text-white mb-4">{t('contact.readyToStart')}</h3>
+              <h3 className="text-xl font-bold text-white mb-4">
+                {t('contact.readyToStart')}<br />
+                {t('contact.readyToStartSecond')}
+              </h3>
               <p className="text-white mb-6">
                 {t('contact.discussProject')}
               </p>

@@ -172,9 +172,9 @@ const Header: React.FC = () => {
             <img 
               src="/Assets/portal logo.png" 
               alt="Portal Media Logo" 
-              className="w-12 h-12 object-contain drop-shadow-lg"
+              className="w-10 h-10 object-contain drop-shadow-lg"
             />
-            <span className={`text-2xl font-bold drop-shadow-sm font-dallas ${
+            <span className={`text-xl font-bold drop-shadow-sm font-dallas ${
               isScrolled || !isHomePage
                 ? 'text-yellow-400'
                 : 'text-gradient'
