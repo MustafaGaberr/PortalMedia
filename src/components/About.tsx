@@ -160,13 +160,13 @@ const About: React.FC = () => {
 
           <motion.div variants={fadeInUp} className="relative hidden lg:block">
             <div className="relative z-10">
-              <div className="w-full h-[500px] lg:h-[600px] overflow-hidden  ">
+              <div className="w-full h-[300px] md:h-[500px] lg:h-[600px] overflow-hidden">
                 <div 
                   ref={animationContainerRef}
                   style={{ 
                     width: '100%', 
                     height: '100%',
-                    minHeight: '500px'
+                    minHeight: window.innerWidth < 768 ? '300px' : '500px'
                   }}
                 />
                        <div 

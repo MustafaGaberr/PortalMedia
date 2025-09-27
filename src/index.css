@@ -279,17 +279,31 @@
   background-clip: text;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-/* Prevent horizontal overflow on body */
-/* Scroll behavior */
+/* Optimized scrolling for mobile performance */
 html {
   scroll-behavior: smooth;
   scroll-restoration: manual;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for better performance on mobile */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {

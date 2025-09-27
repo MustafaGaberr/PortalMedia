@@ -6,55 +6,55 @@ const AnimatedBackground: React.FC = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
+    if (container && window.innerWidth >= 768) { // Only animate on desktop
       const circles = Array.from(container.children);
       
-      // Create more dynamic floating animation for all circles
+      // Optimized animation for better performance
       circles.forEach((circle: Element, index: number) => {
-        // Random movement patterns
+        // Reduced movement range and slower animations for better performance
         gsap.to(circle, {
-          x: `random(-200, 200)`,
-          duration: `random(10, 20)`,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
-          delay: index * 0.5
-        });
-
-        gsap.to(circle, {
-          y: `random(-150, 150)`,
-          duration: `random(8, 16)`,
-          repeat: -1,
-          yoyo: true,
-          ease: "power2.inOut",
-          delay: index * 0.3
-        });
-
-        gsap.to(circle, {
-          rotation: `random(-360, 360)`,
+          x: `random(-100, 100)`,
           duration: `random(15, 25)`,
           repeat: -1,
           yoyo: true,
-          ease: "none",
-          delay: index * 0.7
+          ease: "power1.inOut",
+          delay: index * 1
         });
 
         gsap.to(circle, {
-          scale: `random(0.5, 1.5)`,
-          duration: `random(6, 12)`,
+          y: `random(-80, 80)`,
+          duration: `random(12, 20)`,
           repeat: -1,
           yoyo: true,
           ease: "power2.inOut",
-          delay: index * 0.4
+          delay: index * 0.8
         });
 
         gsap.to(circle, {
-          opacity: `random(0.1, 0.4)`,
-          duration: `random(4, 8)`,
+          rotation: `random(-180, 180)`,
+          duration: `random(20, 30)`,
+          repeat: -1,
+          yoyo: true,
+          ease: "none",
+          delay: index * 1.2
+        });
+
+        gsap.to(circle, {
+          scale: `random(0.8, 1.2)`,
+          duration: `random(10, 18)`,
+          repeat: -1,
+          yoyo: true,
+          ease: "power2.inOut",
+          delay: index * 0.6
+        });
+
+        gsap.to(circle, {
+          opacity: `random(0.15, 0.3)`,
+          duration: `random(8, 15)`,
           repeat: -1,
           yoyo: true,
           ease: "power1.inOut",
-          delay: index * 0.6
+          delay: index * 0.9
         });
       });
     }

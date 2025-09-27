@@ -31,14 +31,14 @@ const HomePage: React.FC = () => {
       <Hero />
       <About />
       
-      <LazySection threshold={0.1} rootMargin="200px">
-        <React.Suspense fallback={<div className="min-h-[600px]" />}>
+      <LazySection threshold={0.05} rootMargin="100px">
+        <React.Suspense fallback={<div className="min-h-[400px] md:min-h-[600px]" />}>
           <Services />
         </React.Suspense>
       </LazySection>
       
-      <LazySection threshold={0.1} rootMargin="200px">
-        <React.Suspense fallback={<div className="min-h-[500px]" />}>
+      <LazySection threshold={0.05} rootMargin="100px">
+        <React.Suspense fallback={<div className="min-h-[300px] md:min-h-[500px]" />}>
           <BlogPreview />
         </React.Suspense>
       </LazySection>

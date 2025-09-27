@@ -60,12 +60,12 @@ const Hero: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center min-h-[80vh]">
-          <motion.div
-            className={`text-left ${isRTL ? 'text-right' : 'text-left'}`}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+                 <motion.div
+                   className={`text-left ${isRTL ? 'text-right' : 'text-left'}`}
+                   initial={{ opacity: 0, x: window.innerWidth < 768 ? -20 : -50 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: window.innerWidth < 768 ? 0.5 : 0.8, ease: "easeOut" }}
+                 >
             <motion.div
               className={`hidden md:flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : 'space-x-2'} mb-8`}
               initial={{ opacity: 0, y: 20 }}
@@ -139,12 +139,20 @@ const Hero: React.FC = () => {
                   animationData={heroBotAnimation}
                   loop={true}
                   autoplay={true}
-                  style={{ width: '100%', height: '100%' }}
+                  style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    maxHeight: window.innerWidth < 768 ? '300px' : '100%'
+                  }}
+                  rendererSettings={{
+                    preserveAspectRatio: 'xMidYMid slice',
+                    progressiveLoad: true
+                  }}
                 />
               ) : (
-                <div className="w-full h-[400px] flex items-center justify-center">
+                <div className="w-full h-[300px] md:h-[400px] flex items-center justify-center">
                   <div className="animate-pulse">
-                    <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto"></div>
+                    <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-200 rounded-full mx-auto"></div>
                   </div>
                 </div>
               )}
