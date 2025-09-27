@@ -26,18 +26,18 @@ const ScrollToTop = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className={`fixed bottom-24 z-40 w-12 h-12 rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-200 hidden sm:flex ${
+          className={`fixed bottom-24 z-40 w-12 h-12 rounded-full items-center justify-center hover:shadow-lg transition-all duration-200 hidden sm:flex ${
             language === 'ar' ? 'left-6' : 'right-6'
           }`}
           style={{
-            background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
-            boxShadow: '0 4px 12px rgba(246, 217, 115, 0.25)'
+            background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))',
+            boxShadow: '0 4px 12px rgba(95, 109, 176, 0.25)'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(246, 217, 115, 0.4)';
+            e.currentTarget.style.boxShadow = '0 8px 20px rgba(95, 109, 176, 0.4)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(246, 217, 115, 0.25)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(95, 109, 176, 0.25)';
           }}
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}

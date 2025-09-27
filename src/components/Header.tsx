@@ -152,13 +152,13 @@ const Header: React.FC = () => {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled 
-          ? 'backdrop-blur-md border-b border-yellow-600/50 shadow-lg' 
+          ? 'backdrop-blur-md border-b border-primary-500/50 shadow-lg' 
           : isHomePage
           ? 'bg-transparent'
-          : 'backdrop-blur-md border-b border-yellow-600/50 shadow-lg'
+          : 'backdrop-blur-md border-b border-primary-500/50 shadow-lg'
       }`}
       style={{
-        backgroundColor: isScrolled || !isHomePage ? '#212529e6' : 'transparent'
+        backgroundColor: isScrolled || !isHomePage ? 'rgba(255, 255, 255, 0.95)' : 'transparent'
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,7 +176,7 @@ const Header: React.FC = () => {
             />
             <span className={`text-xl font-bold drop-shadow-sm font-dallas mt-1 ${
               isScrolled || !isHomePage
-                ? 'text-yellow-400'
+                ? 'text-primary-400'
                 : 'text-gradient'
             }`}>
               Portal Media
@@ -194,10 +194,10 @@ const Header: React.FC = () => {
                       onClick={handleHomeClick}
                       className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
+                          ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
-                          ? 'text-yellow-300/90 hover:text-yellow-400'
-                          : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
+                          ? 'text-primary-300/90 hover:text-primary-400'
+                          : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
                       }`}
                     >
                       {item.name}
@@ -207,10 +207,10 @@ const Header: React.FC = () => {
                       to={item.href}
                       className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
                         location.pathname === item.href
-                          ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
+                          ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
                           : isScrolled || !isHomePage
-                          ? 'text-yellow-300/90 hover:text-yellow-400'
-                          : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
+                          ? 'text-primary-300/90 hover:text-primary-400'
+                          : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
                       }`}
                     >
                       {item.name}
@@ -222,10 +222,10 @@ const Header: React.FC = () => {
                     className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 mt-1 ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-yellow-400 font-bold text-lg drop-shadow-lg'
+                        ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
                         : isScrolled || !isHomePage
-                        ? 'text-yellow-300/90 hover:text-yellow-400'
-                        : 'text-yellow-300 hover:text-yellow-200 drop-shadow-sm'
+                        ? 'text-primary-300/90 hover:text-primary-400'
+                        : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
                     }`}
                   >
                     {item.name}
@@ -241,7 +241,7 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-yellow-600/30 text-yellow-300/90 hover:text-yellow-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 min-w-[120px] mt-1"
+                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-primary-600/30 text-primary-300/90 hover:text-primary-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500/50 min-w-[120px] mt-1"
                 style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
@@ -261,17 +261,17 @@ const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className={`absolute top-full mt-2 backdrop-blur-md rounded-xl border border-yellow-600/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
+                  className={`absolute top-full mt-2 backdrop-blur-md rounded-xl border border-primary-600/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
                     language === 'ar' ? 'right-0' : 'left-0'
                   }`}
                   style={{ backgroundColor: '#212529f2' }}
                 >
                   <button
                     onClick={() => handleLanguageChange('en')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-yellow-600/20 transition-all duration-200 ${
-                      language === 'en' 
-                        ? 'bg-yellow-600/30 text-yellow-300 font-semibold' 
-                        : 'text-yellow-300/90 hover:text-yellow-300'
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-primary-600/20 transition-all duration-200 ${
+                      language === 'en'
+                        ? 'bg-primary-600/30 text-primary-300 font-semibold' 
+                        : 'text-primary-300/90 hover:text-primary-300'
                     }`}
                   >
                     <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
@@ -289,10 +289,10 @@ const Header: React.FC = () => {
                   </button>
                   <button
                     onClick={() => handleLanguageChange('ar')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-yellow-600/20 transition-all duration-200 ${
-                      language === 'ar' 
-                        ? 'bg-yellow-600/30 text-yellow-300 font-semibold' 
-                        : 'text-yellow-300/90 hover:text-yellow-300'
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-primary-600/20 transition-all duration-200 ${
+                      language === 'ar'
+                        ? 'bg-primary-600/30 text-primary-300 font-semibold' 
+                        : 'text-primary-300/90 hover:text-primary-300'
                     }`}
                   >
                     <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
@@ -315,7 +315,7 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-yellow-300 transition-all duration-200 hover:scale-110 border border-yellow-600/30 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 mt-1"
+              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-primary-300 transition-all duration-200 hover:scale-110 border border-primary-600/30 focus:outline-none focus:ring-2 focus:ring-primary-500/50 mt-1"
               style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
@@ -331,7 +331,7 @@ const Header: React.FC = () => {
           initial={false}
           animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-yellow-600/50"
+          className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-primary-600/50"
           style={{ backgroundColor: '#212529f2' }}
         >
           <nav className="py-4 font-cairo">
@@ -347,8 +347,8 @@ const Header: React.FC = () => {
                       }}
                       className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-base leading-6 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
-                          : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
+                          ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
+                          : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
                       }`}
                     >
                       {item.name}
@@ -359,8 +359,8 @@ const Header: React.FC = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
                         location.pathname === item.href
-                          ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
-                          : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
+                          ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
+                          : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
                       }`}
                     >
                       {item.name}
@@ -374,8 +374,8 @@ const Header: React.FC = () => {
                     }}
                     className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-yellow-400 bg-yellow-600/20 border-l-4 border-yellow-400 font-bold text-base'
-                        : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
+                        ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
+                        : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
                     }`}
                   >
                     {item.name}
@@ -385,16 +385,16 @@ const Header: React.FC = () => {
             ))}
             
             {/* Language Switcher in Mobile Menu */}
-            <div className="mx-2 mt-4 pt-4 border-t border-yellow-600/50">
-              <p className="px-6 py-2 text-sm text-yellow-300/70 font-medium uppercase tracking-wide">
+            <div className="mx-2 mt-4 pt-4 border-t border-primary-600/50">
+              <p className="px-6 py-2 text-sm text-primary-300/70 font-medium uppercase tracking-wide">
                 Language / اللغة
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'en'
-                    ? 'text-yellow-300 bg-yellow-600/20 font-semibold'
-                    : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
+                    ? 'text-primary-300 bg-primary-600/20 font-semibold'
+                    : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -410,15 +410,15 @@ const Header: React.FC = () => {
                 </span>
                 <span className="text-base font-medium">English</span>
                 {language === 'en' && (
-                  <span className="ml-auto text-yellow-300">✓</span>
+                  <span className="ml-auto text-primary-300">✓</span>
                 )}
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'ar'
-                    ? 'text-yellow-300 bg-yellow-600/20 font-semibold'
-                    : 'text-yellow-300/90 hover:text-yellow-300 hover:bg-yellow-600/10'
+                    ? 'text-primary-300 bg-primary-600/20 font-semibold'
+                    : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -434,7 +434,7 @@ const Header: React.FC = () => {
                 </span>
                 <span className="text-base font-medium">العربية</span>
                 {language === 'ar' && (
-                  <span className="ml-auto text-yellow-300">✓</span>
+                  <span className="ml-auto text-primary-300">✓</span>
                 )}
               </button>
             </div>

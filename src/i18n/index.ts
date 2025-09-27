@@ -18,11 +18,15 @@ const resources = {
       },
       // Hero Section
       hero: {
-        title: 'Portal Media',
-        subtitle: 'Digital Marketing & Advertising Excellence',
-        description: 'Transform your brand with our cutting-edge digital marketing strategies. We create compelling campaigns that drive results and elevate your business to new heights.',
-        cta: 'Get Started Today',
-        learnMore: 'Learn More'
+        title: 'Elevate Your Brand to New Heights',
+        subtitle: '',
+        description: 'We create powerful marketing strategies that drive growth, engage audiences, and deliver measurable results for your business.',
+        getStarted: 'Get Started Today',
+        learnMore: 'Watch Demo',
+        happyClients: 'Happy Clients',
+        successRate: 'Success Rate',
+        yearsExperience: 'Years Experience',
+        scrollDown: 'Scroll Down'
       },
       // About Section
       about: {
@@ -253,11 +257,15 @@ const resources = {
       },
       // Hero Section
       hero: {
-        title: 'بورتال ميديا',
-        subtitle: 'التميز في التسويق الرقمي والإعلان',
-        description: 'حوّل علامتك التجارية من خلال استراتيجيات التسويق الرقمي المتطورة لدينا. نحن ننشئ حملات مقنعة تحقق النتائج وترفع عملك إلى آفاق جديدة.',
-        cta: 'ابدأ اليوم',
-        learnMore: 'اعرف المزيد'
+        title: 'ارفع علامتك التجارية إلى آفاق جديدة',
+        subtitle: '',
+        description: 'نحن ننشئ استراتيجيات تسويقية قوية تحقق النمو وتتفاعل مع الجماهير وتقدم نتائج قابلة للقياس لعملك.',
+        getStarted: 'ابدأ اليوم',
+        learnMore: 'شاهد العرض التوضيحي',
+        happyClients: 'عميل سعيد',
+        successRate: 'معدل النجاح',
+        yearsExperience: 'سنوات من الخبرة',
+        scrollDown: 'مرر للأسفل'
       },
       // About Section
       about: {

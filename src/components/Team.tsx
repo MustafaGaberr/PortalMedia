@@ -2,7 +2,6 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useLanguage } from '../contexts/LanguageContext';
-import type { Swiper as SwiperType } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -34,7 +33,7 @@ const Team: React.FC = () => {
     },
     {
       id: 3,
-      name: "Menna Muhammed",
+      name: "Eman ",
       title: "Social Media Specialist",
       image: "/Assets/team/mennamuhammed.jpg"
     },
@@ -46,21 +45,21 @@ const Team: React.FC = () => {
     },
     {
       id: 5,
-      name: "Omar Al-Amir",
+      name: "Abdullah Eyad",
       title: "Graphic Designer",
-      image: "/Assets/team/omralamir.jpg"
+      image: "/Assets/team/abood.jpg"
     }
   ];
 
   return (
-    <section id="team" className="py-20 lg:py-32 bg-white">
+    <section id="team" className="py-20 lg:py-32" style={{ background: 'linear-gradient(135deg, var(--bg-light) 0%, var(--bg-primary) 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: '#212529' }}>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: 'var(--primary-color)' }}>
             {t('team.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto font-cairo">
+          <p className="text-xl max-w-3xl mx-auto font-cairo" style={{ color: 'var(--accent-color)' }}>
             {t('team.subtitle')}
           </p>
         </div>
@@ -125,7 +124,7 @@ const Team: React.FC = () => {
                       <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-white transition-colors duration-300 font-cairo">
                         {member.name}
                       </h3>
-                      <p className="text-yellow-400 font-semibold text-sm uppercase tracking-wider group-hover:text-yellow-300 transition-colors duration-300 font-cairo">
+                      <p className="text-primary-400 font-semibold text-sm uppercase tracking-wider group-hover:text-primary-300 transition-colors duration-300 font-cairo">
                         {member.title}
                       </p>
                     </div>
@@ -166,7 +165,7 @@ const Team: React.FC = () => {
         }
         
         .swiper-pagination-bullet-active-custom {
-          background: linear-gradient(45deg, #8b5cf6, #3b82f6) !important;
+          background: linear-gradient(45deg, var(--primary-color), var(--accent-color)) !important;
           transform: scale(1.2) !important;
         }
         

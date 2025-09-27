@@ -16,7 +16,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-32 bg-white">
+    <section id="about" className="py-20 lg:py-32" style={{ background: 'linear-gradient(135deg, var(--bg-light) 0%, var(--bg-primary) 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -27,13 +27,13 @@ const About: React.FC = () => {
         >
           <motion.div variants={fadeInUp}>
             <motion.div variants={fadeInUp} className="mb-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6 font-cairo">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: 'var(--primary-color)' }}>
                 {t('about.title')}
               </h2>
-              <h3 className="text-xl font-semibold mb-6 font-cairo" style={{ color: 'var(--gold-dark)' }}>
+              <h3 className="text-xl font-semibold mb-6 font-cairo" style={{ color: 'var(--secondary-color)' }}>
                 {t('about.subtitle')}
               </h3>
-              <p className="text-lg text-gray-600 leading-relaxed font-cairo">
+              <p className="text-lg leading-relaxed font-cairo" style={{ color: 'var(--accent-color)' }}>
                 {t('about.description')}
               </p>
             </motion.div>
@@ -49,7 +49,7 @@ const About: React.FC = () => {
                   className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200"
                 >
                   <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))' }}>
                       <stat.icon className="w-6 h-6" style={{ color: '#212529' }} />
                     </div>
                     <div>
@@ -76,13 +76,13 @@ const About: React.FC = () => {
               animate={{ opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20"
-              style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}
+              style={{ background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))' }}
             />
             <motion.div
               animate={{ opacity: [0.1, 0.2, 0.1] }}
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
               className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full opacity-20"
-              style={{ background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))' }}
+              style={{ background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))' }}
             />
           </motion.div>
         </motion.div>

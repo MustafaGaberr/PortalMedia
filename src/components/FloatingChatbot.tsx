@@ -118,9 +118,13 @@ const ChatBot: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className={`fixed bottom-24 w-80 sm:w-96 bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden z-50 ${
+            className={`fixed bottom-24 w-80 sm:w-96 rounded-xl shadow-2xl overflow-hidden z-50 ${
               language === 'ar' ? 'left-8' : 'right-8'
             }`}
+            style={{ 
+              background: 'linear-gradient(135deg, var(--bg-light) 0%, var(--bg-primary) 100%)',
+              border: '1px solid rgba(95, 109, 176, 0.2)'
+            }}
           >
             {/* Chat window header */}
             <div className="bg-gradient-primary text-white p-4 flex justify-between items-center">
@@ -140,7 +144,7 @@ const ChatBot: React.FC = () => {
                       <button
                         key={response.id}
                         onClick={() => handleQuickResponse(response.question)}
-                        className={`block w-full ${language === 'ar' ? 'text-right' : 'text-left'} bg-gray-100 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-yellow-200 text-gray-800 p-2 rounded-md text-sm transition-all duration-200 border border-yellow-200 hover:border-yellow-400`}
+                        className={`block w-full ${language === 'ar' ? 'text-right' : 'text-left'} bg-gray-100 hover:bg-gradient-to-r hover:from-primary-100 hover:to-primary-200 text-gray-800 p-2 rounded-md text-sm transition-all duration-200 border border-primary-200 hover:border-primary-400`}
                       >
                         {response.question}
                       </button>
@@ -151,7 +155,7 @@ const ChatBot: React.FC = () => {
                 <>
                   <button 
                     onClick={() => setMessages([])} 
-                    className="self-start mb-3 flex items-center gap-1 text-yellow-600 hover:text-yellow-700 transition-colors"
+                    className="self-start mb-3 flex items-center gap-1 text-primary-600 hover:text-primary-700 transition-colors"
                   >
                     <ArrowLeft className="h-4 w-4" />
                     <span>{t('chat.backToOptions')}</span>
@@ -159,7 +163,7 @@ const ChatBot: React.FC = () => {
                   {messages.map((message, index) => (
                     <div 
                       key={index} 
-                      className={`max-w-[80%] p-3 rounded-lg ${message.isUser ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-white self-end' : 'bg-gray-100 text-gray-800 self-start'}`}
+                      className={`max-w-[80%] p-3 rounded-lg ${message.isUser ? 'bg-gradient-to-r from-primary-400 to-primary-500 text-white self-end' : 'bg-gray-100 text-gray-800 self-start'}`}
                     >
                       {message.text}
                     </div>
@@ -178,11 +182,11 @@ const ChatBot: React.FC = () => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder={t('chat.placeholder')}
-                className="flex-1 bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                className="flex-1 bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
               <button 
                 onClick={handleSend}
-                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white p-2 rounded-md hover:from-yellow-500 hover:to-yellow-600 transition-all duration-200"
+                className="bg-gradient-to-r from-primary-400 to-primary-500 text-white p-2 rounded-md hover:from-primary-500 hover:to-primary-600 transition-all duration-200"
               >
                 <Send className="h-5 w-5" />
               </button>
@@ -194,7 +198,7 @@ const ChatBot: React.FC = () => {
       {/* Chat button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-8 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-7 py-3 rounded-lg shadow-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-yellow-500 hover:to-yellow-600 z-50 ${
+        className={`fixed bottom-8 bg-gradient-to-r from-primary-400 to-primary-500 text-white px-7 py-3 rounded-lg shadow-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-primary-500 hover:to-primary-600 z-50 ${
           language === 'ar' ? 'left-8 space-x-reverse space-x-2' : 'right-8 space-x-2'
         }`}
       >

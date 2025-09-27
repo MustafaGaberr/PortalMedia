@@ -117,11 +117,11 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 px-6 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #212529, #343a40, #495057)' }}>
+    <section id="contact" ref={ref} className="py-20 px-6 sm:px-6 lg:px-8 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)' }}>
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ backgroundColor: 'var(--gold-light)' }}></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000" style={{ backgroundColor: 'var(--gold-dark)' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500" style={{ backgroundColor: 'var(--gold-darker)' }}></div>
+        <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ backgroundColor: 'var(--primary-color)' }}></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000" style={{ backgroundColor: 'var(--accent-color)' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500" style={{ backgroundColor: 'var(--tertiary-color)' }}></div>
       </div>
 
       <motion.div 
@@ -136,12 +136,12 @@ const Contact: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <MessageCircle className="w-16 h-16 mx-auto" style={{ color: 'var(--gold-light)' }} />
+            <MessageCircle className="w-16 h-16 mx-auto" style={{ color: 'var(--primary-color)' }} />
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-cairo">
-            {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-cairo" style={{ color: 'var(--primary-color)' }}>
+            {t('contact.getInTouch')} <span className="text-transparent bg-clip-text" style={{ background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))', WebkitBackgroundClip: 'text' }}>{t('contact.touch')}</span>
           </h2>
-          <p className="text-xl text-white max-w-2xl mx-auto font-cairo">
+          <p className="text-xl max-w-2xl mx-auto font-cairo" style={{ color: 'var(--accent-color)' }}>
             {t('contact.readyToStart')}<br />
             {t('contact.readyToStartSecond')}
           </p>
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Send us </span>
-                <span style={{ background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))', WebkitBackgroundClip: 'text' }}>message</span>
+                <span style={{ background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))', WebkitBackgroundClip: 'text' }}>message</span>
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -177,7 +177,7 @@ const Contact: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 font-cairo"
-                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
+                    style={{ '--tw-ring-color': 'var(--primary-color)' } as React.CSSProperties}
                     placeholder="Your Name"
                   />
                 </motion.div>
@@ -196,7 +196,7 @@ const Contact: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 font-cairo"
-                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
+                    style={{ '--tw-ring-color': 'var(--primary-color)' } as React.CSSProperties}
                     placeholder="Your Email"
                   />
                 </motion.div>
@@ -215,7 +215,7 @@ const Contact: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none"
-                    style={{ '--tw-ring-color': 'var(--gold-light)' } as React.CSSProperties}
+                    style={{ '--tw-ring-color': 'var(--primary-color)' } as React.CSSProperties}
                     placeholder="Your Message"
                   ></textarea>
                 </motion.div>
@@ -225,15 +225,15 @@ const Contact: React.FC = () => {
                   disabled={isSubmitting}
                   className="w-full py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 rtl:space-x-reverse focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent font-cairo"
                   style={{ 
-                    background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+                    background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))',
                     color: '#212529',
-                    border: '2px solid rgba(246, 217, 115, 0.3)'
+                    border: '2px solid rgba(95, 109, 176, 0.3)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-dark), var(--gold-darker))';
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--accent-color), var(--tertiary-color))';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-light), var(--gold-dark))';
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--primary-color), var(--accent-color))';
                   }}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
@@ -267,7 +267,7 @@ const Contact: React.FC = () => {
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Contact </span>
-                <span style={{ color: 'var(--gold-light)' }}>Information</span>
+                <span style={{ color: 'var(--primary-color)' }}>Information</span>
               </h3>
               
               <div className="space-y-4">
@@ -277,7 +277,7 @@ const Contact: React.FC = () => {
                     href={item.href}
                     className="flex items-center space-x-4 rtl:space-x-reverse text-white transition-colors duration-200 group"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--gold-light)';
+                      e.currentTarget.style.color = 'var(--primary-color)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = '#ffffff'; // white
@@ -287,13 +287,13 @@ const Contact: React.FC = () => {
                   >
                     <motion.div
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200"
-                      style={{ backgroundColor: 'rgba(246, 217, 115, 0.2)' }}
+                      style={{ backgroundColor: 'rgba(95, 109, 176, 0.2)' }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--gold-light)';
+                        e.currentTarget.style.backgroundColor = 'var(--primary-color)';
                         e.currentTarget.style.color = '#212529';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'rgba(246, 217, 115, 0.2)';
+                        e.currentTarget.style.backgroundColor = 'rgba(95, 109, 176, 0.2)';
                         e.currentTarget.style.color = '#ffffff';
                       }}
                       whileHover={{ rotate: 180 }}
@@ -317,7 +317,7 @@ const Contact: React.FC = () => {
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
                 <span className="text-white">Follow </span>
-                <span style={{ color: 'var(--gold-light)' }}>Us</span>
+                <span style={{ color: 'var(--primary-color)' }}>Us</span>
               </h3>
               
               <div className="flex space-x-4 rtl:space-x-reverse">
@@ -334,7 +334,7 @@ const Contact: React.FC = () => {
                       boxShadow: "0 10px 20px -5px rgba(246, 217, 115, 0.3)"
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--gold-light)';
+                      e.currentTarget.style.color = 'var(--primary-color)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = '#ffffff'; // white
@@ -376,14 +376,14 @@ const Contact: React.FC = () => {
                 className="font-semibold py-3 px-6 rounded-xl transition-all duration-200 font-cairo"
                 onClick={() => window.open('https://wa.me/970569225413', '_blank')}
                 style={{ 
-                  background: 'linear-gradient(to right, var(--gold-light), var(--gold-dark))',
+                  background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))',
                   color: '#212529'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-dark), var(--gold-darker))';
+                  e.currentTarget.style.background = 'linear-gradient(to right, var(--accent-color), var(--tertiary-color))';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'linear-gradient(to right, var(--gold-light), var(--gold-dark))';
+                  e.currentTarget.style.background = 'linear-gradient(to right, var(--primary-color), var(--accent-color))';
                 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

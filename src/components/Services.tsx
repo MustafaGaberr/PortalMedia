@@ -14,14 +14,14 @@ const Services: React.FC = () => {
       icon: Code,
       title: t('services.seo.title'),
       description: t('services.seo.description'),
-      gradient: 'gold-primary',
+      gradient: 'primary-gradient',
       details: ['Web Design & Development', 'Mobile App Development (iOS & Android)', 'Hosting & Domain Services', 'Website Performance Optimization'],
     },
     {
       icon: Share2,
       title: t('services.social.title'),
       description: t('services.social.description'),
-      gradient: 'gold-secondary',
+      gradient: 'secondary-gradient',
       details: ['Facebook, Instagram, TikTok', 'Monthly Content Calendar', 'Community Management', 'Performance Reports'],
     },
     {
@@ -55,7 +55,7 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-20 lg:py-32 bg-white">
+    <section id="services" className="py-20 lg:py-32" style={{ background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -65,10 +65,10 @@ const Services: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6 font-cairo">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: 'var(--primary-color)' }}>
               {t('services.title')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-cairo">
+            <p className="text-xl max-w-3xl mx-auto font-cairo" style={{ color: 'var(--accent-color)' }}>
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -97,20 +97,20 @@ const Services: React.FC = () => {
                   <div className="absolute inset-0 w-full h-full bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden border border-gray-100">
                     <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center">
                       <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 ${
-                        service.gradient === 'gold-primary' 
+                        service.gradient === 'primary-gradient' 
                           ? '' 
-                          : service.gradient === 'gold-secondary'
+                          : service.gradient === 'secondary-gradient'
                           ? ''
                           : `bg-gradient-to-br ${service.gradient}`
                       }`}
                       style={{
-                        background: service.gradient === 'gold-primary' 
-                          ? 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))'
-                          : service.gradient === 'gold-secondary'
-                          ? 'linear-gradient(135deg, var(--gold-dark), var(--gold-darker))'
+                        background: service.gradient === 'primary-gradient' 
+                          ? 'linear-gradient(135deg, var(--primary-color), var(--accent-color))'
+                          : service.gradient === 'secondary-gradient'
+                          ? 'linear-gradient(135deg, var(--secondary-color), var(--tertiary-color))'
                           : undefined
                       }}>
-                        <service.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }} />
+                        <service.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }} />
                       </div>
                       <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-2 md:mb-4 line-clamp-2 font-cairo">
                         {service.title}
@@ -123,18 +123,18 @@ const Services: React.FC = () => {
 
                   {/* Back of card */}
                   <div className={`absolute inset-0 w-full h-full rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 backface-hidden rotate-y-180 ${
-                    service.gradient === 'gold-primary' || service.gradient === 'gold-secondary' ? '' : `bg-gradient-to-br ${service.gradient}`
+                    service.gradient === 'primary-gradient' || service.gradient === 'secondary-gradient' ? '' : `bg-gradient-to-br ${service.gradient}`
                   }`}
                   style={{
-                    background: service.gradient === 'gold-primary' 
-                      ? 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))'
-                      : service.gradient === 'gold-secondary'
-                      ? 'linear-gradient(135deg, var(--gold-dark), var(--gold-darker))'
+                    background: service.gradient === 'primary-gradient' 
+                      ? 'linear-gradient(135deg, var(--primary-color), var(--accent-color))'
+                      : service.gradient === 'secondary-gradient'
+                      ? 'linear-gradient(135deg, var(--secondary-color), var(--tertiary-color))'
                       : undefined
                   }}>
                     <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center text-white">
-                      <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }} />
-                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6 font-cairo" style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }}>{service.title}</h3>
+                      <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }} />
+                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6 font-cairo" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }}>{service.title}</h3>
                       <ul className="space-y-2 md:space-y-3">
                         {service.details.map((detail, detailIndex) => (
                           <motion.li
@@ -146,9 +146,9 @@ const Services: React.FC = () => {
                             }}
                             transition={{ delay: detailIndex * 0.1 }}
                             className="flex items-center justify-center text-xs md:text-base font-cairo"
-                            style={{ color: service.gradient.includes('gold') ? '#212529' : 'white' }}
+                            style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }}
                           >
-                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0" style={{ backgroundColor: service.gradient.includes('gold') ? '#212529' : 'white' }}></div>
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0" style={{ backgroundColor: service.gradient.includes('gradient') ? 'white' : 'white' }}></div>
                             {detail}
                           </motion.li>
                         ))}
