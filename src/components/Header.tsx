@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState('');
-  const { language, changeLanguage, t } = useLanguage();
+  const { language, changeLanguage, t, isRTL } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -346,9 +346,9 @@ const Header: React.FC = () => {
                         handleHomeClick();
                         setIsMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-base leading-6 ${
+                      className={`block w-full ${isRTL ? 'text-right' : 'text-left'} px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-base leading-6 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                          ? `text-[#735fb0] bg-[#5f6db0]/20 ${isRTL ? 'border-r-4' : 'border-l-4'} border-[#5f6db0]`
                           : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                       }`}
                     >
@@ -358,9 +358,9 @@ const Header: React.FC = () => {
                     <Link
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
+                      className={`block px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${isRTL ? 'text-right' : 'text-left'} ${
                         location.pathname === item.href
-                          ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                          ? `text-[#735fb0] bg-[#5f6db0]/20 ${isRTL ? 'border-r-4' : 'border-l-4'} border-[#5f6db0]`
                           : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                       }`}
                     >
@@ -373,7 +373,7 @@ const Header: React.FC = () => {
                       scrollToSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
+                    className={`block w-full ${isRTL ? 'text-right' : 'text-left'} px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
                       location.pathname === '/' && isCurrentSection(item.href)
                         ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
                         : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
@@ -392,7 +392,7 @@ const Header: React.FC = () => {
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
-                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
+                className={`flex items-center w-full px-6 py-3 ${isRTL ? 'text-right' : 'text-left'} transition-all duration-150 rounded-lg mx-0 ${
                   language === 'en'
                     ? 'text-[#735fb0] bg-[#5f6db0]/20 font-bold'
                     : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
@@ -416,7 +416,7 @@ const Header: React.FC = () => {
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
-                className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
+                className={`flex items-center w-full px-6 py-3 ${isRTL ? 'text-right' : 'text-left'} transition-all duration-150 rounded-lg mx-0 ${
                   language === 'ar'
                     ? 'text-[#735fb0] bg-[#5f6db0]/20 font-bold'
                     : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'

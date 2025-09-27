@@ -152,10 +152,10 @@ const Contact: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start px-2 sm:px-0">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-stretch px-2 sm:px-0">
           <motion.div variants={itemVariants}>
             <motion.div 
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg"
+              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg h-full flex flex-col"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(95, 109, 176, 0.25)",
                 borderColor: "rgba(95, 109, 176, 0.3)"
@@ -167,7 +167,7 @@ const Contact: React.FC = () => {
                 <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">message</span>
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -215,11 +215,11 @@ const Contact: React.FC = () => {
                   </label>
                   <textarea
                     name="message"
-                    rows={5}
+                    rows={8}
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none flex-1 min-h-[370px]"
                     style={{ '--tw-ring-color': 'var(--primary-color)' } as React.CSSProperties}
                     placeholder="Your Message"
                   ></textarea>

@@ -35,7 +35,7 @@ const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
 
   const quickLinks = [
     { name: t('nav.home'), href: '/' },
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: 0.15 }}
-                className="flex items-center space-x-4"
+                className={`flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}
               >
                 {socialMedia.map((social, index) => {
                   const IconComponent = social.icon;

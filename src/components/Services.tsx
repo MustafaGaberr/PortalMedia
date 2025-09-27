@@ -65,7 +65,7 @@ const Services: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent leading-normal pt-3 pb-3 overflow-visible">
               {t('services.title')}
             </h2>
             <p className="text-xl max-w-3xl mx-auto font-cairo">

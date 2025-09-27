@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ToastProvider, useToast } from './contexts/ToastContext';
@@ -6,12 +6,14 @@ import { ToastProvider, useToast } from './contexts/ToastContext';
 // Components
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import Footer from './components/Footer';
-import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import ToastContainer from './components/ToastContainer';
 import AnimatedBackground from './components/AnimatedBackground';
+
+// Lazy loaded components
+const Footer = React.lazy(() => import('./components/Footer'));
+const FloatingChatbot = React.lazy(() => import('./components/FloatingChatbot'));
 
 // Pages
 import BlogPage from './pages/BlogPage';
@@ -34,8 +36,12 @@ const AppContent: React.FC = () => {
             <Route path="/payment" element={<PaymentPage />} />
           </Routes>
         </main>
-        <Footer />
-        <FloatingChatbot />
+        <Suspense fallback={<div className="min-h-[200px] bg-gray-100 animate-pulse"></div>}>
+          <Footer />
+        </Suspense>
+        <Suspense fallback={null}>
+          <FloatingChatbot />
+        </Suspense>
         <ScrollToTopButton />
         <ToastContainer toasts={toasts} onClose={removeToast} />
       </div>

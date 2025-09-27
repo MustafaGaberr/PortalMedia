@@ -8,6 +8,7 @@ import Services from '../components/Services';
 import BlogPreview from '../components/BlogPreview';
 import Team from '../components/Team';
 import Contact from '../components/Contact';
+import LazySection from '../components/LazySection';
 
 const HomePage: React.FC = () => {
   const location = useLocation();
@@ -31,10 +32,18 @@ const HomePage: React.FC = () => {
     <>
       <Hero />
       <About />
-      <Services />
-      <BlogPreview />
-      <Team />
-      <Contact />
+      <LazySection threshold={0.1} rootMargin="200px">
+        <Services />
+      </LazySection>
+      <LazySection threshold={0.1} rootMargin="200px">
+        <BlogPreview />
+      </LazySection>
+      <LazySection threshold={0.1} rootMargin="200px">
+        <Team />
+      </LazySection>
+      <LazySection threshold={0.1} rootMargin="200px">
+        <Contact />
+      </LazySection>
     </>
   );
 };

@@ -135,7 +135,7 @@ const About: React.FC = () => {
         >
           <motion.div variants={fadeInUp}>
             <motion.div variants={fadeInUp} className="mb-8">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent leading-normal pt-3 pb-3 overflow-visible">
                 {t('about.title')}
               </h2>
               

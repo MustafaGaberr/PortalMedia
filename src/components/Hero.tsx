@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, Star } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -10,6 +10,7 @@ const Hero: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const heroRef = useRef<HTMLElement>(null);
   const floatingShapesRef = useRef<HTMLDivElement>(null);
+  const [isLottieLoaded, setIsLottieLoaded] = useState(false);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -35,6 +36,15 @@ const Hero: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  // Load Lottie animation after component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLottieLoaded(true);
+    }, 1000); // Load after 1 second
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section 
       id="home" 
@@ -52,23 +62,23 @@ const Hero: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center min-h-[80vh]">
           {/* Left Content */}
           <motion.div
-            className="text-left"
+            className={`text-left ${isRTL ? 'text-right' : 'text-left'}`}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.div
-              className="flex items-center space-x-2 mb-8"
+              className={`hidden md:flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : 'space-x-2'} mb-8`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             >
               <Star className="w-5 h-5 text-[#b0a25f] fill-current" />
-              <span className="text-[#5f6db0] font-semibold">Premium Marketing Solutions</span>
+              <span className="text-[#5f6db0] font-semibold">{t('hero.subtitle')}</span>
             </motion.div>
 
             <motion.h1
-              className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-8 font-cairo"
+              className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-8 font-cairo mt-8 md:mt-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -101,17 +111,17 @@ const Hero: React.FC = () => {
             >
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="group bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-cairo"
+                className={`group bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center ${isRTL ? 'space-x-reverse' : 'space-x-2'} hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-cairo`}
               >
                 <span>{t('hero.getStarted')}</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className={`w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ${isRTL ? 'rotate-180' : ''}`} />
               </button>
               
               <button 
                 onClick={() => scrollToSection('about')}
-                className="group border-2 border-[#5f6db0] text-[#5f6db0] px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 hover:bg-[#5f6db0] hover:text-white transition-all duration-300 font-cairo"
+                className={`group border-2 border-[#5f6db0] text-[#5f6db0] px-8 py-4 rounded-full font-semibold flex items-center justify-center ${isRTL ? 'space-x-reverse' : 'space-x-2'} hover:bg-[#5f6db0] hover:text-white transition-all duration-300 font-cairo`}
               >
-                <Play className="w-5 h-5" />
+                <Play className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />
                 <span>{t('hero.learnMore')}</span>
               </button>
             </motion.div>
@@ -126,12 +136,20 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
-              <Lottie
-                animationData={heroBotAnimation}
-                loop={true}
-                autoplay={true}
-                style={{ width: '100%', height: '100%' }}
-              />
+              {isLottieLoaded ? (
+                <Lottie
+                  animationData={heroBotAnimation}
+                  loop={true}
+                  autoplay={true}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <div className="w-full h-[400px] flex items-center justify-center">
+                  <div className="animate-pulse">
+                    <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto"></div>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -139,7 +157,7 @@ const Hero: React.FC = () => {
 
       {/* Scroll Down Indicator - Keep as is */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => scrollToSection('about')}

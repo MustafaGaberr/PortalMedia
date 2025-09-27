@@ -19,7 +19,7 @@ const resources = {
       // Hero Section
       hero: {
         title: 'Elevate Your Brand to New Heights',
-        subtitle: '',
+        subtitle: 'Premium Marketing Solutions',
         description: 'We create powerful marketing strategies that drive growth, engage audiences, and deliver measurable results for your business.',
         getStarted: 'Get Started Today',
         learnMore: 'Learn More',
@@ -256,7 +256,7 @@ const resources = {
       // Hero Section
       hero: {
         title: 'ارفع علامتك التجارية إلى آفاق جديدة',
-        subtitle: '',
+        subtitle: 'حلول تسويقية متميزة',
         description: 'نحن ننشئ استراتيجيات تسويقية قوية تحقق النمو وتتفاعل مع الجماهير وتقدم نتائج قابلة للقياس لعملك.',
         getStarted: 'ابدأ اليوم',
         learnMore: 'اعرف المزيد',
@@ -267,7 +267,7 @@ const resources = {
       about: {
         title: 'عن بورتال ميديا',
         subtitle: 'شريكك في النجاح الرقمي',
-        description: 'نحن وكالة تسويق رقمي رائدة متخصصة في حلول الإعلان الشاملة. يجمع فريقنا بين الإبداع والاستراتيجيات المدفوعة بالبيانات لتحقيق نتائج استثنائية للشركات من جميع الأحجام.',
+        description: 'وكالة تسويق رقمي ناشئة بطموحٍ كبير، متخصصة في صناعة الحلول الإعلانية الذكية، يجمع فريقنا بين الشغف والإبداع والقدرة على التحليل لنقدّم حملات مدروسة تُحقّق نتائج ملموسة',
         experience: 'سنوات من الخبرة',
         clients: 'عميل سعيد',
         projects: 'مشروع ناجح',
