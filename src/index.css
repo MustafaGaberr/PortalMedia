@@ -286,6 +286,12 @@ html {
 }
 
 /* Prevent horizontal overflow on body */
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-restoration: manual;
+}
+
 body {
   overflow-x: hidden;
   background: var(--bg-light);

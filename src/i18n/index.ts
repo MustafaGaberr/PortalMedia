@@ -402,7 +402,7 @@ const resources = {
         send: 'إرسال الرسالة',
         sending: 'جاري الإرسال...',
         successMessage: 'شكراً لرسالتك! سنتواصل معك قريباً.',
-        contactInformation: 'معلومات الاتصال',
+        contactInformation: 'تواصل معنا',
         follow: 'تابعنا',
         stayConnected: 'ابق متصلاً معنا للحصول على آخر التحديثات والمحتوى الحصري.',
         discussProject: 'لنناقش مشروعك ونحول رؤيتك إلى حقيقة.',

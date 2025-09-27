@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ToastProvider, useToast } from './contexts/ToastContext';
 
-// Components
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import ScrollToTopButton from './components/ScrollToTopButton';
@@ -11,22 +10,28 @@ import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import ToastContainer from './components/ToastContainer';
 import AnimatedBackground from './components/AnimatedBackground';
 
-// Lazy loaded components
 const Footer = React.lazy(() => import('./components/Footer'));
 const FloatingChatbot = React.lazy(() => import('./components/FloatingChatbot'));
 
-// Pages
 import BlogPage from './pages/BlogPage';
 import PaymentPage from './pages/PaymentPage';
 
 const AppContent: React.FC = () => {
   const { toasts, removeToast } = useToast();
   
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+  
   return (
     <Router>
       <ScrollToTopOnRouteChange />
       <div className="App overflow-x-hidden min-h-screen">
-        <AnimatedBackground />
+        <AnimatedBackground ></AnimatedBackground>
         <Header />
         <main className="overflow-x-hidden">
           <Routes>

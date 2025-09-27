@@ -182,19 +182,18 @@ const About: React.FC = () => {
                     minHeight: '500px'
                   }}
                 />
-                {/* Fallback content */}
-                <div 
-                  ref={fallbackRef}
-                  className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#5f6db0]/10 to-[#735fb0]/10 rounded-2xl transition-opacity duration-300"
-                >
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#5f6db0] to-[#735fb0] flex items-center justify-center">
-                      <Award className="w-12 h-12 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-700 font-cairo mb-2">About Portal Media</h3>
-                    <p className="text-gray-600 font-cairo">Loading animation...</p>
-                  </div>
-                </div>
+                       <div 
+                         ref={fallbackRef}
+                         className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#5f6db0]/10 to-[#735fb0]/10 rounded-2xl transition-opacity duration-300"
+                       >
+                         <div className="text-center">
+                           <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#5f6db0] to-[#735fb0] flex items-center justify-center">
+                             <Award className="w-12 h-12 text-white" />
+                           </div>
+                           <h3 className="text-2xl font-bold text-gray-700 font-cairo mb-2">About Portal Media</h3>
+                           <p className="text-gray-600 font-cairo">Loading animation...</p>
+                         </div>
+                       </div>
               </div>
             </div>
           </motion.div>

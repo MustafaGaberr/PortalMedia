@@ -126,10 +126,10 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 px-6 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
 
       <motion.div 
-        className="max-w-7xl mx-auto relative z-10 px-2 sm:px-0"
+        className="max-w-7xl mx-auto relative z-10 px-0 sm:px-0"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -143,8 +143,8 @@ const Contact: React.FC = () => {
             <MessageCircle className="w-16 h-16 mx-auto" style={{ color: 'var(--primary-color)' }} />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 font-cairo">
-            <span className="text-gray-800">Get In </span>
-            <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">Touch</span>
+            <span className="text-gray-800">{t('contact.getInTouch')} </span>
+            <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">{t('contact.touch')}</span>
           </h2>
           <p className="text-xl max-w-2xl mx-auto font-cairo" >
             {t('contact.readyToStart')}<br />
@@ -152,10 +152,10 @@ const Contact: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-stretch px-2 sm:px-0">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-16 items-stretch justify-center px-4 sm:px-0">
           <motion.div variants={itemVariants}>
             <motion.div 
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg h-full flex flex-col"
+              className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-200 shadow-lg h-full flex flex-col mx-auto w-full max-w-full"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(95, 109, 176, 0.25)",
                 borderColor: "rgba(95, 109, 176, 0.3)"
@@ -163,8 +163,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
-                <span className="text-gray-800">Send us </span>
-                <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">message</span>
+                <span className="text-gray-800">{t('contact.sendMessage')}</span>
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
@@ -215,11 +214,11 @@ const Contact: React.FC = () => {
                   </label>
                   <textarea
                     name="message"
-                    rows={8}
+                    rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none flex-1 min-h-[370px]"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none flex-1 min-h-[150px] sm:min-h-[200px] lg:min-h-[370px]"
                     style={{ '--tw-ring-color': 'var(--primary-color)' } as React.CSSProperties}
                     placeholder="Your Message"
                   ></textarea>
@@ -261,9 +260,9 @@ const Contact: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6 lg:space-y-8">
             <motion.div 
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg"
+              className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-200 shadow-lg mx-auto w-full max-w-full"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(95, 109, 176, 0.25)",
                 borderColor: "rgba(95, 109, 176, 0.3)"
@@ -271,8 +270,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
-                <span className="text-gray-800">Contact </span>
-                <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">Information</span>
+                <span className="text-gray-800">{t('contact.contactInformation')}</span>
               </h3>
               
               <div className="space-y-4">
@@ -313,7 +311,7 @@ const Contact: React.FC = () => {
             </motion.div>
 
             <motion.div 
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg"
+              className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-200 shadow-lg mx-auto w-full max-w-full"
               whileHover={{ 
                 boxShadow: "0 25px 50px -12px rgba(95, 109, 176, 0.25)",
                 borderColor: "rgba(95, 109, 176, 0.3)"
@@ -321,8 +319,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.15 }}
             >
               <h3 className="text-2xl font-bold mb-6 font-cairo">
-                <span className="text-gray-800">Follow </span>
-                <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">Us</span>
+                <span className="text-gray-800">{t('contact.follow')}</span>
               </h3>
               
               <div className="flex space-x-4 rtl:space-x-reverse">
@@ -361,7 +358,7 @@ const Contact: React.FC = () => {
             </motion.div>
 
             <motion.div 
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg"
+              className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-200 shadow-lg mx-auto w-full max-w-full"
               style={{ 
                 background: 'white',
                 borderColor: 'rgba(95, 109, 176, 0.2)'

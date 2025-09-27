@@ -370,12 +370,15 @@ const Header: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      scrollToSection(item.href);
+                      const element = document.querySelector(item.href);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
                       setIsMenuOpen(false);
                     }}
                     className={`block w-full ${isRTL ? 'text-right' : 'text-left'} px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                        ? `text-[#735fb0] bg-[#5f6db0]/20 ${isRTL ? 'border-r-4' : 'border-l-4'} border-[#5f6db0]`
                         : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                     }`}
                   >

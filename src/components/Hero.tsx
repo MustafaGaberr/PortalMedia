@@ -18,7 +18,6 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Floating shapes animation
       if (floatingShapesRef.current) {
         gsap.to(floatingShapesRef.current.children, {
           y: "random(-30, 30)",
@@ -36,11 +35,10 @@ const Hero: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
-  // Load Lottie animation after component mounts
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLottieLoaded(true);
-    }, 1000); // Load after 1 second
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -51,7 +49,6 @@ const Hero: React.FC = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Floating Shapes */}
       <div ref={floatingShapesRef} className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-[#735fb0]/20 to-[#5f6db0]/20 rounded-full blur-xl"></div>
         <div className="absolute top-1/3 right-20 w-24 h-24 bg-gradient-to-br from-[#b0a25f]/20 to-[#6db05f]/20 rounded-full blur-xl"></div>
@@ -60,7 +57,6 @@ const Hero: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center min-h-[80vh]">
-          {/* Left Content */}
           <motion.div
             className={`text-left ${isRTL ? 'text-right' : 'text-left'}`}
             initial={{ opacity: 0, x: -50 }}
@@ -128,7 +124,6 @@ const Hero: React.FC = () => {
 
           </motion.div>
 
-          {/* Right Content - Lottie Animation */}
           <motion.div
             className="relative flex justify-center items-center"
             initial={{ opacity: 0, x: 50 }}
@@ -155,7 +150,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll Down Indicator - Keep as is */}
       <motion.div
         className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
         animate={{ y: [0, 10, 0] }}
@@ -172,7 +166,6 @@ const Hero: React.FC = () => {
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
-        {/* Scroll hint text */}
         <motion.p
           className="text-xs mt-2 text-center"
           style={{ color: '#5f6db0' }}
