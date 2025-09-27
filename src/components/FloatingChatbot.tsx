@@ -163,7 +163,8 @@ const ChatBot: React.FC = () => {
                   {messages.map((message, index) => (
                     <div 
                       key={index} 
-                      className={`max-w-[80%] p-3 rounded-lg ${message.isUser ? 'bg-gradient-to-r from-primary-400 to-primary-500 text-white self-end' : 'bg-gray-100 text-gray-800 self-start'}`}
+                      className={`max-w-[80%] p-3 rounded-lg ${message.isUser ? 'text-white self-end' : 'bg-gray-100 text-gray-800 self-start'}`}
+                      style={message.isUser ? { background: 'linear-gradient(to right, #5f6db0, #735fb0)' } : {}}
                     >
                       {message.text}
                     </div>
@@ -186,7 +187,14 @@ const ChatBot: React.FC = () => {
               />
               <button 
                 onClick={handleSend}
-                className="bg-gradient-to-r from-primary-400 to-primary-500 text-white p-2 rounded-md hover:from-primary-500 hover:to-primary-600 transition-all duration-200"
+                className="text-white p-2 rounded-md transition-all duration-200"
+                style={{ background: 'linear-gradient(to right, #5f6db0, #735fb0)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #735fb0, #5f6db0)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #5f6db0, #735fb0)';
+                }}
               >
                 <Send className="h-5 w-5" />
               </button>
@@ -198,9 +206,16 @@ const ChatBot: React.FC = () => {
       {/* Chat button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-8 bg-gradient-to-r from-primary-400 to-primary-500 text-white px-7 py-3 rounded-lg shadow-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-primary-500 hover:to-primary-600 z-50 ${
+        className={`fixed bottom-8 text-white px-7 py-3 rounded-lg shadow-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl z-50 ${
           language === 'ar' ? 'left-8 space-x-reverse space-x-2' : 'right-8 space-x-2'
         }`}
+        style={{ background: 'linear-gradient(to right, #5f6db0, #735fb0)' }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'linear-gradient(to right, #735fb0, #5f6db0)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'linear-gradient(to right, #5f6db0, #735fb0)';
+        }}
       >
         <MessageCircle className="h-5 w-5" />
         <span className="font-semibold">{language === 'ar' ? 'الدعم' : 'Chat'}</span>

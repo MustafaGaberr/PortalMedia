@@ -22,11 +22,9 @@ const resources = {
         subtitle: '',
         description: 'We create powerful marketing strategies that drive growth, engage audiences, and deliver measurable results for your business.',
         getStarted: 'Get Started Today',
-        learnMore: 'Watch Demo',
-        happyClients: 'Happy Clients',
-        successRate: 'Success Rate',
-        yearsExperience: 'Years Experience',
-        scrollDown: 'Scroll Down'
+        learnMore: 'Learn More',
+
+      
       },
       // About Section
       about: {
@@ -261,11 +259,9 @@ const resources = {
         subtitle: '',
         description: 'نحن ننشئ استراتيجيات تسويقية قوية تحقق النمو وتتفاعل مع الجماهير وتقدم نتائج قابلة للقياس لعملك.',
         getStarted: 'ابدأ اليوم',
-        learnMore: 'شاهد العرض التوضيحي',
-        happyClients: 'عميل سعيد',
-        successRate: 'معدل النجاح',
-        yearsExperience: 'سنوات من الخبرة',
-        scrollDown: 'مرر للأسفل'
+        learnMore: 'اعرف المزيد',
+
+        
       },
       // About Section
       about: {

@@ -185,7 +185,7 @@
 
 /* New gradient backgrounds */
 .bg-gradient-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--tertiary-color));
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   position: relative;
 }
 
@@ -456,4 +456,14 @@ body {
   .team-swiper .swiper-button-prev::after {
     font-size: 16px;
   }
+}
+
+/* Footer bullets styling */
+.footer-bullets {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.footer-bullets li::marker {
+  color: #735fb0;
 }

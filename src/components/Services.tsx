@@ -55,7 +55,7 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-20 lg:py-32" style={{ background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%)' }}>
+    <section id="services" className="py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -65,10 +65,10 @@ const Services: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: 'var(--primary-color)' }}>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">
               {t('services.title')}
             </h2>
-            <p className="text-xl max-w-3xl mx-auto font-cairo" style={{ color: 'var(--accent-color)' }}>
+            <p className="text-xl max-w-3xl mx-auto font-cairo">
               {t('services.subtitle')}
             </p>
           </motion.div>
@@ -110,7 +110,7 @@ const Services: React.FC = () => {
                           ? 'linear-gradient(135deg, var(--secondary-color), var(--tertiary-color))'
                           : undefined
                       }}>
-                        <service.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }} />
+                        <service.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: 'white' }} />
                       </div>
                       <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-2 md:mb-4 line-clamp-2 font-cairo">
                         {service.title}
@@ -133,8 +133,8 @@ const Services: React.FC = () => {
                       : undefined
                   }}>
                     <div className="p-4 md:p-8 h-full flex flex-col justify-center items-center text-center text-white">
-                      <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }} />
-                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6 font-cairo" style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }}>{service.title}</h3>
+                      <service.icon className="w-8 h-8 md:w-12 md:h-12 mb-4 md:mb-6" style={{ color: 'white' }} />
+                      <h3 className="text-sm md:text-xl font-bold mb-4 md:mb-6 font-cairo" style={{ color: 'white' }}>{service.title}</h3>
                       <ul className="space-y-2 md:space-y-3">
                         {service.details.map((detail, detailIndex) => (
                           <motion.li
@@ -146,9 +146,9 @@ const Services: React.FC = () => {
                             }}
                             transition={{ delay: detailIndex * 0.1 }}
                             className="flex items-center justify-center text-xs md:text-base font-cairo"
-                            style={{ color: service.gradient.includes('gradient') ? 'white' : 'white' }}
+                            style={{ color: 'white' }}
                           >
-                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0" style={{ backgroundColor: service.gradient.includes('gradient') ? 'white' : 'white' }}></div>
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full mr-2 md:mr-3 rtl:ml-2 md:rtl:ml-3 rtl:mr-0" style={{ backgroundColor: 'white' }}></div>
                             {detail}
                           </motion.li>
                         ))}

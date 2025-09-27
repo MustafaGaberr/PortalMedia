@@ -35,7 +35,7 @@ const Team: React.FC = () => {
       id: 3,
       name: "Eman ",
       title: "Social Media Specialist",
-      image: "/Assets/team/mennamuhammed.jpg"
+      image: "/Assets/team/eman.png"
     },
     {
       id: 4,
@@ -52,14 +52,14 @@ const Team: React.FC = () => {
   ];
 
   return (
-    <section id="team" className="py-20 lg:py-32" style={{ background: 'linear-gradient(135deg, var(--bg-light) 0%, var(--bg-primary) 100%)' }}>
+    <section id="team" className="py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo" style={{ color: 'var(--primary-color)' }}>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-cairo bg-gradient-to-r from-[#5f6db0] to-[#735fb0] bg-clip-text text-transparent">
             {t('team.title')}
           </h2>
-          <p className="text-xl max-w-3xl mx-auto font-cairo" style={{ color: 'var(--accent-color)' }}>
+          <p className="text-xl max-w-3xl mx-auto font-cairo" >
             {t('team.subtitle')}
           </p>
         </div>

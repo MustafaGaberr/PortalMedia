@@ -15,10 +15,10 @@ const BlogPage: React.FC = () => {
   // Loading state
   if (!blogPosts || blogPosts.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 100%)' }}>
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-400 mx-auto mb-4"></div>
-          <p className="text-primary-300">{t('blog.loading')}</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5f6db0] mx-auto mb-4"></div>
+          <p className="text-gray-600">{t('blog.loading')}</p>
         </div>
       </div>
     );
@@ -32,14 +32,14 @@ const BlogPage: React.FC = () => {
     
     if (!post) {
       return (
-        <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 100%)' }}>
+        <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-primary-300 mb-4 font-cairo">
+            <h1 className="text-3xl font-bold text-gray-800 mb-4 font-cairo">
               {t('blog.articleNotFound')}
             </h1>
             <Link 
               to="/blog" 
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-400 to-primary-600 text-gray-900 font-semibold rounded-lg hover:from-primary-500 hover:to-primary-700 transition-all duration-300 font-cairo"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white font-semibold rounded-lg hover:from-[#735fb0] hover:to-[#5f6db0] transition-all duration-300 font-cairo"
             >
               {t('blog.backToBlog')}
             </Link>
@@ -49,14 +49,14 @@ const BlogPage: React.FC = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-24 pb-16">
+      <div className="min-h-screen pt-24 pb-16">
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-elegant overflow-hidden border border-primary-400/20">
+            <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100">
               <div className="relative overflow-hidden">
                 <img
                   src={post.image}
@@ -65,38 +65,38 @@ const BlogPage: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute top-6 left-6">
-                  <span className="bg-gradient-to-r from-primary-400 to-primary-600 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                  <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                     {post.category}
                   </span>
                 </div>
                 <div className="absolute top-6 right-6">
-                  <span className="bg-black/50 backdrop-blur-sm text-primary-300 px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-gray-800/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
                     {post.readTime}
                   </span>
                 </div>
               </div>
               
               <div className="p-8 md:p-12">
-                <h1 className="text-4xl md:text-5xl font-bold text-primary-300 mb-6 leading-tight font-cairo">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight font-cairo">
                   {post.title}
                 </h1>
                 
-                <div className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-primary-400/20">
-                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-primary-200">
+                <div className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-gray-200">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-600">
                     <User className="w-5 h-5" />
                     <span className="font-medium font-cairo">{post.author}</span>
                   </div>
-                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-primary-200">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-600">
                     <Calendar className="w-5 h-5" />
                     <span className="font-medium font-cairo">{post.date}</span>
                   </div>
                 </div>
                 
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-xl text-primary-100 mb-8 leading-relaxed font-cairo">
+                  <p className="text-xl text-gray-600 mb-8 leading-relaxed font-cairo">
                     {post.excerpt}
                   </p>
-                  <div className="text-lg text-primary-50 leading-relaxed font-cairo">
+                  <div className="text-lg text-gray-700 leading-relaxed font-cairo">
                     {post.content && (
                       <div 
                         className="whitespace-pre-line"
@@ -113,7 +113,7 @@ const BlogPage: React.FC = () => {
             <div className="mt-8 text-center">
               <Link
                 to="/blog"
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-600 text-gray-900 font-semibold rounded-xl hover:from-primary-500 hover:to-primary-700 transition-all duration-300 shadow-lg hover:shadow-xl font-cairo"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white font-semibold rounded-xl hover:from-[#735fb0] hover:to-[#5f6db0] transition-all duration-300 shadow-lg hover:shadow-xl font-cairo"
               >
                 <ArrowRight 
                   className={`w-5 h-5 mr-3 rtl:ml-3 rtl:mr-0 rotate-180 ${isRTL ? 'rotate-0' : ''}`} 
@@ -128,8 +128,8 @@ const BlogPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-24 pb-16">
+      <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -138,10 +138,10 @@ const BlogPage: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <h1 className="text-5xl lg:text-6xl font-bold text-primary-300 mb-6 font-cairo">
+            <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-6 font-cairo">
               {t('blog.title')}
             </h1>
-            <p className="text-xl text-primary-200 max-w-3xl mx-auto leading-relaxed font-cairo">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-cairo">
               {t('blog.subtitle')}
             </p>
           </motion.div>
@@ -156,7 +156,7 @@ const BlogPage: React.FC = () => {
               <motion.article
                 key={post.id}
                 variants={fadeInUp}
-                className="group bg-white/10 backdrop-blur-lg rounded-2xl shadow-elegant overflow-hidden hover:shadow-2xl transition-all duration-500 border border-primary-400/20 hover:border-primary-400/40"
+                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -166,13 +166,13 @@ const BlogPage: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4">
-                    <span className="bg-gradient-to-r from-primary-400 to-primary-600 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                    <span className="bg-gradient-to-r from-[#5f6db0] to-[#735fb0] text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
                       {post.category}
                     </span>
                   </div>
                   {post.readTime && (
                     <div className="absolute top-4 right-4">
-                      <span className="bg-black/50 backdrop-blur-sm text-primary-300 px-2 py-1 rounded-lg text-xs font-medium">
+                      <span className="bg-gray-800/80 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-medium">
                         {post.readTime}
                       </span>
                     </div>
@@ -180,19 +180,19 @@ const BlogPage: React.FC = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary-300 mb-3 line-clamp-2 group-hover:text-primary-200 transition-colors duration-300 font-cairo">
+                  <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-gray-700 transition-colors duration-300 font-cairo">
                     {post.title}
                   </h3>
-                  <p className="text-primary-100/80 mb-4 line-clamp-3 leading-relaxed font-cairo">
+                  <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed font-cairo">
                     {post.excerpt}
                   </p>
                   
                   <div className="flex items-center justify-between mb-4 text-sm">
-                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-primary-200/70">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-500">
                       <User className="w-4 h-4" />
                       <span className="font-cairo">{post.author}</span>
                     </div>
-                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-primary-200/70">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span className="font-cairo">{post.date}</span>
                     </div>
@@ -200,7 +200,7 @@ const BlogPage: React.FC = () => {
                   
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex items-center text-primary-400 font-semibold hover:text-primary-300 transition-colors duration-300 group-hover:translate-x-1 transform font-cairo"
+                    className="inline-flex items-center text-[#5f6db0] font-semibold hover:text-[#735fb0] transition-colors duration-300 group-hover:translate-x-1 transform font-cairo"
                   >
                     {t('blog.readMore')}
                     <ArrowRight 

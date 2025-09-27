@@ -30,7 +30,7 @@ const ScrollToTop = () => {
             language === 'ar' ? 'left-6' : 'right-6'
           }`}
           style={{
-            background: 'linear-gradient(to right, var(--primary-color), var(--accent-color))',
+            background: 'linear-gradient(to right, #5f6db0, #735fb0)',
             boxShadow: '0 4px 12px rgba(95, 109, 176, 0.25)'
           }}
           onMouseEnter={(e) => {
@@ -43,7 +43,7 @@ const ScrollToTop = () => {
           whileTap={{ scale: 0.9 }}
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-5 h-5" style={{ color: '#212529' }} />
+          <ArrowUp className="w-5 h-5" style={{ color: 'white' }} />
         </motion.button>
       )}
     </>

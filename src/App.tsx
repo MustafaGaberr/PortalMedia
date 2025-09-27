@@ -11,6 +11,7 @@ import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import ToastContainer from './components/ToastContainer';
+import AnimatedBackground from './components/AnimatedBackground';
 
 // Pages
 import BlogPage from './pages/BlogPage';
@@ -23,6 +24,7 @@ const AppContent: React.FC = () => {
     <Router>
       <ScrollToTopOnRouteChange />
       <div className="App overflow-x-hidden min-h-screen">
+        <AnimatedBackground />
         <Header />
         <main className="overflow-x-hidden">
           <Routes>

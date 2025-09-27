@@ -176,7 +176,7 @@ const Header: React.FC = () => {
             />
             <span className={`text-xl font-bold drop-shadow-sm font-dallas mt-1 ${
               isScrolled || !isHomePage
-                ? 'text-primary-400'
+                ? 'text-[#5f6db0]'
                 : 'text-gradient'
             }`}>
               Portal Media
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6 rtl:space-x-reverse font-cairo">
+          <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse font-cairo">
             {navigation.map((item) => (
               <div key={item.name}>
                 {item.href.startsWith('/') ? (
@@ -192,43 +192,52 @@ const Header: React.FC = () => {
                     // Special handling for Home link
                     <button
                       onClick={handleHomeClick}
-                      className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
+                      className={`relative text-[#5f6db0] font-bold hover:text-[#735fb0] transition-colors duration-200 group ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
-                          : isScrolled || !isHomePage
-                          ? 'text-primary-300/90 hover:text-primary-400'
-                          : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
+                          ? 'text-[#735fb0]'
+                          : ''
                       }`}
                     >
                       {item.name}
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-[#5f6db0] to-[#735fb0] transition-all duration-300 ${
+                        location.pathname === item.href && currentSection === ''
+                          ? 'w-full'
+                          : 'w-0 group-hover:w-full'
+                      }`}></span>
                     </button>
                   ) : (
                     <Link
                       to={item.href}
-                      className={`relative px-4 py-2 text-lg font-medium leading-6 transition-all duration-200 hover:scale-105 mt-1 ${
+                      className={`relative text-[#5f6db0] font-bold hover:text-[#735fb0] transition-colors duration-200 group ${
                         location.pathname === item.href
-                          ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
-                          : isScrolled || !isHomePage
-                          ? 'text-primary-300/90 hover:text-primary-400'
-                          : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
+                          ? 'text-[#735fb0]'
+                          : ''
                       }`}
                     >
                       {item.name}
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-[#5f6db0] to-[#735fb0] transition-all duration-300 ${
+                        location.pathname === item.href
+                          ? 'w-full'
+                          : 'w-0 group-hover:w-full'
+                      }`}></span>
                     </Link>
                   )
                 ) : (
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative px-4 py-2 text-base font-medium transition-all duration-200 hover:scale-105 mt-1 ${
+                    className={`relative text-[#5f6db0] font-bold hover:text-[#735fb0] transition-colors duration-200 group ${
                       // Check if we're on home page and this section is currently in view
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-primary-400 font-bold text-lg drop-shadow-lg'
-                        : isScrolled || !isHomePage
-                        ? 'text-primary-300/90 hover:text-primary-400'
-                        : 'text-primary-300 hover:text-primary-200 drop-shadow-sm'
+                        ? 'text-[#735fb0]'
+                        : ''
                     }`}
                   >
                     {item.name}
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-[#5f6db0] to-[#735fb0] transition-all duration-300 ${
+                      location.pathname === '/' && isCurrentSection(item.href)
+                        ? 'w-full'
+                        : 'w-0 group-hover:w-full'
+                    }`}></span>
                   </button>
                 )}
               </div>
@@ -241,15 +250,12 @@ const Header: React.FC = () => {
             <div className="hidden lg:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center px-4 py-2 backdrop-blur-sm rounded-xl border border-primary-600/30 text-primary-300/90 hover:text-primary-300 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500/50 min-w-[120px] mt-1"
-                style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
+                className="flex items-center px-4 py-2 bg-white/90 backdrop-blur-sm rounded-xl border border-[#5f6db0]/30 text-[#5f6db0] hover:text-[#735fb0] transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#5f6db0]/50 min-w-[120px] shadow-lg hover:shadow-xl"
                 title="Change Language"
               >
-                <span className="mr-2 rtl:ml-2 rtl:mr-0 drop-shadow-sm">{getCurrentFlag()}</span>
-                <span className="text-base font-semibold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
-                <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-150 drop-shadow-sm ${
+                <span className="mr-2 rtl:ml-2 rtl:mr-0">{getCurrentFlag()}</span>
+                <span className="text-base font-bold tracking-wide flex-1 text-left rtl:text-right">{getCurrentLanguageName()}</span>
+                <ChevronDown className={`w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-150 ${
                   isLangDropdownOpen ? 'rotate-180' : ''
                 }`} />
               </button>
@@ -261,20 +267,19 @@ const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className={`absolute top-full mt-2 backdrop-blur-md rounded-xl border border-primary-600/50 shadow-xl overflow-hidden min-w-[140px] z-50 ${
+                  className={`absolute top-full mt-2 bg-white/95 backdrop-blur-md rounded-xl border border-[#5f6db0]/30 shadow-xl overflow-hidden min-w-[140px] z-50 ${
                     language === 'ar' ? 'right-0' : 'left-0'
                   }`}
-                  style={{ backgroundColor: '#212529f2' }}
                 >
                   <button
                     onClick={() => handleLanguageChange('en')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-primary-600/20 transition-all duration-200 ${
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-[#5f6db0]/10 transition-all duration-200 ${
                       language === 'en'
-                        ? 'bg-primary-600/30 text-primary-300 font-semibold' 
-                        : 'text-primary-300/90 hover:text-primary-300'
+                        ? 'bg-[#5f6db0]/20 text-[#735fb0] font-bold' 
+                        : 'text-[#5f6db0] hover:text-[#735fb0]'
                     }`}
                   >
-                    <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
+                    <span className="mr-3 rtl:ml-3 rtl:mr-0">
                       <ReactCountryFlag 
                         countryCode="US" 
                         svg 
@@ -285,17 +290,17 @@ const Header: React.FC = () => {
                         title="United States"
                       />
                     </span>
-                    <span className="text-base font-medium">English</span>
+                    <span className="text-base font-bold">English</span>
                   </button>
                   <button
                     onClick={() => handleLanguageChange('ar')}
-                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-primary-600/20 transition-all duration-200 ${
+                    className={`w-full flex items-center px-4 py-3 text-left hover:bg-[#5f6db0]/10 transition-all duration-200 ${
                       language === 'ar'
-                        ? 'bg-primary-600/30 text-primary-300 font-semibold' 
-                        : 'text-primary-300/90 hover:text-primary-300'
+                        ? 'bg-[#5f6db0]/20 text-[#735fb0] font-bold' 
+                        : 'text-[#5f6db0] hover:text-[#735fb0]'
                     }`}
                   >
-                    <span className="mr-3 rtl:ml-3 rtl:mr-0 drop-shadow-sm">
+                    <span className="mr-3 rtl:ml-3 rtl:mr-0">
                       <ReactCountryFlag 
                         countryCode="SA" 
                         svg 
@@ -306,7 +311,7 @@ const Header: React.FC = () => {
                         title="Saudi Arabia"
                       />
                     </span>
-                    <span className="text-base font-medium">العربية</span>
+                    <span className="text-base font-bold">العربية</span>
                   </button>
                 </motion.div>
               )}
@@ -315,13 +320,10 @@ const Header: React.FC = () => {
             {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl backdrop-blur-sm text-primary-300 transition-all duration-200 hover:scale-110 border border-primary-600/30 focus:outline-none focus:ring-2 focus:ring-primary-500/50 mt-1"
-              style={{ backgroundColor: 'rgba(33, 37, 41, 0.4)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.6)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(33, 37, 41, 0.4)' }}
+              className="lg:hidden p-3 rounded-xl bg-white/90 backdrop-blur-sm text-[#5f6db0] transition-all duration-200 hover:scale-110 border border-[#5f6db0]/30 focus:outline-none focus:ring-2 focus:ring-[#5f6db0]/50 shadow-lg hover:shadow-xl"
               title={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMenuOpen ? <X size={22} className="drop-shadow-sm" /> : <Menu size={22} className="drop-shadow-sm" />}
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -331,8 +333,7 @@ const Header: React.FC = () => {
           initial={false}
           animate={{ height: isMenuOpen ? 'auto' : 0, opacity: isMenuOpen ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          className="lg:hidden overflow-hidden backdrop-blur-md rounded-xl mt-2 border border-primary-600/50"
-          style={{ backgroundColor: '#212529f2' }}
+          className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-md rounded-xl mt-2 border border-[#5f6db0]/30 shadow-lg"
         >
           <nav className="py-4 font-cairo">
             {navigation.map((item) => (
@@ -345,10 +346,10 @@ const Header: React.FC = () => {
                         handleHomeClick();
                         setIsMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-base leading-6 ${
+                      className={`block w-full text-left px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-base leading-6 ${
                         location.pathname === item.href && currentSection === ''
-                          ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
-                          : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
+                          ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                          : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                       }`}
                     >
                       {item.name}
@@ -357,10 +358,10 @@ const Header: React.FC = () => {
                     <Link
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
+                      className={`block px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
                         location.pathname === item.href
-                          ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
-                          : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
+                          ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                          : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                       }`}
                     >
                       {item.name}
@@ -372,10 +373,10 @@ const Header: React.FC = () => {
                       scrollToSection(item.href);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-medium rounded-lg mx-2 text-lg ${
+                    className={`block w-full text-left px-6 py-3 transition-all duration-200 font-bold rounded-lg mx-2 text-lg ${
                       location.pathname === '/' && isCurrentSection(item.href)
-                        ? 'text-primary-400 bg-primary-600/20 border-l-4 border-primary-400 font-bold text-base'
-                        : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
+                        ? 'text-[#735fb0] bg-[#5f6db0]/20 border-l-4 border-[#5f6db0]'
+                        : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                     }`}
                   >
                     {item.name}
@@ -385,16 +386,16 @@ const Header: React.FC = () => {
             ))}
             
             {/* Language Switcher in Mobile Menu */}
-            <div className="mx-2 mt-4 pt-4 border-t border-primary-600/50">
-              <p className="px-6 py-2 text-sm text-primary-300/70 font-medium uppercase tracking-wide">
+            <div className="mx-2 mt-4 pt-4 border-t border-[#5f6db0]/30">
+              <p className="px-6 py-2 text-sm text-[#5f6db0]/70 font-bold uppercase tracking-wide">
                 Language / اللغة
               </p>
               <button
                 onClick={() => handleLanguageChange('en')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'en'
-                    ? 'text-primary-300 bg-primary-600/20 font-semibold'
-                    : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
+                    ? 'text-[#735fb0] bg-[#5f6db0]/20 font-bold'
+                    : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -408,17 +409,17 @@ const Header: React.FC = () => {
                     title="United States"
                   />
                 </span>
-                <span className="text-base font-medium">English</span>
+                <span className="text-base font-bold">English</span>
                 {language === 'en' && (
-                  <span className="ml-auto text-primary-300">✓</span>
+                  <span className="ml-auto text-[#735fb0]">✓</span>
                 )}
               </button>
               <button
                 onClick={() => handleLanguageChange('ar')}
                 className={`flex items-center w-full px-6 py-3 text-left transition-all duration-150 rounded-lg mx-0 ${
                   language === 'ar'
-                    ? 'text-primary-300 bg-primary-600/20 font-semibold'
-                    : 'text-primary-300/90 hover:text-primary-300 hover:bg-primary-600/10'
+                    ? 'text-[#735fb0] bg-[#5f6db0]/20 font-bold'
+                    : 'text-[#5f6db0] hover:text-[#735fb0] hover:bg-[#5f6db0]/10'
                 }`}
               >
                 <span className="mr-3 rtl:ml-3 rtl:mr-0">
@@ -432,9 +433,9 @@ const Header: React.FC = () => {
                     title="Saudi Arabia"
                   />
                 </span>
-                <span className="text-base font-medium">العربية</span>
+                <span className="text-base font-bold">العربية</span>
                 {language === 'ar' && (
-                  <span className="ml-auto text-primary-300">✓</span>
+                  <span className="ml-auto text-[#735fb0]">✓</span>
                 )}
               </button>
             </div>
