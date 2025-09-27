@@ -5,6 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn } from '../hooks/useScrollAnimation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import aboutAnimData from '/Public/animations/aboutanim.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,18 +14,14 @@ const About: React.FC = () => {
   const { ref, controls } = useScrollAnimation();
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const fallbackRef = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const animRef = useRef<any>(null);
 
   useEffect(() => {
-    // Load Lottie animation
     const loadAnimation = async () => {
       try {
-        // Import lottie dynamically
         const lottie = (await import('lottie-web')).default;
         
         if (animationContainerRef.current) {
-          // Clear any existing animation
           if (animRef.current) {
             animRef.current.destroy();
           }
@@ -34,14 +31,10 @@ const About: React.FC = () => {
             renderer: 'svg',
             loop: false,
             autoplay: false,
-            path: '/Public/Assets/lottie/aboutanim.json'
+            animationData: aboutAnimData
           });
 
-          // Wait for animation to load
           animRef.current.addEventListener('data_ready', () => {
-            console.log('Lottie animation loaded successfully');
-            
-            // Hide fallback content
             if (fallbackRef.current) {
               fallbackRef.current.style.opacity = '0';
               setTimeout(() => {
@@ -51,7 +44,6 @@ const About: React.FC = () => {
               }, 300);
             }
             
-            // Create ScrollTrigger for About section only
             ScrollTrigger.create({
               trigger: "#about",
               start: "top 80%",
@@ -66,12 +58,8 @@ const About: React.FC = () => {
             });
           });
 
-          // Fallback if data_ready doesn't fire
           setTimeout(() => {
             if (animRef.current && animRef.current.isLoaded) {
-              console.log('Lottie animation loaded (fallback)');
-              
-              // Hide fallback content
               if (fallbackRef.current) {
                 fallbackRef.current.style.opacity = '0';
                 setTimeout(() => {
@@ -101,7 +89,6 @@ const About: React.FC = () => {
       }
     };
 
-    // Add delay to ensure DOM is ready
     const timer = setTimeout(() => {
       loadAnimation();
     }, 100);

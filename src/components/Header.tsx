@@ -71,14 +71,11 @@ const Header: React.FC = () => {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
-      // If we're not on the home page, navigate to home first then scroll
       if (location.pathname !== '/') {
-        // Navigate to home page and add hash to URL so it scrolls when page loads
         navigate('/' + href);
         return;
       }
       
-      // If we're on home page, scroll to the section
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });

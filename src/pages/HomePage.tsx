@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 500);
 
       return () => clearTimeout(timer);
     }
@@ -43,17 +43,13 @@ const HomePage: React.FC = () => {
         </React.Suspense>
       </LazySection>
       
-      <LazySection threshold={0.1} rootMargin="200px">
-        <React.Suspense fallback={<div className="min-h-[600px]" />}>
-          <Team />
-        </React.Suspense>
-      </LazySection>
+      <React.Suspense fallback={<div className="min-h-[600px]" />}>
+        <Team />
+      </React.Suspense>
       
-      <LazySection threshold={0.1} rootMargin="200px">
-        <React.Suspense fallback={<div className="min-h-[700px]" />}>
-          <Contact />
-        </React.Suspense>
-      </LazySection>
+      <React.Suspense fallback={<div className="min-h-[700px]" />}>
+        <Contact />
+      </React.Suspense>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { ArrowRight, Play, Star } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { gsap } from 'gsap';
 import Lottie from 'lottie-react';
-import heroBotAnimation from '/Public/Assets/lottie/herobot.json';
+import heroBotAnimation from '/Public/animations/herobot.json';
 
 const Hero: React.FC = () => {
   const { t, isRTL } = useLanguage();
@@ -13,7 +13,10 @@ const Hero: React.FC = () => {
   const [isLottieLoaded, setIsLottieLoaded] = useState(false);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
