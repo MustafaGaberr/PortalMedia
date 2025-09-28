@@ -49,8 +49,12 @@ RewriteRule ^ /index.html [L]
     # Fonts
     AddType font/woff .woff
     AddType font/woff2 .woff2
+    AddType font/ttf .ttf
+    AddType font/otf .otf
     AddType application/font-woff .woff
     AddType application/font-woff2 .woff2
+    AddType application/font-ttf .ttf
+    AddType application/font-otf .otf
 </IfModule>
 
 # Compression - Optimized for React assets
@@ -139,16 +143,16 @@ RewriteRule ^ /index.html [L]
     
     # Preload critical resources
     <FilesMatch "index\.html$">
-        Header add Link "</Assets/index-Cx39V1bD.css>; rel=preload; as=style"
-        Header add Link "</Assets/index-QasxJPnB.js>; rel=preload; as=script"
+        Header add Link "</Assets/index-BqPwuzKZ.css>; rel=preload; as=style"
+        Header add Link "</Assets/index-B4ibvzh_.js>; rel=preload; as=script"
     </FilesMatch>
 </IfModule>
 
 # Performance optimizations
 <IfModule mod_headers.c>
     # Enable HTTP/2 Server Push for critical resources
-    Header add Link "</Assets/index-Cx39V1bD.css>; rel=preload; as=style"
-    Header add Link "</Assets/index-QasxJPnB.js>; rel=preload; as=script"
+    Header add Link "</Assets/index-BqPwuzKZ.css>; rel=preload; as=style"
+    Header add Link "</Assets/index-B4ibvzh_.js>; rel=preload; as=script"
     
     # Remove server signature
     Header unset Server
