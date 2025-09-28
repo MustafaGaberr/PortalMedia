@@ -169,7 +169,7 @@ const resources = {
         stayConnected: 'Stay connected with us for the latest updates and behind-the-scenes content.',
         discussProject: 'Let\'s discuss your project and bring your vision to life.',
         scheduleCall: 'Schedule a Call',
-        address: 'Riyadh, Saudi Arabia',
+        address: 'Jerusalem, Palestine',
         whatsapp: 'WhatsApp Us'
       },
       // Payment
@@ -407,7 +407,7 @@ const resources = {
         stayConnected: 'ابق متصلاً معنا للحصول على آخر التحديثات والمحتوى الحصري.',
         discussProject: 'لنناقش مشروعك ونحول رؤيتك إلى حقيقة.',
         scheduleCall: 'جدولة مكالمة',
-        address: 'الرياض، المملكة العربية السعودية',
+        address: 'القدس ، فلسطين',
         whatsapp: 'واتساب'
       },
       // Payment

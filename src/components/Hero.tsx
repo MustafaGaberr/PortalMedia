@@ -77,7 +77,8 @@ const Hero: React.FC = () => {
             </motion.div>
 
             <motion.h1
-              className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-8 font-cairo mt-8 md:mt-0"
+              className={`${isRTL ? 'text-balance text-4xl md:text-6xl font-bold text-right max-w-2xl mx-auto' : 'text-5xl lg:text-7xl font-bold text-gray-900 leading-tight'} mb-8 font-cairo mt-8 md:mt-0`}
+              style={isRTL ? { lineHeight: '1.5' } : {}}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
