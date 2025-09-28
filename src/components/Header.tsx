@@ -170,6 +170,7 @@ const Header: React.FC = () => {
               src="/Assets/portal logo.png" 
               alt="Portal Media Logo" 
               className="w-10 h-10 object-contain drop-shadow-lg"
+              loading="lazy"
             />
             <span className={`text-xl font-bold drop-shadow-sm font-dallas mt-1 ${
               isScrolled || !isHomePage

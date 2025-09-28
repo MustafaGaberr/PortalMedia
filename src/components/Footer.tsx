@@ -76,6 +76,7 @@ const Footer: React.FC = () => {
                   src="/Assets/portal logo.png" 
                   alt="Portal Media Logo" 
                   className="w-12 h-12 object-contain"
+                  loading="lazy"
                 />
                 <span className="text-2xl font-bold font-cairo">Portal Media</span>
               </div>

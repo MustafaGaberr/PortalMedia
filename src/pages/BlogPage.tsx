@@ -62,6 +62,7 @@ const BlogPage: React.FC = () => {
                   src={post.image}
                   alt={post.title}
                   className="w-full h-64 md:h-96 object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute top-6 left-6">
@@ -163,6 +164,7 @@ const BlogPage: React.FC = () => {
                     src={post.image}
                     alt={post.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4">
