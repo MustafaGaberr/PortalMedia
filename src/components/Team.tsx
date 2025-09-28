@@ -23,13 +23,13 @@ const Team: React.FC = () => {
       id: 1,
       name: "Ammar Salaymeh",
       title: "CEO & Founder",
-      image: "/Assets/team/Ammar.jpg"
+      image: "/Assets/team/Ammar.webp"
     },
     {
       id: 2,
       name: "Lina Sharaf",
       title: "Creative Director",
-      image: "/Assets/team/linasharaf.jpg"
+      image: "/Assets/team/linasharaf.webp"
     },
     {
       id: 3,
@@ -41,13 +41,13 @@ const Team: React.FC = () => {
       id: 4,
       name: "Mustafa Gaber",
       title: "Web Developer",
-      image: "/Assets/team/mustafagaber.jpg"
+      image: "/Assets/team/mustafagaber.webp"
     },
     {
       id: 5,
       name: "Abdullah Eyad",
       title: "Graphic Designer",
-      image: "/Assets/team/abood.jpg"
+      image: "/Assets/team/abood.webp"
     }
   ];
 
